@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Send, Phone, Video, MoreVertical, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -113,15 +112,9 @@ const WhatsAppChat = () => {
         <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden relative">
           {/* iPhone Notch */}
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-black rounded-b-2xl z-10"></div>
-        
-          {/* رقم الجوال المستلم بشكل ثابت أعلى الشات */}
-          <div className="flex flex-col items-end px-4 pt-5 pb-1 gap-1 bg-gray-50 select-text">
-            <span className="text-xs text-gray-600 font-semibold pr-2">الجوال المستلم</span>
-            <span className="text-base font-bold text-green-700 tracking-widest pr-2" dir="ltr">
-              {phoneNumber}
-            </span>
-          </div>
-          
+
+          {/* تم حذف الرقم من الأعلى ولن يظهر في الواجهة */}
+
           {/* WhatsApp Header */}
           <div className="bg-green-600 text-white px-4 py-4 pt-8 flex items-center justify-between">
             <div className="flex items-center space-x-3 space-x-reverse">
