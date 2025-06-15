@@ -1,18 +1,17 @@
-import { useState, useEffect } from 'react';
+
+import { useState } from 'react';
 import { Send, Phone, Video, MoreVertical, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useMutation } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from "sonner";
 
-const LOCAL_STORAGE_KEY = "whatsapp_target_number";
+const WHATSAPP_TARGET_NUMBER = '966594959443'; // الرقم الثابت لعرضه في الأعلى (غير قابل للتعديل)
 
 const WhatsAppChat = () => {
   const [message, setMessage] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState(() => {
-    // استرجاع الرقم المحفوظ (إن وجد) أو وضع الرقم الافتراضي
-    return localStorage.getItem(LOCAL_STORAGE_KEY) || '966594959443';
-  });
+  // تمت إزالة إمكانية تعديل رقم الجوال
+  const phoneNumber = WHATSAPP_TARGET_NUMBER;
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -36,11 +35,6 @@ const WhatsAppChat = () => {
       isBot: true
     }
   ]);
-
-  useEffect(() => {
-    // حفظ الرقم في localStorage عند تغييره
-    localStorage.setItem(LOCAL_STORAGE_KEY, phoneNumber);
-  }, [phoneNumber]);
 
   const sendMessageMutation = useMutation({
     mutationFn: async (text: string) => {
@@ -119,26 +113,17 @@ const WhatsAppChat = () => {
         <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden relative">
           {/* iPhone Notch */}
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-black rounded-b-2xl z-10"></div>
-          
-          {/* رقم الهاتف المرسل إليه (يمكنك تغييره بحرية) */}
-          <div className="flex flex-col items-end px-4 pt-5 pb-2 gap-1 bg-gray-50">
-            <label className="text-xs text-gray-600 font-semibold pr-2">رقم الجوال المستلم (مع 966)</label>
-            <input
-              type="tel"
-              value={phoneNumber}
-              onChange={e => {
-                // يسمح فقط بالأرقام
-                const value = e.target.value.replace(/[^0-9]/g, '');
-                setPhoneNumber(value.substring(0, 15));
-              }}
-              className="rounded-lg border border-gray-200 px-3 py-1 text-sm w-full text-right outline-none focus:ring-2 focus:ring-green-200"
-              placeholder="9665xxxxxxxx"
-              disabled={sendMessageMutation.isPending}
-            />
+        
+          {/* رقم الجوال المستلم بشكل ثابت أعلى الشات */}
+          <div className="flex flex-col items-end px-4 pt-5 pb-1 gap-1 bg-gray-50 select-text">
+            <span className="text-xs text-gray-600 font-semibold pr-2">الجوال المستلم</span>
+            <span className="text-base font-bold text-green-700 tracking-widest pr-2" dir="ltr">
+              {phoneNumber}
+            </span>
           </div>
           
           {/* WhatsApp Header */}
-          <div className="bg-green-600 text-white p-4 pt-8 flex items-center justify-between">
+          <div className="bg-green-600 text-white px-4 py-4 pt-8 flex items-center justify-between">
             <div className="flex items-center space-x-3 space-x-reverse">
               <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
                 A
