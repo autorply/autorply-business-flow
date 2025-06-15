@@ -1,1 +1,5 @@
+
 project_id = "thyzkqqfkgxudynxfpay"
+
+[functions.send-whatsapp-message]
+  verify_jwt = false

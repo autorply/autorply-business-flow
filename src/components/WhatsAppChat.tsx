@@ -1,7 +1,10 @@
 
 import { useState } from 'react';
-import { Send, Phone, Video, MoreVertical } from 'lucide-react';
+import { Send, Phone, Video, MoreVertical, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useMutation } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from "sonner";
 
 const WhatsAppChat = () => {
   const [message, setMessage] = useState('');
@@ -29,8 +32,50 @@ const WhatsAppChat = () => {
     }
   ]);
 
+  const sendMessageMutation = useMutation({
+    mutationFn: async (text: string) => {
+        const targetPhoneNumber = '966564455333'; // For demo, sending to the company number
+        const { data, error } = await supabase.functions.invoke('send-whatsapp-message', {
+            body: { 
+                message: text,
+                phone_number: targetPhoneNumber
+            },
+        });
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        if (data.status === '0') {
+            throw new Error(data.message || 'فشل في إرسال الرسالة.');
+        }
+
+        return data;
+    },
+    onSuccess: (data) => {
+        console.log('Message sent successfully:', data);
+        toast.success("تم إرسال رسالتك بنجاح!");
+        
+        // محاكاة رد تلقائي للحفاظ على شكل المحادثة
+        setTimeout(() => {
+          const autoReply = {
+            id: Date.now() + 1,
+            text: 'شكراً لك على رسالتك! سيقوم أحد ممثلينا بالرد عليك قريباً.',
+            sender: 'autorply',
+            time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }),
+            isBot: true
+          };
+          setMessages(prev => [...prev, autoReply]);
+        }, 1000);
+    },
+    onError: (error: Error) => {
+        console.error('Failed to send message:', error);
+        toast.error(error.message || "لم نتمكن من إرسال رسالتك. يرجى المحاولة مرة أخرى.");
+    },
+  });
+
   const handleSendMessage = () => {
-    if (message.trim()) {
+    if (message.trim() && !sendMessageMutation.isPending) {
       const newMessage = {
         id: Date.now(),
         text: message,
@@ -39,20 +84,9 @@ const WhatsAppChat = () => {
         isBot: false
       };
 
-      setMessages([...messages, newMessage]);
+      setMessages(prev => [...prev, newMessage]);
+      sendMessageMutation.mutate(message);
       setMessage('');
-
-      // محاكاة رد تلقائي
-      setTimeout(() => {
-        const autoReply = {
-          id: Date.now() + 1,
-          text: 'شكراً لك على رسالتك! سيقوم أحد ممثلينا بالرد عليك قريباً.',
-          sender: 'autorply',
-          time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }),
-          isBot: true
-        };
-        setMessages(prev => [...prev, autoReply]);
-      }, 1000);
     }
   };
 
@@ -129,13 +163,19 @@ const WhatsAppChat = () => {
                 onKeyPress={handleKeyPress}
                 placeholder="اكتب رسالة..."
                 className="flex-1 bg-transparent outline-none text-sm text-right"
+                disabled={sendMessageMutation.isPending}
               />
             </div>
             <button
               onClick={handleSendMessage}
-              className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white hover:bg-green-600 transition-colors"
+              disabled={sendMessageMutation.isPending}
+              className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white hover:bg-green-600 transition-colors disabled:bg-green-400"
             >
-              <Send className="w-5 h-5 transform rotate-180" />
+              {sendMessageMutation.isPending ? (
+                <Loader2 className="w-5 h-5 animate-spin" />
+              ) : (
+                <Send className="w-5 h-5 transform rotate-180" />
+              )}
             </button>
           </div>
         </div>
