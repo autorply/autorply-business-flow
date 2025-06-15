@@ -1,13 +1,18 @@
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Send, Phone, Video, MoreVertical, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useMutation } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from "sonner";
 
+const LOCAL_STORAGE_KEY = "whatsapp_target_number";
+
 const WhatsAppChat = () => {
   const [message, setMessage] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState(() => {
+    // استرجاع الرقم المحفوظ (إن وجد) أو وضع الرقم الافتراضي
+    return localStorage.getItem(LOCAL_STORAGE_KEY) || '966594959443';
+  });
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -32,45 +37,50 @@ const WhatsAppChat = () => {
     }
   ]);
 
+  useEffect(() => {
+    // حفظ الرقم في localStorage عند تغييره
+    localStorage.setItem(LOCAL_STORAGE_KEY, phoneNumber);
+  }, [phoneNumber]);
+
   const sendMessageMutation = useMutation({
     mutationFn: async (text: string) => {
-        const targetPhoneNumber = '966564455333'; // For demo, sending to the company number
-        const { data, error } = await supabase.functions.invoke('send-whatsapp-message', {
-            body: { 
-                message: text,
-                phone_number: targetPhoneNumber
-            },
-        });
+      if (!phoneNumber || phoneNumber.length < 10) {
+        throw new Error('الرجاء إدخال رقم جوال صحيح يبدأ بـ 966');
+      }
+      const { data, error } = await supabase.functions.invoke('send-whatsapp-message', {
+        body: { 
+          message: text,
+          phone_number: phoneNumber
+        },
+      });
 
-        if (error) {
-            throw new Error(error.message);
-        }
+      if (error) {
+        throw new Error(error.message);
+      }
 
-        if (data.status === '0') {
-            throw new Error(data.message || 'فشل في إرسال الرسالة.');
-        }
+      if (data.status === '0') {
+        throw new Error(data.message || 'فشل في إرسال الرسالة.');
+      }
 
-        return data;
+      return data;
     },
     onSuccess: (data) => {
-        console.log('Message sent successfully:', data);
-        toast.success("تم إرسال رسالتك بنجاح!");
-        
-        // محاكاة رد تلقائي للحفاظ على شكل المحادثة
-        setTimeout(() => {
-          const autoReply = {
-            id: Date.now() + 1,
-            text: 'شكراً لك على رسالتك! سيقوم أحد ممثلينا بالرد عليك قريباً.',
-            sender: 'autorply',
-            time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }),
-            isBot: true
-          };
-          setMessages(prev => [...prev, autoReply]);
-        }, 1000);
+      console.log('Message sent successfully:', data);
+      toast.success("تم إرسال رسالتك بنجاح!");
+      setTimeout(() => {
+        const autoReply = {
+          id: Date.now() + 1,
+          text: 'شكراً لك على رسالتك! سيقوم أحد ممثلينا بالرد عليك قريباً.',
+          sender: 'autorply',
+          time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }),
+          isBot: true
+        };
+        setMessages(prev => [...prev, autoReply]);
+      }, 1000);
     },
     onError: (error: Error) => {
-        console.error('Failed to send message:', error);
-        toast.error(error.message || "لم نتمكن من إرسال رسالتك. يرجى المحاولة مرة أخرى.");
+      console.error('Failed to send message:', error);
+      toast.error(error.message || "لم نتمكن من إرسال رسالتك. يرجى المحاولة مرة أخرى.");
     },
   });
 
@@ -109,6 +119,23 @@ const WhatsAppChat = () => {
         <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden relative">
           {/* iPhone Notch */}
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-black rounded-b-2xl z-10"></div>
+          
+          {/* رقم الهاتف المرسل إليه (يمكنك تغييره بحرية) */}
+          <div className="flex flex-col items-end px-4 pt-5 pb-2 gap-1 bg-gray-50">
+            <label className="text-xs text-gray-600 font-semibold pr-2">رقم الجوال المستلم (مع 966)</label>
+            <input
+              type="tel"
+              value={phoneNumber}
+              onChange={e => {
+                // يسمح فقط بالأرقام
+                const value = e.target.value.replace(/[^0-9]/g, '');
+                setPhoneNumber(value.substring(0, 15));
+              }}
+              className="rounded-lg border border-gray-200 px-3 py-1 text-sm w-full text-right outline-none focus:ring-2 focus:ring-green-200"
+              placeholder="9665xxxxxxxx"
+              disabled={sendMessageMutation.isPending}
+            />
+          </div>
           
           {/* WhatsApp Header */}
           <div className="bg-green-600 text-white p-4 pt-8 flex items-center justify-between">
