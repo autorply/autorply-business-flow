@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { Send, Phone, Video, MoreVertical, Loader2, Plus, Mic } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -164,7 +165,7 @@ const WhatsAppChat = () => {
                 <img 
                   src="https://autorply.sa/assets/img/logo_64.svg" 
                   alt="Autorply" 
-                  className="w-10 h-10 object-contain"
+                  className="w-6 h-6 object-contain"
                 />
               </div>
               <div className="flex-1">
