@@ -1,6 +1,6 @@
 
-import { useState } from 'react';
-import { Send, Phone, Video, MoreVertical, Loader2, Plus, Mic, ExternalLink } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Send, Phone, Video, MoreVertical, Loader2, Plus, Mic } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useMutation } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -11,6 +11,7 @@ const WHATSAPP_TARGET_NUMBER = '966594959443';
 const WhatsAppChat = () => {
   const [message, setMessage] = useState('');
   const phoneNumber = WHATSAPP_TARGET_NUMBER;
+  const messagesEndRef = useRef<HTMLDivElement>(null);
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -34,6 +35,14 @@ const WhatsAppChat = () => {
       isBot: true
     }
   ]);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const chatWithAI = useMutation({
     mutationFn: async (userMessage: string) => {
@@ -145,26 +154,23 @@ const WhatsAppChat = () => {
     >
       {/* iPhone Frame */}
       <div className="relative w-72 h-[600px] bg-black rounded-[3rem] p-2 shadow-2xl">
-        <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden relative">
+        <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden relative flex flex-col">
           {/* iPhone Notch */}
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-black rounded-b-2xl z-10"></div>
 
           {/* WhatsApp Header */}
-          <div className="bg-[#f7f3f0] text-gray-800 px-4 py-4 pt-8 flex items-center justify-between border-b border-gray-200">
+          <div className="bg-[#f7f3f0] text-gray-800 px-4 py-4 pt-8 flex items-center justify-between border-b border-gray-200 flex-shrink-0">
             <div className="flex items-center space-x-3 space-x-reverse">
-              <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden">
+              <div className="w-10 h-10 bg-[#1877f2] rounded-full flex items-center justify-center overflow-hidden">
                 <img 
-                  src="/lovable-uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" 
+                  src="/lovable-uploads/ebef3426-c087-41c9-9726-3423f1b8d47f.png" 
                   alt="Autorply" 
-                  className="w-full h-full object-cover"
+                  className="w-8 h-8 object-contain filter invert brightness-0"
                 />
               </div>
               <div className="flex-1">
                 <h3 className="font-semibold text-sm text-gray-900">Autorply</h3>
-                <button className="flex items-center space-x-1 space-x-reverse bg-white px-2 py-1 rounded-full text-xs border border-gray-200 hover:bg-gray-50 transition-colors">
-                  <span className="text-[#00b386] font-medium">زيارة الموقع</span>
-                  <ExternalLink className="w-3 h-3 text-[#00b386]" />
-                </button>
+                <p className="text-xs text-gray-500">متصل الآن</p>
               </div>
             </div>
             <div className="flex items-center space-x-4 space-x-reverse text-[#00b386]">
@@ -175,7 +181,7 @@ const WhatsAppChat = () => {
           </div>
 
           {/* Chat Messages */}
-          <div className="flex-1 p-4 space-y-3 bg-[#efeae2] h-96 overflow-y-auto">
+          <div className="flex-1 p-4 space-y-3 bg-[#efeae2] overflow-y-auto min-h-0">
             {messages.map((msg) => (
               <motion.div
                 key={msg.id}
@@ -221,10 +227,11 @@ const WhatsAppChat = () => {
                 </div>
               </motion.div>
             )}
+            <div ref={messagesEndRef} />
           </div>
 
           {/* Message Input */}
-          <div className="p-3 bg-white border-t border-gray-200 flex items-center space-x-2 space-x-reverse">
+          <div className="p-3 bg-white flex items-center space-x-2 space-x-reverse flex-shrink-0">
             <button className="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors">
               <Plus className="w-5 h-5" />
             </button>
