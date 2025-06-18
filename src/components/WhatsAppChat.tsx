@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Send, Phone, Video, MoreVertical, Loader2, Plus, Mic } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -6,7 +5,7 @@ import { useMutation } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from "sonner";
 
-const WHATSAPP_TARGET_NUMBER = '966594959443';
+const WHATSAPP_TARGET_NUMBER = '920001212';
 
 const WhatsAppChat = () => {
   const [message, setMessage] = useState('');
@@ -161,11 +160,11 @@ const WhatsAppChat = () => {
           {/* WhatsApp Header */}
           <div className="bg-[#f7f3f0] text-gray-800 px-4 py-4 pt-8 flex items-center justify-between border-b border-gray-200 flex-shrink-0">
             <div className="flex items-center space-x-3 space-x-reverse">
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center overflow-hidden border border-gray-200">
+              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center overflow-hidden border border-gray-200">
                 <img 
                   src="https://autorply.sa/assets/img/logo_64.svg" 
                   alt="Autorply" 
-                  className="w-8 h-8 object-contain"
+                  className="w-10 h-10 object-contain"
                 />
               </div>
               <div className="flex-1">
