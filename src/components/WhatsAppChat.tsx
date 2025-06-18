@@ -161,11 +161,11 @@ const WhatsAppChat = () => {
           {/* WhatsApp Header */}
           <div className="bg-[#f7f3f0] text-gray-800 px-4 py-4 pt-8 flex items-center justify-between border-b border-gray-200 flex-shrink-0">
             <div className="flex items-center space-x-3 space-x-reverse">
-              <div className="w-10 h-10 bg-[#1877f2] rounded-full flex items-center justify-center overflow-hidden">
+              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center overflow-hidden border border-gray-200">
                 <img 
-                  src="/lovable-uploads/ebef3426-c087-41c9-9726-3423f1b8d47f.png" 
+                  src="https://autorply.sa/assets/img/logo_64.svg" 
                   alt="Autorply" 
-                  className="w-8 h-8 object-contain filter invert brightness-0"
+                  className="w-8 h-8 object-contain"
                 />
               </div>
               <div className="flex-1">
