@@ -1,15 +1,15 @@
+
 import { useState } from 'react';
-import { Send, Phone, Video, MoreVertical, Loader2 } from 'lucide-react';
+import { Send, Phone, Video, MoreVertical, Loader2, Plus, Mic, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useMutation } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from "sonner";
 
-const WHATSAPP_TARGET_NUMBER = '966594959443'; // الرقم الثابت لعرضه في الأعلى (غير قابل للتعديل)
+const WHATSAPP_TARGET_NUMBER = '966594959443';
 
 const WhatsAppChat = () => {
   const [message, setMessage] = useState('');
-  // تمت إزالة إمكانية تعديل رقم الجوال
   const phoneNumber = WHATSAPP_TARGET_NUMBER;
   const [messages, setMessages] = useState([
     {
@@ -34,6 +34,46 @@ const WhatsAppChat = () => {
       isBot: true
     }
   ]);
+
+  const chatWithAI = useMutation({
+    mutationFn: async (userMessage: string) => {
+      const { data, error } = await supabase.functions.invoke('chat-with-openai', {
+        body: { message: userMessage },
+      });
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      return data;
+    },
+    onSuccess: (data) => {
+      console.log('AI response received:', data);
+      
+      const aiReply = {
+        id: Date.now() + 1,
+        text: data.reply || 'شكراً لك على رسالتك! سيقوم أحد ممثلينا بالرد عليك قريباً.',
+        sender: 'autorply',
+        time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }),
+        isBot: true
+      };
+      
+      setMessages(prev => [...prev, aiReply]);
+    },
+    onError: (error: Error) => {
+      console.error('Failed to get AI response:', error);
+      
+      const fallbackReply = {
+        id: Date.now() + 1,
+        text: 'شكراً لك على رسالتك! سيقوم أحد ممثلينا بالرد عليك قريباً.',
+        sender: 'autorply',
+        time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }),
+        isBot: true
+      };
+      
+      setMessages(prev => [...prev, fallbackReply]);
+    },
+  });
 
   const sendMessageMutation = useMutation({
     mutationFn: async (text: string) => {
@@ -60,16 +100,6 @@ const WhatsAppChat = () => {
     onSuccess: (data) => {
       console.log('Message sent successfully:', data);
       toast.success("تم إرسال رسالتك بنجاح!");
-      setTimeout(() => {
-        const autoReply = {
-          id: Date.now() + 1,
-          text: 'شكراً لك على رسالتك! سيقوم أحد ممثلينا بالرد عليك قريباً.',
-          sender: 'autorply',
-          time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }),
-          isBot: true
-        };
-        setMessages(prev => [...prev, autoReply]);
-      }, 1000);
     },
     onError: (error: Error) => {
       console.error('Failed to send message:', error);
@@ -78,7 +108,7 @@ const WhatsAppChat = () => {
   });
 
   const handleSendMessage = () => {
-    if (message.trim() && !sendMessageMutation.isPending) {
+    if (message.trim() && !sendMessageMutation.isPending && !chatWithAI.isPending) {
       const newMessage = {
         id: Date.now(),
         text: message,
@@ -88,7 +118,13 @@ const WhatsAppChat = () => {
       };
 
       setMessages(prev => [...prev, newMessage]);
+      
+      // Send to WhatsApp API
       sendMessageMutation.mutate(message);
+      
+      // Get AI response
+      chatWithAI.mutate(message);
+      
       setMessage('');
     }
   };
@@ -113,20 +149,25 @@ const WhatsAppChat = () => {
           {/* iPhone Notch */}
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-black rounded-b-2xl z-10"></div>
 
-          {/* تم حذف الرقم من الأعلى ولن يظهر في الواجهة */}
-
           {/* WhatsApp Header */}
-          <div className="bg-green-600 text-white px-4 py-4 pt-8 flex items-center justify-between">
+          <div className="bg-[#f7f3f0] text-gray-800 px-4 py-4 pt-8 flex items-center justify-between border-b border-gray-200">
             <div className="flex items-center space-x-3 space-x-reverse">
-              <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                A
+              <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden">
+                <img 
+                  src="/lovable-uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" 
+                  alt="Autorply" 
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <div>
-                <h3 className="font-semibold text-sm">Autorply</h3>
-                <p className="text-xs text-green-100">متصل الآن</p>
+              <div className="flex-1">
+                <h3 className="font-semibold text-sm text-gray-900">Autorply</h3>
+                <button className="flex items-center space-x-1 space-x-reverse bg-white px-2 py-1 rounded-full text-xs border border-gray-200 hover:bg-gray-50 transition-colors">
+                  <span className="text-[#00b386] font-medium">زيارة الموقع</span>
+                  <ExternalLink className="w-3 h-3 text-[#00b386]" />
+                </button>
               </div>
             </div>
-            <div className="flex items-center space-x-4 space-x-reverse">
+            <div className="flex items-center space-x-4 space-x-reverse text-[#00b386]">
               <Video className="w-5 h-5" />
               <Phone className="w-5 h-5" />
               <MoreVertical className="w-5 h-5" />
@@ -134,7 +175,7 @@ const WhatsAppChat = () => {
           </div>
 
           {/* Chat Messages */}
-          <div className="flex-1 p-4 space-y-3 bg-gray-50 h-96 overflow-y-auto">
+          <div className="flex-1 p-4 space-y-3 bg-[#efeae2] h-96 overflow-y-auto">
             {messages.map((msg) => (
               <motion.div
                 key={msg.id}
@@ -142,25 +183,52 @@ const WhatsAppChat = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className={`flex ${msg.isBot ? 'justify-start' : 'justify-end'}`}
               >
-                <div className={`max-w-xs p-3 rounded-lg ${
+                <div className={`max-w-xs p-3 rounded-lg relative ${
                   msg.isBot 
-                    ? 'bg-white text-gray-800' 
-                    : 'bg-green-500 text-white'
+                    ? 'bg-white text-gray-800 rounded-tl-none shadow-sm' 
+                    : 'bg-[#d8fdd2] text-gray-800 rounded-tr-none'
                 }`}>
-                  <p className="text-sm">{msg.text}</p>
-                  <p className={`text-xs mt-1 ${
-                    msg.isBot ? 'text-gray-500' : 'text-green-100'
+                  <p className="text-sm leading-relaxed">{msg.text}</p>
+                  <div className={`flex items-center justify-end mt-1 space-x-1 space-x-reverse ${
+                    msg.isBot ? 'text-gray-500' : 'text-gray-600'
                   }`}>
-                    {msg.time}
-                  </p>
+                    <span className="text-xs">{msg.time}</span>
+                    {!msg.isBot && (
+                      <div className="flex space-x-0.5">
+                        <div className="w-2 h-2">
+                          <svg viewBox="0 0 16 15" className="fill-current text-[#4fc3f7]">
+                            <path d="m15.01 3.316-.478-.372a.365.365 0 0 0-.51.063L8.666 9.879a.32.32 0 0 1-.484.033l-.358-.325a.319.319 0 0 0-.484.032l-.378.483a.418.418 0 0 0 .036.541l1.32 1.266c.143.14.361.125.484-.033l6.272-8.048a.366.366 0 0 0-.063-.51z"/>
+                            <path d="m5.09 9.050a.32.32 0 0 1-.484.032l-.358-.325a.319.319 0 0 0-.484.032l-.378.483a.418.418 0 0 0 .036.541l1.32 1.266c.143.14.361.125.484-.033L10.666 3.9a.32.32 0 0 0-.033-.484l-.325-.358a.319.319 0 0 0-.484.032L5.09 9.050z"/>
+                          </svg>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             ))}
+            {(sendMessageMutation.isPending || chatWithAI.isPending) && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex justify-start"
+              >
+                <div className="bg-white p-3 rounded-lg rounded-tl-none shadow-sm">
+                  <div className="flex items-center space-x-2 space-x-reverse">
+                    <Loader2 className="w-4 h-4 animate-spin text-gray-500" />
+                    <span className="text-sm text-gray-500">جاري الكتابة...</span>
+                  </div>
+                </div>
+              </motion.div>
+            )}
           </div>
 
           {/* Message Input */}
-          <div className="p-4 bg-white border-t flex items-center space-x-2 space-x-reverse">
-            <div className="flex-1 bg-gray-100 rounded-full px-4 py-2 flex items-center">
+          <div className="p-3 bg-white border-t border-gray-200 flex items-center space-x-2 space-x-reverse">
+            <button className="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors">
+              <Plus className="w-5 h-5" />
+            </button>
+            <div className="flex-1 bg-gray-100 rounded-full px-4 py-2 flex items-center min-h-[40px]">
               <input
                 type="text"
                 value={message}
@@ -168,18 +236,20 @@ const WhatsAppChat = () => {
                 onKeyPress={handleKeyPress}
                 placeholder="اكتب رسالة..."
                 className="flex-1 bg-transparent outline-none text-sm text-right"
-                disabled={sendMessageMutation.isPending}
+                disabled={sendMessageMutation.isPending || chatWithAI.isPending}
               />
             </div>
             <button
               onClick={handleSendMessage}
-              disabled={sendMessageMutation.isPending}
-              className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white hover:bg-green-600 transition-colors disabled:bg-green-400"
+              disabled={sendMessageMutation.isPending || chatWithAI.isPending}
+              className="w-8 h-8 flex items-center justify-center text-[#00b386] hover:text-[#00a073] transition-colors disabled:text-gray-400"
             >
-              {sendMessageMutation.isPending ? (
+              {(sendMessageMutation.isPending || chatWithAI.isPending) ? (
                 <Loader2 className="w-5 h-5 animate-spin" />
-              ) : (
+              ) : message.trim() ? (
                 <Send className="w-5 h-5 transform rotate-180" />
+              ) : (
+                <Mic className="w-5 h-5" />
               )}
             </button>
           </div>
