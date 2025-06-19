@@ -3,12 +3,12 @@ import { motion } from 'framer-motion';
 
 const Clients = () => {
   const clients = [
-    { name: 'عميل 1', logo: 'https://via.placeholder.com/120x60?text=Client+1' },
-    { name: 'عميل 2', logo: 'https://via.placeholder.com/120x60?text=Client+2' },
-    { name: 'عميل 3', logo: 'https://via.placeholder.com/120x60?text=Client+3' },
-    { name: 'عميل 4', logo: 'https://via.placeholder.com/120x60?text=Client+4' },
-    { name: 'عميل 5', logo: 'https://via.placeholder.com/120x60?text=Client+5' },
-    { name: 'عميل 6', logo: 'https://via.placeholder.com/120x60?text=Client+6' },
+    { name: 'شركة التقنية المتطورة', logo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=120&h=60&fit=crop&crop=center' },
+    { name: 'مجموعة الأعمال الرقمية', logo: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=120&h=60&fit=crop&crop=center' },
+    { name: 'شركة الحلول الذكية', logo: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=120&h=60&fit=crop&crop=center' },
+    { name: 'مؤسسة الإبداع التجاري', logo: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=120&h=60&fit=crop&crop=center' },
+    { name: 'شركة النمو المستدام', logo: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=120&h=60&fit=crop&crop=center' },
+    { name: 'مجموعة التطوير الشامل', logo: 'https://images.unsplash.com/photo-1556155092-490a1ba16284?w=120&h=60&fit=crop&crop=center' },
   ];
 
   return (
@@ -24,26 +24,26 @@ const Clients = () => {
         <div className="w-24 h-1 mx-auto bg-green-500 rounded"></div>
       </motion.div>
       
-      <div className="overflow-hidden">
-        <motion.div 
-          className="flex gap-12 w-fit"
-          animate={{ x: ['0%', '-50%'] }}
-          transition={{ 
-            duration: 30, 
-            repeat: Infinity, 
-            ease: 'linear' 
-          }}
-        >
-          {[...clients, ...clients].map((client, index) => (
-            <motion.img 
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
+          {clients.map((client, index) => (
+            <motion.div
               key={index}
-              src={client.logo} 
-              className="h-16 object-contain opacity-60 hover:opacity-100 transition-opacity"
-              alt={client.name}
-              whileHover={{ scale: 1.1 }}
-            />
+              className="flex items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ scale: 1.05 }}
+            >
+              <img 
+                src={client.logo} 
+                className="h-12 w-auto object-contain filter grayscale hover:grayscale-0 transition-all"
+                alt={client.name}
+              />
+            </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

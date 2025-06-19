@@ -5,8 +5,9 @@ import Hero from '../components/Hero';
 import MetaPartnerBadge from '../components/MetaPartnerBadge';
 import Features from '../components/Features';
 import MultiChannelSection from '../components/MultiChannelSection';
-import Pricing from '../components/Pricing';
 import AutoSlider from '../components/AutoSlider';
+import OmnichannelSection from '../components/OmnichannelSection';
+import Pricing from '../components/Pricing';
 import LeadForm from '../components/LeadForm';
 import Clients from '../components/Clients';
 import Contact from '../components/Contact';
@@ -21,6 +22,7 @@ const Index = () => {
       <Features />
       <MultiChannelSection />
       <AutoSlider />
+      <OmnichannelSection />
       <Pricing />
       <LeadForm />
       <Clients />

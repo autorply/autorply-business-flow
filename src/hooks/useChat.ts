@@ -46,62 +46,8 @@ export const useChat = () => {
       });
 
       if (error) {
+        console.error('Supabase function error:', error);
         throw new Error(error.message);
-      }
-
-      // Handle streaming response
-      if (data instanceof ReadableStream) {
-        const reader = data.getReader();
-        const decoder = new TextDecoder();
-        let fullResponse = '';
-
-        try {
-          while (true) {
-            const { done, value } = await reader.read();
-            if (done) break;
-
-            const chunk = decoder.decode(value, { stream: true });
-            const lines = chunk.split('\n');
-
-            for (const line of lines) {
-              if (line.startsWith('data: ') && line !== 'data: [DONE]') {
-                try {
-                  const jsonData = JSON.parse(line.slice(6));
-                  if (jsonData.choices?.[0]?.delta?.content) {
-                    fullResponse += jsonData.choices[0].delta.content;
-                    
-                    // Update message in real-time
-                    setMessages(prev => {
-                      const newMessages = [...prev];
-                      const lastMessageIndex = newMessages.length - 1;
-                      
-                      if (newMessages[lastMessageIndex]?.isBot && newMessages[lastMessageIndex]?.id === Date.now() + 1) {
-                        newMessages[lastMessageIndex].text = fullResponse;
-                      } else {
-                        newMessages.push({
-                          id: Date.now() + 1,
-                          text: fullResponse,
-                          sender: 'autorply',
-                          time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }),
-                          isBot: true
-                        });
-                      }
-                      
-                      return newMessages;
-                    });
-                  }
-                } catch (e) {
-                  console.log('Error parsing JSON:', e);
-                }
-              }
-            }
-          }
-        } catch (streamError) {
-          console.error('Stream reading error:', streamError);
-          throw streamError;
-        }
-
-        return { reply: fullResponse };
       }
 
       return data;
@@ -131,12 +77,117 @@ export const useChat = () => {
         isBot: false
       };
 
+      // إضافة رسالة المستخدم فوراً
       setMessages(prev => [...prev, newMessage]);
       
-      // Get AI response with streaming
-      chatWithAI.mutate(message);
+      // إضافة رسالة فارغة للبوت لبدء الـ streaming
+      const botMessageId = Date.now() + 1;
+      const initialBotMessage: Message = {
+        id: botMessageId,
+        text: '',
+        sender: 'autorply',
+        time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }),
+        isBot: true
+      };
+      
+      setMessages(prev => [...prev, initialBotMessage]);
+      
+      // بدء الـ streaming
+      handleStreamingResponse(message, botMessageId);
       
       setMessage('');
+    }
+  };
+
+  const handleStreamingResponse = async (userMessage: string, botMessageId: number) => {
+    try {
+      const { data, error } = await supabase.functions.invoke('chat-with-openai', {
+        body: { message: userMessage },
+      });
+
+      if (error) {
+        console.error('Supabase function error:', error);
+        throw new Error(error.message);
+      }
+
+      if (data && typeof data === 'object' && data.body) {
+        const reader = data.body.getReader();
+        const decoder = new TextDecoder();
+        let fullResponse = '';
+
+        try {
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            const chunk = decoder.decode(value, { stream: true });
+            const lines = chunk.split('\n');
+
+            for (const line of lines) {
+              if (line.startsWith('data: ') && line !== 'data: [DONE]') {
+                try {
+                  const jsonData = JSON.parse(line.slice(6));
+                  if (jsonData.choices?.[0]?.delta?.content) {
+                    fullResponse += jsonData.choices[0].delta.content;
+                    
+                    // تحديث الرسالة في الوقت الفعلي
+                    setMessages(prev => {
+                      const newMessages = [...prev];
+                      const messageIndex = newMessages.findIndex(msg => msg.id === botMessageId);
+                      
+                      if (messageIndex !== -1) {
+                        newMessages[messageIndex] = {
+                          ...newMessages[messageIndex],
+                          text: fullResponse
+                        };
+                      }
+                      
+                      return newMessages;
+                    });
+                  }
+                } catch (e) {
+                  console.error('Error parsing JSON:', e);
+                }
+              }
+            }
+          }
+        } catch (streamError) {
+          console.error('Stream reading error:', streamError);
+          throw streamError;
+        }
+      } else if (data && data.reply) {
+        // التعامل مع الرد العادي غير المتدفق
+        setMessages(prev => {
+          const newMessages = [...prev];
+          const messageIndex = newMessages.findIndex(msg => msg.id === botMessageId);
+          
+          if (messageIndex !== -1) {
+            newMessages[messageIndex] = {
+              ...newMessages[messageIndex],
+              text: data.reply
+            };
+          }
+          
+          return newMessages;
+        });
+      }
+    } catch (error) {
+      console.error('Error in streaming response:', error);
+      
+      // إضافة رسالة خطأ
+      setMessages(prev => {
+        const newMessages = [...prev];
+        const messageIndex = newMessages.findIndex(msg => msg.id === botMessageId);
+        
+        if (messageIndex !== -1) {
+          newMessages[messageIndex] = {
+            ...newMessages[messageIndex],
+            text: 'عذراً، حدث خطأ في النظام. يرجى المحاولة مرة أخرى.'
+          };
+        }
+        
+        return newMessages;
+      });
     }
   };
 
