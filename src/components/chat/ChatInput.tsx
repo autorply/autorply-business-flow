@@ -34,13 +34,13 @@ const ChatInput = ({
       </div>
       <button
         onClick={handleSendMessage}
-        disabled={isLoading}
-        className="w-8 h-8 flex items-center justify-center text-[#00b386] hover:text-[#00a073] transition-colors disabled:text-gray-400"
+        disabled={isLoading || !message.trim()}
+        className="w-8 h-8 flex items-center justify-center text-[#00b386] hover:text-[#00a073] transition-colors disabled:text-gray-400 disabled:cursor-not-allowed"
       >
         {isLoading ? (
           <Loader2 className="w-5 h-5 animate-spin" />
         ) : message.trim() ? (
-          <Send className="w-5 h-5 transform rotate-180" />
+          <Send className="w-5 h-5" />
         ) : (
           <Mic className="w-5 h-5" />
         )}

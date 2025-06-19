@@ -27,9 +27,7 @@ serve(async (req) => {
       throw new Error('OpenAI API key not configured');
     }
 
-    // Use Assistant API if Assistant ID is provided, otherwise use regular chat completion
-    let response;
-    
+    // Use Assistant API if Assistant ID is provided, otherwise use regular chat completion with streaming
     if (assistantId) {
       // Create thread
       const threadResponse = await fetch('https://api.openai.com/v1/threads', {
@@ -59,7 +57,7 @@ serve(async (req) => {
         })
       });
 
-      // Run assistant
+      // Run assistant with streaming
       const runResponse = await fetch(`https://api.openai.com/v1/threads/${thread.id}/runs`, {
         method: 'POST',
         headers: {
@@ -68,52 +66,23 @@ serve(async (req) => {
           'OpenAI-Beta': 'assistants=v2'
         },
         body: JSON.stringify({
-          assistant_id: assistantId
+          assistant_id: assistantId,
+          stream: true
         })
       });
 
-      const run = await runResponse.json();
-      console.log('Started run:', run.id);
-
-      // Poll for completion
-      let runStatus = run;
-      while (runStatus.status === 'queued' || runStatus.status === 'in_progress') {
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        const statusResponse = await fetch(`https://api.openai.com/v1/threads/${thread.id}/runs/${run.id}`, {
-          headers: {
-            'Authorization': `Bearer ${openAIApiKey}`,
-            'OpenAI-Beta': 'assistants=v2'
-          }
-        });
-        
-        runStatus = await statusResponse.json();
-        console.log('Run status:', runStatus.status);
-      }
-
-      if (runStatus.status === 'completed') {
-        // Get messages
-        const messagesResponse = await fetch(`https://api.openai.com/v1/threads/${thread.id}/messages`, {
-          headers: {
-            'Authorization': `Bearer ${openAIApiKey}`,
-            'OpenAI-Beta': 'assistants=v2'
-          }
-        });
-
-        const messages = await messagesResponse.json();
-        const assistantMessage = messages.data.find((msg: any) => msg.role === 'assistant');
-        
-        if (assistantMessage && assistantMessage.content[0]) {
-          response = { reply: assistantMessage.content[0].text.value };
-        } else {
-          throw new Error('No assistant response found');
-        }
-      } else {
-        throw new Error(`Assistant run failed with status: ${runStatus.status}`);
-      }
+      // Return streaming response
+      return new Response(runResponse.body, {
+        headers: {
+          ...corsHeaders,
+          'Content-Type': 'text/plain; charset=utf-8',
+          'Cache-Control': 'no-cache',
+          'Connection': 'keep-alive',
+        },
+      });
     } else {
-      // Use regular chat completion
-      response = await fetch('https://api.openai.com/v1/chat/completions', {
+      // Use regular chat completion with streaming
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${openAIApiKey}`,
@@ -129,23 +98,28 @@ serve(async (req) => {
             { role: 'user', content: message }
           ],
           max_tokens: 500,
-          temperature: 0.7
+          temperature: 0.7,
+          stream: true
         }),
       });
 
-      const data = await response.json();
-      console.log('OpenAI response:', data);
+      console.log('OpenAI streaming response initiated');
 
-      if (data.error) {
-        throw new Error(data.error.message);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error?.message || 'OpenAI API error');
       }
 
-      response = { reply: data.choices[0].message.content };
+      // Return streaming response
+      return new Response(response.body, {
+        headers: {
+          ...corsHeaders,
+          'Content-Type': 'text/plain; charset=utf-8',
+          'Cache-Control': 'no-cache',
+          'Connection': 'keep-alive',
+        },
+      });
     }
-
-    return new Response(JSON.stringify(response), {
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    });
   } catch (error) {
     console.error('Error in chat-with-openai function:', error);
     return new Response(JSON.stringify({ 

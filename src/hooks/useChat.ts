@@ -49,20 +49,62 @@ export const useChat = () => {
         throw new Error(error.message);
       }
 
+      // Handle streaming response
+      if (data instanceof ReadableStream) {
+        const reader = data.getReader();
+        const decoder = new TextDecoder();
+        let fullResponse = '';
+
+        try {
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            const chunk = decoder.decode(value, { stream: true });
+            const lines = chunk.split('\n');
+
+            for (const line of lines) {
+              if (line.startsWith('data: ') && line !== 'data: [DONE]') {
+                try {
+                  const jsonData = JSON.parse(line.slice(6));
+                  if (jsonData.choices?.[0]?.delta?.content) {
+                    fullResponse += jsonData.choices[0].delta.content;
+                    
+                    // Update message in real-time
+                    setMessages(prev => {
+                      const newMessages = [...prev];
+                      const lastMessageIndex = newMessages.length - 1;
+                      
+                      if (newMessages[lastMessageIndex]?.isBot && newMessages[lastMessageIndex]?.id === Date.now() + 1) {
+                        newMessages[lastMessageIndex].text = fullResponse;
+                      } else {
+                        newMessages.push({
+                          id: Date.now() + 1,
+                          text: fullResponse,
+                          sender: 'autorply',
+                          time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }),
+                          isBot: true
+                        });
+                      }
+                      
+                      return newMessages;
+                    });
+                  }
+                } catch (e) {
+                  console.log('Error parsing JSON:', e);
+                }
+              }
+            }
+          }
+        } catch (streamError) {
+          console.error('Stream reading error:', streamError);
+          throw streamError;
+        }
+
+        return { reply: fullResponse };
+      }
+
       return data;
-    },
-    onSuccess: (data) => {
-      console.log('AI response received:', data);
-      
-      const aiReply: Message = {
-        id: Date.now() + 1,
-        text: data.reply || 'شكراً لك على رسالتك! سيقوم أحد ممثلينا بالرد عليك قريباً.',
-        sender: 'autorply',
-        time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }),
-        isBot: true
-      };
-      
-      setMessages(prev => [...prev, aiReply]);
     },
     onError: (error: Error) => {
       console.error('Failed to get AI response:', error);
@@ -91,7 +133,7 @@ export const useChat = () => {
 
       setMessages(prev => [...prev, newMessage]);
       
-      // Get AI response only
+      // Get AI response with streaming
       chatWithAI.mutate(message);
       
       setMessage('');

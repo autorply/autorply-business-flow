@@ -6,7 +6,7 @@ import MetaPartnerBadge from '../components/MetaPartnerBadge';
 import Features from '../components/Features';
 import MultiChannelSection from '../components/MultiChannelSection';
 import Pricing from '../components/Pricing';
-import Demo from '../components/Demo';
+import AutoSlider from '../components/AutoSlider';
 import LeadForm from '../components/LeadForm';
 import Clients from '../components/Clients';
 import Contact from '../components/Contact';
@@ -20,7 +20,7 @@ const Index = () => {
       <MetaPartnerBadge />
       <Features />
       <MultiChannelSection />
-      <Demo />
+      <AutoSlider />
       <Pricing />
       <LeadForm />
       <Clients />
