@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Hero from '../components/Hero';
 import MetaPartnerBadge from '../components/MetaPartnerBadge';
 import Features from '../components/Features';
+import MultiChannelSection from '../components/MultiChannelSection';
 import Pricing from '../components/Pricing';
 import Demo from '../components/Demo';
 import LeadForm from '../components/LeadForm';
@@ -18,6 +19,7 @@ const Index = () => {
       <Hero />
       <MetaPartnerBadge />
       <Features />
+      <MultiChannelSection />
       <Demo />
       <Pricing />
       <LeadForm />
