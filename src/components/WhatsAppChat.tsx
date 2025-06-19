@@ -4,13 +4,9 @@ import { Send, Phone, Video, MoreVertical, Loader2, Plus, Mic } from 'lucide-rea
 import { motion } from 'framer-motion';
 import { useMutation } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import { toast } from "sonner";
-
-const WHATSAPP_TARGET_NUMBER = '920001212';
 
 const WhatsAppChat = () => {
   const [message, setMessage] = useState('');
-  const phoneNumber = WHATSAPP_TARGET_NUMBER;
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [messages, setMessages] = useState([
     {
@@ -84,40 +80,8 @@ const WhatsAppChat = () => {
     },
   });
 
-  const sendMessageMutation = useMutation({
-    mutationFn: async (text: string) => {
-      if (!phoneNumber || phoneNumber.length < 10) {
-        throw new Error('الرجاء إدخال رقم جوال صحيح يبدأ بـ 966');
-      }
-      const { data, error } = await supabase.functions.invoke('send-whatsapp-message', {
-        body: { 
-          message: text,
-          phone_number: phoneNumber
-        },
-      });
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      if (data.status === '0') {
-        throw new Error(data.message || 'فشل في إرسال الرسالة.');
-      }
-
-      return data;
-    },
-    onSuccess: (data) => {
-      console.log('Message sent successfully:', data);
-      toast.success("تم إرسال رسالتك بنجاح!");
-    },
-    onError: (error: Error) => {
-      console.error('Failed to send message:', error);
-      toast.error(error.message || "لم نتمكن من إرسال رسالتك. يرجى المحاولة مرة أخرى.");
-    },
-  });
-
   const handleSendMessage = () => {
-    if (message.trim() && !sendMessageMutation.isPending && !chatWithAI.isPending) {
+    if (message.trim() && !chatWithAI.isPending) {
       const newMessage = {
         id: Date.now(),
         text: message,
@@ -128,10 +92,7 @@ const WhatsAppChat = () => {
 
       setMessages(prev => [...prev, newMessage]);
       
-      // Send to WhatsApp API
-      sendMessageMutation.mutate(message);
-      
-      // Get AI response
+      // Get AI response only
       chatWithAI.mutate(message);
       
       setMessage('');
@@ -213,7 +174,7 @@ const WhatsAppChat = () => {
                 </div>
               </motion.div>
             ))}
-            {(sendMessageMutation.isPending || chatWithAI.isPending) && (
+            {chatWithAI.isPending && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -243,15 +204,15 @@ const WhatsAppChat = () => {
                 onKeyPress={handleKeyPress}
                 placeholder="اكتب رسالة..."
                 className="flex-1 bg-transparent outline-none text-sm text-right"
-                disabled={sendMessageMutation.isPending || chatWithAI.isPending}
+                disabled={chatWithAI.isPending}
               />
             </div>
             <button
               onClick={handleSendMessage}
-              disabled={sendMessageMutation.isPending || chatWithAI.isPending}
+              disabled={chatWithAI.isPending}
               className="w-8 h-8 flex items-center justify-center text-[#00b386] hover:text-[#00a073] transition-colors disabled:text-gray-400"
             >
-              {(sendMessageMutation.isPending || chatWithAI.isPending) ? (
+              {chatWithAI.isPending ? (
                 <Loader2 className="w-5 h-5 animate-spin" />
               ) : message.trim() ? (
                 <Send className="w-5 h-5 transform rotate-180" />
