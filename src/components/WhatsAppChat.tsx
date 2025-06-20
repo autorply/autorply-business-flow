@@ -11,7 +11,7 @@ const WhatsAppChat = () => {
     setMessage,
     messages,
     messagesEndRef,
-    chatWithAI,
+    isLoading,
     handleSendMessage,
     handleKeyPress
   } = useChat();
@@ -33,7 +33,7 @@ const WhatsAppChat = () => {
           
           <ChatMessages 
             messages={messages}
-            isLoading={chatWithAI.isPending}
+            isLoading={isLoading}
             messagesEndRef={messagesEndRef}
           />
 
@@ -42,7 +42,7 @@ const WhatsAppChat = () => {
             setMessage={setMessage}
             handleSendMessage={handleSendMessage}
             handleKeyPress={handleKeyPress}
-            isLoading={chatWithAI.isPending}
+            isLoading={isLoading}
           />
         </div>
       </div>

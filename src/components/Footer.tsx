@@ -2,13 +2,6 @@
 import { motion } from 'framer-motion';
 
 const Footer = () => {
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   const footerSections = [
     {
       title: 'عن أوتوربلاي',
@@ -62,58 +55,70 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-900 text-white mt-32">
-      {/* الشعارات */}
+      {/* Email Section */}
+      <div className="bg-blue-600 py-4">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <p className="text-lg font-semibold">للتواصل: info@autorply.sa</p>
+        </div>
+      </div>
+
+      {/* Partner Badges */}
       <div className="bg-gray-800 py-8">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-wrap justify-center items-center gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center justify-items-center">
             <motion.div
-              className="flex items-center gap-2"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <div className="bg-blue-600 text-white px-3 py-1 rounded-lg text-sm font-bold">
-                Meta Partner
-              </div>
+              <img src="/lovable-uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" alt="Meta Partner" className="h-12 w-auto" />
             </motion.div>
             
             <motion.div
-              className="flex items-center gap-2"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <img src="/lovable-uploads/14caefca-39ff-4152-9289-55b52c714582.png" alt="منشآت" className="h-8" />
+              <img src="/lovable-uploads/14caefca-39ff-4152-9289-55b52c714582.png" alt="منشآت" className="h-12 w-auto" />
             </motion.div>
             
             <motion.div
-              className="flex items-center gap-2"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <img src="/lovable-uploads/328ed69d-c8c4-40cb-883a-6752c3aacffa.png" alt="رؤية 2030" className="h-8" />
+              <img src="/lovable-uploads/328ed69d-c8c4-40cb-883a-6752c3aacffa.png" alt="رؤية 2030" className="h-12 w-auto" />
             </motion.div>
             
             <motion.div
-              className="flex items-center gap-2"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <div className="bg-green-600 text-white px-3 py-1 rounded-lg text-sm font-bold">
-                WhatsApp Business Solution Provider
+              <div className="bg-white text-black px-4 py-2 rounded-lg text-sm font-bold text-center">
+                WhatsApp Business<br />Solution Provider
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              <div className="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-bold text-center">
+                Solutions by STC
               </div>
             </motion.div>
           </div>
         </div>
       </div>
 
-      {/* محتوى الفوتر */}
+      {/* Footer Content */}
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8">
           {footerSections.map((section, index) => (
@@ -153,11 +158,6 @@ const Footer = () => {
             </div>
           </div>
         </motion.div>
-      </div>
-      
-      <div className="text-center text-sm text-gray-500 py-4 border-t border-gray-700">
-        <p>واتساب: <a href="https://wa.me/autorply" className="text-blue-400 hover:text-blue-300 transition">wa.me/autorply</a></p>
-        <p className="mt-2">البريد الإلكتروني: support@autorply.sa</p>
       </div>
     </footer>
   );

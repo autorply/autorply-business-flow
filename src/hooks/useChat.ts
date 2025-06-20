@@ -1,12 +1,12 @@
 
 import { useState, useEffect, useRef } from 'react';
-import { useMutation } from '@tanstack/react-query';
-import { supabase } from '@/integrations/supabase/client';
 import { Message } from '@/types/chat';
+import { chatWithOpenAI } from '@/utils/openai';
 
 export const useChat = () => {
   const [message, setMessage] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
@@ -39,36 +39,8 @@ export const useChat = () => {
     scrollToBottom();
   }, [messages]);
 
-  const chatWithAI = useMutation({
-    mutationFn: async (userMessage: string) => {
-      const { data, error } = await supabase.functions.invoke('chat-with-openai', {
-        body: { message: userMessage },
-      });
-
-      if (error) {
-        console.error('Supabase function error:', error);
-        throw new Error(error.message);
-      }
-
-      return data;
-    },
-    onError: (error: Error) => {
-      console.error('Failed to get AI response:', error);
-      
-      const fallbackReply: Message = {
-        id: Date.now() + 1,
-        text: 'شكراً لك على رسالتك! سيقوم أحد ممثلينا بالرد عليك قريباً.',
-        sender: 'autorply',
-        time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }),
-        isBot: true
-      };
-      
-      setMessages(prev => [...prev, fallbackReply]);
-    },
-  });
-
-  const handleSendMessage = () => {
-    if (message.trim() && !chatWithAI.isPending) {
+  const handleSendMessage = async () => {
+    if (message.trim() && !isLoading) {
       const newMessage: Message = {
         id: Date.now(),
         text: message,
@@ -77,10 +49,14 @@ export const useChat = () => {
         isBot: false
       };
 
-      // إضافة رسالة المستخدم فوراً
+      // Add user message immediately
       setMessages(prev => [...prev, newMessage]);
       
-      // إضافة رسالة فارغة للبوت لبدء الـ streaming
+      const userMessage = message;
+      setMessage('');
+      setIsLoading(true);
+
+      // Add empty bot message for streaming
       const botMessageId = Date.now() + 1;
       const initialBotMessage: Message = {
         id: botMessageId,
@@ -91,31 +67,15 @@ export const useChat = () => {
       };
       
       setMessages(prev => [...prev, initialBotMessage]);
-      
-      // بدء الـ streaming
-      handleStreamingResponse(message, botMessageId);
-      
-      setMessage('');
-    }
-  };
 
-  const handleStreamingResponse = async (userMessage: string, botMessageId: number) => {
-    try {
-      const { data, error } = await supabase.functions.invoke('chat-with-openai', {
-        body: { message: userMessage },
-      });
+      try {
+        const response = await chatWithOpenAI(userMessage);
 
-      if (error) {
-        console.error('Supabase function error:', error);
-        throw new Error(error.message);
-      }
+        if (process.env.USE_STREAMING === 'true' && response.body) {
+          const reader = response.body.getReader();
+          const decoder = new TextDecoder();
+          let fullResponse = '';
 
-      if (data && typeof data === 'object' && data.body) {
-        const reader = data.body.getReader();
-        const decoder = new TextDecoder();
-        let fullResponse = '';
-
-        try {
           while (true) {
             const { done, value } = await reader.read();
             if (done) break;
@@ -130,7 +90,6 @@ export const useChat = () => {
                   if (jsonData.choices?.[0]?.delta?.content) {
                     fullResponse += jsonData.choices[0].delta.content;
                     
-                    // تحديث الرسالة في الوقت الفعلي
                     setMessages(prev => {
                       const newMessages = [...prev];
                       const messageIndex = newMessages.findIndex(msg => msg.id === botMessageId);
@@ -151,12 +110,27 @@ export const useChat = () => {
               }
             }
           }
-        } catch (streamError) {
-          console.error('Stream reading error:', streamError);
-          throw streamError;
+        } else {
+          const data = await response.json();
+          const reply = data.choices?.[0]?.message?.content || 'عذراً، حدث خطأ في النظام. يرجى المحاولة مرة أخرى.';
+          
+          setMessages(prev => {
+            const newMessages = [...prev];
+            const messageIndex = newMessages.findIndex(msg => msg.id === botMessageId);
+            
+            if (messageIndex !== -1) {
+              newMessages[messageIndex] = {
+                ...newMessages[messageIndex],
+                text: reply
+              };
+            }
+            
+            return newMessages;
+          });
         }
-      } else if (data && data.reply) {
-        // التعامل مع الرد العادي غير المتدفق
+      } catch (error) {
+        console.error('Failed to get AI response:', error);
+        
         setMessages(prev => {
           const newMessages = [...prev];
           const messageIndex = newMessages.findIndex(msg => msg.id === botMessageId);
@@ -164,30 +138,15 @@ export const useChat = () => {
           if (messageIndex !== -1) {
             newMessages[messageIndex] = {
               ...newMessages[messageIndex],
-              text: data.reply
+              text: 'عذراً، حدث خطأ في النظام. يرجى المحاولة مرة أخرى.'
             };
           }
           
           return newMessages;
         });
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      console.error('Error in streaming response:', error);
-      
-      // إضافة رسالة خطأ
-      setMessages(prev => {
-        const newMessages = [...prev];
-        const messageIndex = newMessages.findIndex(msg => msg.id === botMessageId);
-        
-        if (messageIndex !== -1) {
-          newMessages[messageIndex] = {
-            ...newMessages[messageIndex],
-            text: 'عذراً، حدث خطأ في النظام. يرجى المحاولة مرة أخرى.'
-          };
-        }
-        
-        return newMessages;
-      });
     }
   };
 
@@ -203,7 +162,7 @@ export const useChat = () => {
     setMessage,
     messages,
     messagesEndRef,
-    chatWithAI,
+    isLoading,
     handleSendMessage,
     handleKeyPress
   };

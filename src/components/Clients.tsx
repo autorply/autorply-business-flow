@@ -12,7 +12,7 @@ const Clients = () => {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white overflow-hidden">
       <motion.div 
         className="text-center mb-12"
         initial={{ opacity: 0, y: 50 }}
@@ -24,27 +24,35 @@ const Clients = () => {
         <div className="w-24 h-1 mx-auto bg-green-500 rounded"></div>
       </motion.div>
       
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
-          {clients.map((client, index) => (
-            <motion.div
+      <div className="relative">
+        <div className="flex animate-marquee hover:pause">
+          {[...clients, ...clients].map((client, index) => (
+            <div
               key={index}
-              className="flex items-center justify-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ scale: 1.05 }}
+              className="flex items-center justify-center p-6 mx-4 min-w-[150px]"
             >
               <img 
                 src={client.logo} 
                 className="h-12 w-auto object-contain filter grayscale hover:grayscale-0 transition-all"
                 alt={client.name}
               />
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
+      
+      <style jsx>{`
+        @keyframes marquee {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          animation: marquee 30s linear infinite;
+        }
+        .hover\\:pause:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
   );
 };

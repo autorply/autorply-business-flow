@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
@@ -12,6 +11,9 @@ import LeadForm from '../components/LeadForm';
 import Clients from '../components/Clients';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
+import SmartSurveys from '../components/SmartSurveys';
+import SmartSolutions from '../components/SmartSolutions';
+import Integrations from '../components/Integrations';
 
 const Index = () => {
   return (
@@ -23,6 +25,9 @@ const Index = () => {
       <MultiChannelSection />
       <AutoSlider />
       <OmnichannelSection />
+      <SmartSurveys />
+      <SmartSolutions />
+      <Integrations />
       <Pricing />
       <LeadForm />
       <Clients />
