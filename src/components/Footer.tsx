@@ -1,5 +1,6 @@
 
 import { motion } from 'framer-motion';
+import { Facebook, Instagram, Telegram, MessageCircle } from 'lucide-react';
 
 const Footer = () => {
   const footerSections = [
@@ -55,17 +56,50 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-900 text-white mt-32">
-      {/* Email Section */}
-      <div className="bg-blue-600 py-4">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <p className="text-lg font-semibold">للتواصل: info@autorply.sa</p>
+      {/* Main Footer Content */}
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        {/* Contact Email */}
+        <div className="text-center mb-8">
+          <div className="bg-blue-600 inline-block px-6 py-3 rounded-lg">
+            <p className="text-lg font-semibold">للتواصل: info@autorply.sa</p>
+          </div>
         </div>
-      </div>
 
-      {/* Partner Badges */}
-      <div className="bg-gray-800 py-8">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center justify-items-center">
+        {/* Social Media Icons */}
+        <div className="flex justify-center gap-6 mb-12">
+          <motion.a
+            href="#"
+            className="bg-gray-800 p-3 rounded-full hover:bg-blue-600 transition-colors"
+            whileHover={{ scale: 1.1 }}
+          >
+            <MessageCircle className="w-6 h-6" />
+          </motion.a>
+          <motion.a
+            href="#"
+            className="bg-gray-800 p-3 rounded-full hover:bg-blue-600 transition-colors"
+            whileHover={{ scale: 1.1 }}
+          >
+            <Facebook className="w-6 h-6" />
+          </motion.a>
+          <motion.a
+            href="#"
+            className="bg-gray-800 p-3 rounded-full hover:bg-pink-600 transition-colors"
+            whileHover={{ scale: 1.1 }}
+          >
+            <Instagram className="w-6 h-6" />
+          </motion.a>
+          <motion.a
+            href="#"
+            className="bg-gray-800 p-3 rounded-full hover:bg-blue-500 transition-colors"
+            whileHover={{ scale: 1.1 }}
+          >
+            <Telegram className="w-6 h-6" />
+          </motion.a>
+        </div>
+
+        {/* Partner Logos */}
+        <div className="bg-gray-800 py-8 rounded-lg mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -103,23 +137,10 @@ const Footer = () => {
                 WhatsApp Business<br />Solution Provider
               </div>
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <div className="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-bold text-center">
-                Solutions by STC
-              </div>
-            </motion.div>
           </div>
         </div>
-      </div>
 
-      {/* Footer Content */}
-      <div className="max-w-7xl mx-auto px-6 py-12">
+        {/* Footer Links */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8">
           {footerSections.map((section, index) => (
             <motion.div
@@ -143,6 +164,7 @@ const Footer = () => {
           ))}
         </div>
         
+        {/* Copyright */}
         <motion.div
           className="mt-8 pt-8 border-t border-gray-700"
           initial={{ opacity: 0, y: 20 }}
@@ -152,10 +174,8 @@ const Footer = () => {
         >
           <div className="flex items-center justify-center gap-2 text-sm">
             <p className="text-gray-400">© 2025 جميع الحقوق محفوظة لاوتوربلاي</p>
-            <span className="text-gray-900">By</span>
-            <div className="bg-purple-600 text-white px-2 py-1 rounded text-xs font-bold">
-              Solutions by STC
-            </div>
+            <span className="text-gray-500">By</span>
+            <img src="/lovable-uploads/ebef3426-c087-41c9-9726-3423f1b8d47f.png" alt="STC" className="h-6 w-auto" />
           </div>
         </motion.div>
       </div>

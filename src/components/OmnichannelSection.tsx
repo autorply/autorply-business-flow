@@ -48,6 +48,82 @@ const OmnichannelSection = () => {
         </p>
       </motion.div>
 
+      {/* Unified Platform Illustration */}
+      <motion.div
+        className="max-w-4xl mx-auto mb-16"
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="bg-white rounded-2xl shadow-2xl p-8 mx-4">
+          {/* Tablet/Dashboard Interface */}
+          <div className="bg-gradient-to-br from-blue-50 to-white rounded-xl border-2 border-gray-200 p-6">
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">A</span>
+                </div>
+                <h3 className="text-lg font-bold text-gray-800">لوحة التحكم الموحدة</h3>
+              </div>
+              <div className="flex gap-2">
+                <div className="w-3 h-3 bg-red-400 rounded-full"></div>
+                <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+              </div>
+            </div>
+            
+            {/* Platform Channels */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+              {platforms.map((platform, index) => (
+                <div key={index} className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                  <div className="text-center">
+                    <div className="text-2xl mb-2">{platform.icon}</div>
+                    <p className="text-sm font-medium text-gray-700">{platform.name}</p>
+                    <div className="mt-2">
+                      <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div className="bg-green-500 h-2 rounded-full" style={{width: `${Math.random() * 40 + 60}%`}}></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Unified Inbox Preview */}
+            <div className="bg-white rounded-lg border border-gray-200 p-4">
+              <h4 className="text-sm font-semibold text-gray-700 mb-3">صندوق الرسائل الموحد</h4>
+              <div className="space-y-2">
+                <div className="flex items-center gap-3 p-2 bg-blue-50 rounded">
+                  <span className="text-lg">📱</span>
+                  <div className="flex-1">
+                    <p className="text-xs text-gray-600">أحمد محمد - واتساب</p>
+                    <p className="text-sm">مرحباً، أريد الاستفسار عن الخدمة</p>
+                  </div>
+                  <span className="text-xs text-gray-500">الآن</span>
+                </div>
+                <div className="flex items-center gap-3 p-2 hover:bg-gray-50 rounded">
+                  <span className="text-lg">📘</span>
+                  <div className="flex-1">
+                    <p className="text-xs text-gray-600">سارة أحمد - فيسبوك</p>
+                    <p className="text-sm">شكراً لكم على الخدمة الممتازة</p>
+                  </div>
+                  <span className="text-xs text-gray-500">5 دقائق</span>
+                </div>
+                <div className="flex items-center gap-3 p-2 hover:bg-gray-50 rounded">
+                  <span className="text-lg">📷</span>
+                  <div className="flex-1">
+                    <p className="text-xs text-gray-600">محمد علي - إنستغرام</p>
+                    <p className="text-sm">متى يمكنني بدء الخدمة؟</p>
+                  </div>
+                  <span className="text-xs text-gray-500">10 دقائق</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
       {/* Platform Icons */}
       <motion.div 
         className="flex justify-center items-center gap-8 mb-16"

@@ -24,14 +24,14 @@ const SmartSurveys = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <div className="absolute -top-4 -right-4 z-10">
-            <div className="bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center">
-              ❌
+          <div className="absolute -top-2 -right-2 z-10">
+            <div className="bg-red-500 text-white w-7 h-7 rounded-full flex items-center justify-center shadow-lg">
+              <span className="text-sm">✕</span>
             </div>
           </div>
-          <div className="relative w-72 h-[500px] bg-black rounded-[3rem] p-2 shadow-2xl mx-auto">
-            <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden relative">
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-black rounded-b-2xl z-10"></div>
+          <div className="relative w-64 h-[480px] bg-gray-100 rounded-[2rem] p-1 shadow-xl mx-auto border border-gray-200">
+            <div className="w-full h-full bg-white rounded-[1.8rem] overflow-hidden relative">
+              <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-20 h-4 bg-gray-800 rounded-full"></div>
               <div className="pt-8 p-4 h-full">
                 <div className="bg-purple-600 text-white p-2 text-center text-sm mb-4 rounded">
                   Google Forms
@@ -67,19 +67,19 @@ const SmartSurveys = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <div className="absolute -top-4 -right-4 z-10">
-            <div className="bg-green-500 text-white w-8 h-8 rounded-full flex items-center justify-center">
-              ✅
+          <div className="absolute -top-2 -right-2 z-10">
+            <div className="bg-green-500 text-white w-7 h-7 rounded-full flex items-center justify-center shadow-lg">
+              <span className="text-sm">✓</span>
             </div>
           </div>
-          <div className="relative w-72 h-[500px] bg-black rounded-[3rem] p-2 shadow-2xl mx-auto">
-            <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden relative">
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-black rounded-b-2xl z-10"></div>
+          <div className="relative w-64 h-[480px] bg-gray-100 rounded-[2rem] p-1 shadow-xl mx-auto border border-gray-200">
+            <div className="w-full h-full bg-white rounded-[1.8rem] overflow-hidden relative">
+              <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-20 h-4 bg-gray-800 rounded-full"></div>
               
               {/* WhatsApp Header */}
               <div className="bg-[#075e54] text-white px-4 py-4 pt-8 flex items-center gap-3">
                 <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                  <img src="https://autorply.sa/assets/img/logo_64.svg" alt="Autorply" className="w-4 h-4" />
+                  <div className="w-4 h-4 bg-blue-600 rounded"></div>
                 </div>
                 <div>
                   <h3 className="font-semibold text-sm">Autorply</h3>
@@ -87,40 +87,37 @@ const SmartSurveys = () => {
                 </div>
               </div>
 
-              {/* Chat Messages */}
-              <div className="bg-[#efeae2] p-4 flex-1 space-y-3 overflow-y-auto" style={{ height: 'calc(100% - 120px)' }}>
-                <div className="flex justify-start">
-                  <div className="bg-white p-3 rounded-lg rounded-tl-none shadow-sm max-w-xs">
-                    <p className="text-sm">مرحباً! يرجى ملء البيانات التالية:</p>
+              {/* Form Content */}
+              <div className="bg-[#efeae2] p-4 flex-1 overflow-y-auto" style={{ height: 'calc(100% - 140px)' }}>
+                <div className="bg-white p-4 rounded-lg shadow-sm">
+                  <h3 className="text-sm font-semibold mb-3 text-center text-blue-600">استبيان سريع</h3>
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-xs text-gray-600 mb-1">الاسم</label>
+                      <input type="text" className="w-full p-2 border border-gray-200 rounded text-sm" placeholder="أدخل اسمك" />
+                    </div>
+                    <div>
+                      <label className="block text-xs text-gray-600 mb-1">البريد الإلكتروني</label>
+                      <input type="email" className="w-full p-2 border border-gray-200 rounded text-sm" placeholder="email@example.com" />
+                    </div>
+                    <div>
+                      <label className="block text-xs text-gray-600 mb-1">التقييم</label>
+                      <div className="flex gap-1">
+                        {[1,2,3,4,5].map(star => (
+                          <span key={star} className="text-yellow-400 text-lg">★</span>
+                        ))}
+                      </div>
+                    </div>
+                    <button className="w-full bg-green-500 text-white py-2 rounded text-sm font-medium">
+                      إرسال
+                    </button>
                   </div>
-                </div>
-                <div className="flex justify-end">
-                  <div className="bg-[#d8fdd2] p-3 rounded-lg rounded-tr-none max-w-xs">
-                    <p className="text-sm">أحمد محمد</p>
-                  </div>
-                </div>
-                <div className="flex justify-start">
-                  <div className="bg-white p-3 rounded-lg rounded-tl-none shadow-sm max-w-xs">
-                    <p className="text-sm">شكراً أحمد! ما هو بريدك الإلكتروني؟</p>
-                  </div>
-                </div>
-                <div className="flex justify-end">
-                  <div className="bg-[#d8fdd2] p-3 rounded-lg rounded-tr-none max-w-xs">
-                    <p className="text-sm">ahmed@email.com</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Input */}
-              <div className="p-3 bg-white flex items-center">
-                <div className="flex-1 bg-gray-100 rounded-full px-4 py-2">
-                  <input type="text" placeholder="اكتب رسالة..." className="w-full bg-transparent outline-none text-sm text-right" />
                 </div>
               </div>
 
               {/* Autorply Badge */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gray-100 text-center py-1">
-                <p className="text-xs text-gray-600">تديره شركة Autorply</p>
+              <div className="absolute bottom-2 left-0 right-0 text-center">
+                <p className="text-xs text-gray-500 bg-white/80 inline-block px-2 py-1 rounded">تديره Autorply</p>
               </div>
             </div>
           </div>
