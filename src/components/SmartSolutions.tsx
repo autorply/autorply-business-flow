@@ -1,10 +1,12 @@
 
 import { motion } from 'framer-motion';
+import { ShoppingCart, Heart, GraduationCap, Building, MapPin, Truck, CreditCard, Scissors, Utensils, Car, Wrench } from 'lucide-react';
 
 const SmartSolutions = () => {
   const sectors = [
     {
       title: "التجارة الإلكترونية",
+      icon: ShoppingCart,
       features: [
         "الرد على العملاء تلقائيًا",
         "تأكيد الطلبات",
@@ -13,6 +15,7 @@ const SmartSolutions = () => {
     },
     {
       title: "القطاع الصحي",
+      icon: Heart,
       features: [
         "حجز مواعيد",
         "تذكير بالمراجعات",
@@ -21,6 +24,7 @@ const SmartSolutions = () => {
     },
     {
       title: "التعليم والتدريب",
+      icon: GraduationCap,
       features: [
         "تسجيل الطلاب",
         "إرسال الجداول والروابط",
@@ -29,6 +33,7 @@ const SmartSolutions = () => {
     },
     {
       title: "العقارات",
+      icon: Building,
       features: [
         "الرد على استفسارات العروض",
         "إرسال صور ومعلومات العقارات",
@@ -37,6 +42,7 @@ const SmartSolutions = () => {
     },
     {
       title: "الجهات الحكومية أو الشبه حكومية",
+      icon: MapPin,
       features: [
         "استقبال طلبات",
         "تفعيل التذاكر أو الشكاوى",
@@ -45,6 +51,7 @@ const SmartSolutions = () => {
     },
     {
       title: "الخدمات اللوجستية والتوصيل",
+      icon: Truck,
       features: [
         "تتبع الطلبات",
         "تنبيهات السائق",
@@ -53,6 +60,7 @@ const SmartSolutions = () => {
     },
     {
       title: "المالية والبنوك والتأمين",
+      icon: CreditCard,
       features: [
         "إرسال كشوفات أو تنبيهات",
         "التحقق من الهوية",
@@ -61,6 +69,7 @@ const SmartSolutions = () => {
     },
     {
       title: "الصالونات والمراكز التجميلية",
+      icon: Scissors,
       features: [
         "حجز المواعيد",
         "إرسال العروض",
@@ -69,6 +78,7 @@ const SmartSolutions = () => {
     },
     {
       title: "الضيافة والمطاعم",
+      icon: Utensils,
       features: [
         "استقبال الحجوزات",
         "استعراض القائمة",
@@ -77,6 +87,7 @@ const SmartSolutions = () => {
     },
     {
       title: "قطاع السيارات",
+      icon: Car,
       features: [
         "حجز صيانة",
         "الرد على استفسارات العروض",
@@ -85,6 +96,7 @@ const SmartSolutions = () => {
     },
     {
       title: "الصيانة",
+      icon: Wrench,
       features: [
         "استقبال طلبات الصيانة",
         "جدولة الزيارات",
@@ -111,14 +123,22 @@ const SmartSolutions = () => {
           {sectors.map((sector, index) => (
             <motion.div
               key={index}
-              className="bg-white p-6 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300"
+              className="bg-white p-6 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 group"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: index * 0.1 }}
               whileHover={{ y: -5 }}
             >
-              <h3 className="text-lg font-bold text-blue-600 mb-4">{sector.title}</h3>
+              <div className="flex items-center gap-3 mb-4">
+                <motion.div 
+                  className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-300"
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                >
+                  <sector.icon className="w-5 h-5 text-blue-600 group-hover:text-white transition-colors duration-300" />
+                </motion.div>
+                <h3 className="text-lg font-bold text-blue-600">{sector.title}</h3>
+              </div>
               <ul className="space-y-2">
                 {sector.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-start gap-2">

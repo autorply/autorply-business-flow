@@ -1,5 +1,6 @@
 
 import { motion } from 'framer-motion';
+import WhatsAppFormDemo from './WhatsAppFormDemo';
 
 const SmartSurveys = () => {
   return (
@@ -24,13 +25,15 @@ const SmartSurveys = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <div className="absolute -top-2 -right-2 z-10">
-            <div className="bg-red-500 text-white w-7 h-7 rounded-full flex items-center justify-center shadow-lg">
-              <span className="text-sm">✕</span>
+          <div className="relative w-64 h-[480px] bg-gray-50 rounded-[1.5rem] p-1 shadow-lg mx-auto border border-gray-200">
+            {/* X button - Top right corner */}
+            <div className="absolute -top-3 -right-3 z-10">
+              <div className="bg-blue-700 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-lg">
+                <span className="text-sm font-bold">✕</span>
+              </div>
             </div>
-          </div>
-          <div className="relative w-64 h-[480px] bg-gray-100 rounded-[2rem] p-1 shadow-xl mx-auto border border-gray-200">
-            <div className="w-full h-full bg-white rounded-[1.8rem] overflow-hidden relative">
+            
+            <div className="w-full h-full bg-white rounded-[1.3rem] overflow-hidden relative">
               <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-20 h-4 bg-gray-800 rounded-full"></div>
               <div className="pt-8 p-4 h-full">
                 <div className="bg-purple-600 text-white p-2 text-center text-sm mb-4 rounded">
@@ -56,7 +59,7 @@ const SmartSurveys = () => {
               </div>
             </div>
           </div>
-          <p className="text-center mt-4 text-red-600 font-semibold">أسلوب تقليدي قديم</p>
+          <p className="text-center mt-4 text-blue-700 font-semibold">أسلوب تقليدي قديم</p>
         </motion.div>
 
         {/* WhatsApp Flow - Modern */}
@@ -67,13 +70,15 @@ const SmartSurveys = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <div className="absolute -top-2 -right-2 z-10">
-            <div className="bg-green-500 text-white w-7 h-7 rounded-full flex items-center justify-center shadow-lg">
-              <span className="text-sm">✓</span>
+          <div className="relative w-64 h-[480px] bg-gray-50 rounded-[1.5rem] p-1 shadow-lg mx-auto border border-gray-200">
+            {/* Check button - Top right corner */}
+            <div className="absolute -top-3 -right-3 z-10">
+              <div className="bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-lg">
+                <span className="text-sm font-bold">✓</span>
+              </div>
             </div>
-          </div>
-          <div className="relative w-64 h-[480px] bg-gray-100 rounded-[2rem] p-1 shadow-xl mx-auto border border-gray-200">
-            <div className="w-full h-full bg-white rounded-[1.8rem] overflow-hidden relative">
+            
+            <div className="w-full h-full bg-white rounded-[1.3rem] overflow-hidden relative">
               <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-20 h-4 bg-gray-800 rounded-full"></div>
               
               {/* WhatsApp Header */}
@@ -87,37 +92,12 @@ const SmartSurveys = () => {
                 </div>
               </div>
 
-              {/* Form Content */}
-              <div className="bg-[#efeae2] p-4 flex-1 overflow-y-auto" style={{ height: 'calc(100% - 140px)' }}>
-                <div className="bg-white p-4 rounded-lg shadow-sm">
-                  <h3 className="text-sm font-semibold mb-3 text-center text-blue-600">استبيان سريع</h3>
-                  <div className="space-y-3">
-                    <div>
-                      <label className="block text-xs text-gray-600 mb-1">الاسم</label>
-                      <input type="text" className="w-full p-2 border border-gray-200 rounded text-sm" placeholder="أدخل اسمك" />
-                    </div>
-                    <div>
-                      <label className="block text-xs text-gray-600 mb-1">البريد الإلكتروني</label>
-                      <input type="email" className="w-full p-2 border border-gray-200 rounded text-sm" placeholder="email@example.com" />
-                    </div>
-                    <div>
-                      <label className="block text-xs text-gray-600 mb-1">التقييم</label>
-                      <div className="flex gap-1">
-                        {[1,2,3,4,5].map(star => (
-                          <span key={star} className="text-yellow-400 text-lg">★</span>
-                        ))}
-                      </div>
-                    </div>
-                    <button className="w-full bg-green-500 text-white py-2 rounded text-sm font-medium">
-                      إرسال
-                    </button>
-                  </div>
-                </div>
-              </div>
+              {/* Form Content with real functionality */}
+              <WhatsAppFormDemo />
 
-              {/* Autorply Badge */}
-              <div className="absolute bottom-2 left-0 right-0 text-center">
-                <p className="text-xs text-gray-500 bg-white/80 inline-block px-2 py-1 rounded">تديره Autorply</p>
+              {/* Autorply Badge - Better positioned and styled */}
+              <div className="absolute bottom-4 left-0 right-0 text-center">
+                <p className="text-xs text-gray-600 bg-white/90 inline-block px-3 py-1 rounded-full shadow-sm">تديره Autorply</p>
               </div>
             </div>
           </div>
