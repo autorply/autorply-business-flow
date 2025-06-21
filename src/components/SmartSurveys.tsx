@@ -25,10 +25,17 @@ const SmartSurveys = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
+          {/* Label above Google Forms */}
+          <div className="text-center mb-4">
+            <span className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium">
+              نماذج Google
+            </span>
+          </div>
+          
           <div className="relative w-64 h-[480px] bg-gray-50 rounded-[1.5rem] p-1 shadow-lg mx-auto border border-gray-200">
             {/* X button - Top right corner */}
             <div className="absolute -top-3 -right-3 z-10">
-              <div className="bg-blue-700 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-lg">
+              <div className="bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-lg">
                 <span className="text-sm font-bold">✕</span>
               </div>
             </div>
@@ -59,7 +66,7 @@ const SmartSurveys = () => {
               </div>
             </div>
           </div>
-          <p className="text-center mt-4 text-blue-700 font-semibold">أسلوب تقليدي قديم</p>
+          <p className="text-center mt-4 text-red-600 font-semibold">أسلوب تقليدي قديم</p>
         </motion.div>
 
         {/* WhatsApp Flow - Modern */}
@@ -70,6 +77,13 @@ const SmartSurveys = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
+          {/* Label above WhatsApp Forms */}
+          <div className="text-center mb-4">
+            <span className="bg-green-100 text-green-700 px-4 py-2 rounded-lg text-sm font-medium">
+              نماذج واتساب
+            </span>
+          </div>
+          
           <div className="relative w-64 h-[480px] bg-gray-50 rounded-[1.5rem] p-1 shadow-lg mx-auto border border-gray-200">
             {/* Check button - Top right corner */}
             <div className="absolute -top-3 -right-3 z-10">
@@ -83,8 +97,12 @@ const SmartSurveys = () => {
               
               {/* WhatsApp Header */}
               <div className="bg-[#075e54] text-white px-4 py-4 pt-8 flex items-center gap-3">
-                <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                  <div className="w-4 h-4 bg-blue-600 rounded"></div>
+                <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center overflow-hidden">
+                  <img 
+                    src="https://autorply.sa/assets/img/logo_64.svg" 
+                    alt="Autorply" 
+                    className="w-5 h-5 object-contain"
+                  />
                 </div>
                 <div>
                   <h3 className="font-semibold text-sm">Autorply</h3>
@@ -97,7 +115,7 @@ const SmartSurveys = () => {
 
               {/* Autorply Badge - Better positioned and styled */}
               <div className="absolute bottom-4 left-0 right-0 text-center">
-                <p className="text-xs text-gray-600 bg-white/90 inline-block px-3 py-1 rounded-full shadow-sm">تديره Autorply</p>
+                <p className="text-xs text-gray-500 bg-white/90 inline-block px-3 py-1 rounded-full shadow-sm">تديره Autorply</p>
               </div>
             </div>
           </div>

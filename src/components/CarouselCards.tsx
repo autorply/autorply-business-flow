@@ -73,12 +73,27 @@ const CarouselCards = () => {
 
               {/* WhatsApp Header */}
               <div className="bg-[#075e54] text-white px-6 py-4 pt-10 flex items-center gap-3 relative z-0">
-                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                  <div className="w-6 h-6 bg-blue-600 rounded-full"></div>
+                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center overflow-hidden">
+                  <img 
+                    src="https://autorply.sa/assets/img/logo_64.svg" 
+                    alt="Autorply" 
+                    className="w-6 h-6 object-contain"
+                  />
                 </div>
-                <div>
+                <div className="flex-1">
                   <h3 className="font-semibold text-base">متجر إلكتروني</h3>
                   <p className="text-sm opacity-75">متصل الآن</p>
+                </div>
+                <div className="flex items-center space-x-4 space-x-reverse text-white">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clipRule="evenodd" />
+                  </svg>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                  </svg>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                  </svg>
                 </div>
               </div>
 
@@ -168,14 +183,24 @@ const CarouselCards = () => {
               </div>
 
               {/* Input Area */}
-              <div className="bg-white p-3 flex items-center gap-2">
-                <div className="flex-1 bg-gray-100 rounded-full px-4 py-2">
+              <div className="bg-[#f0f0f0] p-3 flex items-center gap-2">
+                <button className="text-gray-500 p-1">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+                  </svg>
+                </button>
+                <div className="flex-1 bg-white rounded-full px-4 py-2 flex items-center">
                   <input
                     type="text"
                     placeholder="اكتب رسالة..."
-                    className="w-full bg-transparent outline-none text-sm"
+                    className="w-full bg-transparent outline-none text-sm text-right"
                     disabled
                   />
+                  <button className="text-gray-500 ml-2">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" clipRule="evenodd" />
+                    </svg>
+                  </button>
                 </div>
                 <button className="bg-green-500 text-white p-2 rounded-full">
                   <ShoppingBag className="w-4 h-4" />
@@ -194,16 +219,31 @@ const CarouselCards = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.3 }}
       >
-        <div className="grid md:grid-cols-3 gap-8 text-center">
-          <div className="bg-gray-50 p-6 rounded-xl">
+        <div className="grid md:grid-cols-3 gap-8 text-center px-8">
+          <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
+            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
             <h4 className="font-semibold text-gray-800 mb-2">تفاعلية</h4>
             <p className="text-sm text-gray-600">يمكن للعملاء التنقل بين المنتجات بسهولة</p>
           </div>
-          <div className="bg-gray-50 p-6 rounded-xl">
+          <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
+            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+              </svg>
+            </div>
             <h4 className="font-semibold text-gray-800 mb-2">جذابة</h4>
             <p className="text-sm text-gray-600">عرض بصري مميز يلفت انتباه العملاء</p>
           </div>
-          <div className="bg-gray-50 p-6 rounded-xl">
+          <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
+            <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clipRule="evenodd" />
+              </svg>
+            </div>
             <h4 className="font-semibold text-gray-800 mb-2">فعالة</h4>
             <p className="text-sm text-gray-600">زيادة معدلات التحويل والمبيعات</p>
           </div>
