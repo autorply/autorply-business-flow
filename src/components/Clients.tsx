@@ -40,23 +40,6 @@ const Clients = () => {
           ))}
         </div>
       </div>
-      
-      <style jsx>{`
-        @keyframes marquee-slow {
-          0% {
-            transform: translateX(0%);
-          }
-          100% {
-            transform: translateX(-33.333%);
-          }
-        }
-        .animate-marquee-slow {
-          animation: marquee-slow 30s linear infinite;
-        }
-        .animate-marquee-slow:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
     </section>
   );
 };
