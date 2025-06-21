@@ -48,25 +48,22 @@ const Integrations = () => {
       </motion.div>
 
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-6">
+        <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-8">
           {integrations.map((integration, index) => (
             <motion.div
               key={index}
-              className="flex flex-col items-center justify-center p-4 rounded-lg hover:shadow-lg transition-all duration-300 group"
+              className="flex items-center justify-center p-2"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
-              whileHover={{ scale: 1.05, y: -5 }}
+              whileHover={{ scale: 1.1, y: -5 }}
             >
-              <div className="relative overflow-hidden rounded-lg mb-3">
-                <img 
-                  src={integration.logo} 
-                  className="h-12 w-12 object-contain group-hover:scale-110 transition-transform duration-300"
-                  alt={integration.name}
-                />
-              </div>
-              <span className="text-xs text-gray-600 text-center font-medium">{integration.name}</span>
+              <img 
+                src={integration.logo} 
+                className="h-12 w-12 object-contain hover:scale-110 transition-transform duration-300"
+                alt={integration.name}
+              />
             </motion.div>
           ))}
         </div>

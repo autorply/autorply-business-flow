@@ -1,7 +1,7 @@
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { ChevronLeft, ChevronRight, ShoppingBag, Star } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 
 const CarouselCards = () => {
   const [currentCard, setCurrentCard] = useState(0);
@@ -35,6 +35,15 @@ const CarouselCards = () => {
       buttonText: 'اشتري الآن'
     }
   ];
+
+  // Auto rotation every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentCard((prev) => (prev + 1) % carouselItems.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const nextCard = () => {
     setCurrentCard((prev) => (prev + 1) % carouselItems.length);
@@ -81,8 +90,8 @@ const CarouselCards = () => {
                   />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-semibold text-base">متجر إلكتروني</h3>
-                  <p className="text-sm opacity-75">متصل الآن</p>
+                  <h3 className="font-semibold text-sm">متجر إلكتروني</h3>
+                  <p className="text-xs opacity-75">متصل الآن</p>
                 </div>
                 <div className="flex items-center space-x-4 space-x-reverse text-white">
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -203,7 +212,9 @@ const CarouselCards = () => {
                   </button>
                 </div>
                 <button className="bg-green-500 text-white p-2 rounded-full">
-                  <ShoppingBag className="w-4 h-4" />
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                  </svg>
                 </button>
               </div>
             </div>

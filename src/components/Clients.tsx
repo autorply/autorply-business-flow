@@ -25,8 +25,8 @@ const Clients = () => {
       </motion.div>
       
       <div className="relative">
-        <div className="flex animate-marquee hover:pause">
-          {[...clients, ...clients].map((client, index) => (
+        <div className="flex animate-marquee-slow hover:pause">
+          {[...clients, ...clients, ...clients].map((client, index) => (
             <div
               key={index}
               className="flex items-center justify-center p-6 mx-4 min-w-[150px]"
@@ -40,6 +40,23 @@ const Clients = () => {
           ))}
         </div>
       </div>
+      
+      <style jsx>{`
+        @keyframes marquee-slow {
+          0% {
+            transform: translateX(0%);
+          }
+          100% {
+            transform: translateX(-33.333%);
+          }
+        }
+        .animate-marquee-slow {
+          animation: marquee-slow 30s linear infinite;
+        }
+        .animate-marquee-slow:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
   );
 };

@@ -31,7 +31,7 @@ export const useChat = () => {
   ]);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   };
 
   useEffect(() => {
@@ -46,9 +46,13 @@ export const useChat = () => {
       throw new Error('OpenAI API key not configured');
     }
 
+    console.log('Starting chat with OpenAI...', { userMessage, assistantId });
+
     // If we have an assistant ID, use the Assistants API
     if (assistantId) {
       try {
+        console.log('Using Assistants API...');
+        
         // Create a thread
         const threadResponse = await fetch('https://api.openai.com/v1/threads', {
           method: 'POST',
@@ -61,10 +65,13 @@ export const useChat = () => {
         });
 
         if (!threadResponse.ok) {
+          const errorData = await threadResponse.json();
+          console.error('Thread creation failed:', errorData);
           throw new Error('Failed to create thread');
         }
 
         const thread = await threadResponse.json();
+        console.log('Thread created:', thread.id);
 
         // Add message to thread
         const messageResponse = await fetch(`https://api.openai.com/v1/threads/${thread.id}/messages`, {
@@ -81,8 +88,12 @@ export const useChat = () => {
         });
 
         if (!messageResponse.ok) {
+          const errorData = await messageResponse.json();
+          console.error('Message addition failed:', errorData);
           throw new Error('Failed to add message to thread');
         }
+
+        console.log('Message added to thread');
 
         // Run the assistant
         const runResponse = await fetch(`https://api.openai.com/v1/threads/${thread.id}/runs`, {
@@ -98,10 +109,13 @@ export const useChat = () => {
         });
 
         if (!runResponse.ok) {
+          const errorData = await runResponse.json();
+          console.error('Run creation failed:', errorData);
           throw new Error('Failed to run assistant');
         }
 
         const run = await runResponse.json();
+        console.log('Run started:', run.id);
 
         // Poll for completion with timeout
         let runStatus = run;
@@ -109,7 +123,9 @@ export const useChat = () => {
         const maxAttempts = 30; // 30 seconds timeout
         
         while (runStatus.status !== 'completed' && runStatus.status !== 'failed' && attempts < maxAttempts) {
+          console.log(`Polling attempt ${attempts + 1}, status: ${runStatus.status}`);
           await new Promise(resolve => setTimeout(resolve, 1000));
+          
           const statusResponse = await fetch(`https://api.openai.com/v1/threads/${thread.id}/runs/${run.id}`, {
             headers: {
               'Authorization': `Bearer ${openaiApiKey}`,
@@ -118,6 +134,8 @@ export const useChat = () => {
           });
           
           if (!statusResponse.ok) {
+            const errorData = await statusResponse.json();
+            console.error('Status check failed:', errorData);
             throw new Error('Failed to check run status');
           }
           
@@ -126,12 +144,16 @@ export const useChat = () => {
         }
 
         if (runStatus.status === 'failed') {
+          console.error('Assistant run failed:', runStatus);
           throw new Error('Assistant run failed');
         }
 
         if (attempts >= maxAttempts) {
+          console.error('Assistant run timed out');
           throw new Error('Assistant run timed out');
         }
+
+        console.log('Run completed successfully');
 
         // Get messages
         const messagesResponse = await fetch(`https://api.openai.com/v1/threads/${thread.id}/messages`, {
@@ -142,12 +164,15 @@ export const useChat = () => {
         });
 
         if (!messagesResponse.ok) {
+          const errorData = await messagesResponse.json();
+          console.error('Messages retrieval failed:', errorData);
           throw new Error('Failed to get messages');
         }
 
         const messagesData = await messagesResponse.json();
         const lastMessage = messagesData.data[0];
         
+        console.log('Response received:', lastMessage.content[0].text.value);
         return lastMessage.content[0].text.value;
       } catch (error) {
         console.error('Assistants API error:', error);
@@ -160,6 +185,8 @@ export const useChat = () => {
   };
 
   const fallbackChatCompletion = async (userMessage: string, apiKey: string) => {
+    console.log('Using fallback chat completion...');
+    
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -181,15 +208,20 @@ export const useChat = () => {
     });
 
     if (!response.ok) {
+      const errorData = await response.json();
+      console.error('Chat completion failed:', errorData);
       throw new Error('OpenAI API request failed');
     }
 
     const data = await response.json();
+    console.log('Fallback response received:', data.choices[0].message.content);
     return data.choices[0].message.content;
   };
 
   const handleSendMessage = async () => {
     if (message.trim() && !isLoading) {
+      console.log('Sending message:', message);
+      
       const newMessage: Message = {
         id: Date.now(),
         text: message,
@@ -216,6 +248,7 @@ export const useChat = () => {
         };
         
         setMessages(prev => [...prev, botMessage]);
+        console.log('Message exchange completed successfully');
       } catch (error) {
         console.error('Failed to get AI response:', error);
         

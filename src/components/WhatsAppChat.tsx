@@ -53,7 +53,7 @@ const WhatsAppChat = () => {
             messagesEndRef={messagesEndRef}
           />
 
-          <form onSubmit={handleSendMessageWithoutScroll}>
+          <form onSubmit={handleSendMessageWithoutScroll} onClick={(e) => e.stopPropagation()}>
             <ChatInput
               message={message}
               setMessage={setMessage}

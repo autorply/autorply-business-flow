@@ -1,6 +1,6 @@
 
 import { motion } from 'framer-motion';
-import { MessageCircle, Users, BarChart3, Settings, Home, Phone, Instagram, Twitter, Facebook, Send, Zap, FileText, HelpCircle, Target } from 'lucide-react';
+import { MessageCircle, Users, BarChart3, Settings } from 'lucide-react';
 
 const OmnichannelSection = () => {
   const features = [
@@ -33,21 +33,6 @@ const OmnichannelSection = () => {
     { name: 'تيليجرام', icon: '✈️', color: 'text-gray-800' }
   ];
 
-  const sidebarItems = [
-    { icon: Home, label: 'القائمة الرئيسية', active: true },
-    { icon: MessageCircle, label: 'المحادثات', count: 24 },
-    { icon: Phone, label: 'قناة واتساب', status: 'online' },
-    { icon: Instagram, label: 'قناة انستغرام', status: 'online' },
-    { icon: Twitter, label: 'قناة تويتر', status: 'online' },
-    { icon: Facebook, label: 'قناة فيسبوك', status: 'online' },
-    { icon: Send, label: 'قناة تليجرام', status: 'online' },
-    { icon: Target, label: 'الحملات الإعلانية' },
-    { icon: Zap, label: 'الأتمتة' },
-    { icon: FileText, label: 'القوالب' },
-    { icon: Settings, label: 'الإعدادات' },
-    { icon: HelpCircle, label: 'المساعدة' }
-  ];
-
   return (
     <section className="py-20 px-6 bg-gray-50">
       <motion.div 
@@ -65,7 +50,7 @@ const OmnichannelSection = () => {
 
       {/* Unified Platform Illustration */}
       <motion.div
-        className="max-w-5xl mx-auto mb-16"
+        className="max-w-6xl mx-auto mb-16"
         initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
@@ -87,33 +72,66 @@ const OmnichannelSection = () => {
               </div>
             </div>
 
-            <div className="flex min-h-[400px]">
+            <div className="flex">
               {/* Sidebar */}
-              <div className="w-64 bg-white border-r border-gray-200 p-4">
+              <div className="w-64 bg-white border-r border-gray-200 p-4 min-h-[500px]">
                 <div className="space-y-2">
-                  {sidebarItems.map((item, index) => (
-                    <div
-                      key={index}
-                      className={`flex items-center gap-3 p-3 rounded-lg transition-all cursor-pointer ${
-                        item.active 
-                          ? 'bg-blue-100 text-blue-700 border-r-2 border-blue-600' 
-                          : 'hover:bg-gray-50 text-gray-700'
-                      }`}
-                    >
-                      <item.icon className="w-5 h-5" />
-                      <span className="text-sm font-medium flex-1">{item.label}</span>
-                      {item.count && (
-                        <span className="bg-red-500 text-white text-xs rounded-full px-2 py-1">
-                          {item.count}
-                        </span>
-                      )}
-                      {item.status && (
-                        <div className={`w-2 h-2 rounded-full ${
-                          item.status === 'online' ? 'bg-green-500' : 'bg-gray-400'
-                        }`} />
-                      )}
-                    </div>
-                  ))}
+                  <div className="flex items-center gap-3 p-3 rounded-lg bg-blue-100 text-blue-700 border-r-2 border-blue-600">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                    </svg>
+                    <span className="text-sm font-medium flex-1">القائمة الرئيسية</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700">
+                    <MessageCircle className="w-5 h-5" />
+                    <span className="text-sm font-medium flex-1">المحادثات</span>
+                    <span className="bg-red-500 text-white text-xs rounded-full px-2 py-1">24</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700">
+                    <span className="text-lg">📱</span>
+                    <span className="text-sm font-medium flex-1">قناة واتساب</span>
+                    <div className="w-2 h-2 rounded-full bg-green-500" />
+                  </div>
+                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700">
+                    <span className="text-lg">📷</span>
+                    <span className="text-sm font-medium flex-1">قناة انستغرام</span>
+                    <div className="w-2 h-2 rounded-full bg-green-500" />
+                  </div>
+                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700">
+                    <span className="text-lg">🐦</span>
+                    <span className="text-sm font-medium flex-1">قناة تويتر</span>
+                    <div className="w-2 h-2 rounded-full bg-green-500" />
+                  </div>
+                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700">
+                    <span className="text-lg">📘</span>
+                    <span className="text-sm font-medium flex-1">قناة فيسبوك</span>
+                    <div className="w-2 h-2 rounded-full bg-green-500" />
+                  </div>
+                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700">
+                    <span className="text-lg">✈️</span>
+                    <span className="text-sm font-medium flex-1">قناة تليجرام</span>
+                    <div className="w-2 h-2 rounded-full bg-green-500" />
+                  </div>
+                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700">
+                    <span className="text-lg">📢</span>
+                    <span className="text-sm font-medium flex-1">الحملات الإعلانية</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700">
+                    <span className="text-lg">⚡</span>
+                    <span className="text-sm font-medium flex-1">الأتمتة</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700">
+                    <span className="text-lg">📄</span>
+                    <span className="text-sm font-medium flex-1">القوالب</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700">
+                    <Settings className="w-5 h-5" />
+                    <span className="text-sm font-medium flex-1">الإعدادات</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700">
+                    <span className="text-lg">❓</span>
+                    <span className="text-sm font-medium flex-1">المساعدة</span>
+                  </div>
                 </div>
               </div>
 
