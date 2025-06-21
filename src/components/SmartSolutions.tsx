@@ -132,12 +132,12 @@ const SmartSolutions = () => {
             >
               <div className="flex items-center gap-3 mb-4">
                 <motion.div 
-                  className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-300"
+                  className="w-14 h-14 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center group-hover:from-blue-600 group-hover:to-blue-700 transition-all duration-300 shadow-lg"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                 >
-                  <sector.icon className="w-5 h-5 text-blue-600 group-hover:text-white transition-colors duration-300" />
+                  <sector.icon className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors duration-300" />
                 </motion.div>
-                <h3 className="text-lg font-bold text-blue-600">{sector.title}</h3>
+                <h3 className="text-lg font-bold text-blue-600 flex-1">{sector.title}</h3>
               </div>
               <ul className="space-y-2">
                 {sector.features.map((feature, featureIndex) => (

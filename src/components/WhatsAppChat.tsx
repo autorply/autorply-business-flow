@@ -16,6 +16,22 @@ const WhatsAppChat = () => {
     handleKeyPress
   } = useChat();
 
+  const handleSendMessageWithoutScroll = (e?: React.FormEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    handleSendMessage();
+  };
+
+  const handleKeyPressWithoutScroll = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      e.stopPropagation();
+      handleSendMessageWithoutScroll();
+    }
+  };
+
   return (
     <motion.div 
       className="relative mx-auto"
@@ -37,13 +53,15 @@ const WhatsAppChat = () => {
             messagesEndRef={messagesEndRef}
           />
 
-          <ChatInput
-            message={message}
-            setMessage={setMessage}
-            handleSendMessage={handleSendMessage}
-            handleKeyPress={handleKeyPress}
-            isLoading={isLoading}
-          />
+          <form onSubmit={handleSendMessageWithoutScroll}>
+            <ChatInput
+              message={message}
+              setMessage={setMessage}
+              handleSendMessage={handleSendMessageWithoutScroll}
+              handleKeyPress={handleKeyPressWithoutScroll}
+              isLoading={isLoading}
+            />
+          </form>
         </div>
       </div>
     </motion.div>

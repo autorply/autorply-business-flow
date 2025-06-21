@@ -14,6 +14,7 @@ import Footer from '../components/Footer';
 import SmartSurveys from '../components/SmartSurveys';
 import SmartSolutions from '../components/SmartSolutions';
 import Integrations from '../components/Integrations';
+import CarouselCards from '../components/CarouselCards';
 
 const Index = () => {
   return (
@@ -22,6 +23,7 @@ const Index = () => {
       <Hero />
       <MetaPartnerBadge />
       <Features />
+      <CarouselCards />
       <MultiChannelSection />
       <AutoSlider />
       <OmnichannelSection />

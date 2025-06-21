@@ -1,6 +1,6 @@
 
 import { motion } from 'framer-motion';
-import { MessageCircle, Users, BarChart3, Settings } from 'lucide-react';
+import { MessageCircle, Users, BarChart3, Settings, Home, Phone, Instagram, Twitter, Facebook, Send, Zap, FileText, HelpCircle, Target } from 'lucide-react';
 
 const OmnichannelSection = () => {
   const features = [
@@ -33,6 +33,21 @@ const OmnichannelSection = () => {
     { name: 'تيليجرام', icon: '✈️', color: 'text-gray-800' }
   ];
 
+  const sidebarItems = [
+    { icon: Home, label: 'القائمة الرئيسية', active: true },
+    { icon: MessageCircle, label: 'المحادثات', count: 24 },
+    { icon: Phone, label: 'قناة واتساب', status: 'online' },
+    { icon: Instagram, label: 'قناة انستغرام', status: 'online' },
+    { icon: Twitter, label: 'قناة تويتر', status: 'online' },
+    { icon: Facebook, label: 'قناة فيسبوك', status: 'online' },
+    { icon: Send, label: 'قناة تليجرام', status: 'online' },
+    { icon: Target, label: 'الحملات الإعلانية' },
+    { icon: Zap, label: 'الأتمتة' },
+    { icon: FileText, label: 'القوالب' },
+    { icon: Settings, label: 'الإعدادات' },
+    { icon: HelpCircle, label: 'المساعدة' }
+  ];
+
   return (
     <section className="py-20 px-6 bg-gray-50">
       <motion.div 
@@ -50,73 +65,120 @@ const OmnichannelSection = () => {
 
       {/* Unified Platform Illustration */}
       <motion.div
-        className="max-w-4xl mx-auto mb-16"
+        className="max-w-5xl mx-auto mb-16"
         initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
       >
-        <div className="bg-white rounded-2xl shadow-2xl p-8 mx-4">
-          {/* Tablet/Dashboard Interface */}
-          <div className="bg-gradient-to-br from-blue-50 to-white rounded-xl border-2 border-gray-200 p-6">
-            <div className="flex items-center justify-between mb-6">
+        <div className="bg-white rounded-3xl shadow-2xl p-8 mx-4">
+          {/* Platform Interface */}
+          <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl border border-gray-200 overflow-hidden">
+            {/* Header with Logo */}
+            <div className="bg-white border-b border-gray-200 p-4 flex items-center">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">A</span>
+                <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">A</span>
                 </div>
-                <h3 className="text-lg font-bold text-gray-800">لوحة التحكم الموحدة</h3>
-              </div>
-              <div className="flex gap-2">
-                <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-              </div>
-            </div>
-            
-            {/* Platform Channels */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-              {platforms.map((platform, index) => (
-                <div key={index} className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                  <div className="text-center">
-                    <div className="text-2xl mb-2">{platform.icon}</div>
-                    <p className="text-sm font-medium text-gray-700">{platform.name}</p>
-                    <div className="mt-2">
-                      <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div className="bg-green-500 h-2 rounded-full" style={{width: `${Math.random() * 40 + 60}%`}}></div>
-                      </div>
-                    </div>
-                  </div>
+                <div>
+                  <h3 className="text-lg font-bold text-gray-800">Autorply</h3>
+                  <p className="text-xs text-gray-500">منصة إدارة المحادثات</p>
                 </div>
-              ))}
+              </div>
             </div>
 
-            {/* Unified Inbox Preview */}
-            <div className="bg-white rounded-lg border border-gray-200 p-4">
-              <h4 className="text-sm font-semibold text-gray-700 mb-3">صندوق الرسائل الموحد</h4>
-              <div className="space-y-2">
-                <div className="flex items-center gap-3 p-2 bg-blue-50 rounded">
-                  <span className="text-lg">📱</span>
-                  <div className="flex-1">
-                    <p className="text-xs text-gray-600">أحمد محمد - واتساب</p>
-                    <p className="text-sm">مرحباً، أريد الاستفسار عن الخدمة</p>
-                  </div>
-                  <span className="text-xs text-gray-500">الآن</span>
+            <div className="flex min-h-[400px]">
+              {/* Sidebar */}
+              <div className="w-64 bg-white border-r border-gray-200 p-4">
+                <div className="space-y-2">
+                  {sidebarItems.map((item, index) => (
+                    <div
+                      key={index}
+                      className={`flex items-center gap-3 p-3 rounded-lg transition-all cursor-pointer ${
+                        item.active 
+                          ? 'bg-blue-100 text-blue-700 border-r-2 border-blue-600' 
+                          : 'hover:bg-gray-50 text-gray-700'
+                      }`}
+                    >
+                      <item.icon className="w-5 h-5" />
+                      <span className="text-sm font-medium flex-1">{item.label}</span>
+                      {item.count && (
+                        <span className="bg-red-500 text-white text-xs rounded-full px-2 py-1">
+                          {item.count}
+                        </span>
+                      )}
+                      {item.status && (
+                        <div className={`w-2 h-2 rounded-full ${
+                          item.status === 'online' ? 'bg-green-500' : 'bg-gray-400'
+                        }`} />
+                      )}
+                    </div>
+                  ))}
                 </div>
-                <div className="flex items-center gap-3 p-2 hover:bg-gray-50 rounded">
-                  <span className="text-lg">📘</span>
-                  <div className="flex-1">
-                    <p className="text-xs text-gray-600">سارة أحمد - فيسبوك</p>
-                    <p className="text-sm">شكراً لكم على الخدمة الممتازة</p>
-                  </div>
-                  <span className="text-xs text-gray-500">5 دقائق</span>
+              </div>
+
+              {/* Main Content Area */}
+              <div className="flex-1 p-6">
+                <div className="mb-6">
+                  <h4 className="text-xl font-bold text-gray-800 mb-2">لوحة المحادثات</h4>
+                  <p className="text-gray-600">إدارة جميع المحادثات من منصة واحدة</p>
                 </div>
-                <div className="flex items-center gap-3 p-2 hover:bg-gray-50 rounded">
-                  <span className="text-lg">📷</span>
-                  <div className="flex-1">
-                    <p className="text-xs text-gray-600">محمد علي - إنستغرام</p>
-                    <p className="text-sm">متى يمكنني بدء الخدمة؟</p>
+
+                {/* Platform Statistics */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                  {platforms.map((platform, index) => (
+                    <div key={index} className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                      <div className="text-center">
+                        <div className="text-2xl mb-2">{platform.icon}</div>
+                        <p className="text-sm font-medium text-gray-700 mb-2">{platform.name}</p>
+                        <div className="text-lg font-bold text-blue-600">{Math.floor(Math.random() * 50) + 10}</div>
+                        <p className="text-xs text-gray-500">رسالة جديدة</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Recent Conversations */}
+                <div className="bg-white rounded-xl border border-gray-200 p-4">
+                  <h5 className="text-sm font-semibold text-gray-700 mb-3">المحادثات الأخيرة</h5>
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
+                      <span className="text-lg">📱</span>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <p className="text-sm font-medium text-gray-800">أحمد محمد</p>
+                          <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">واتساب</span>
+                        </div>
+                        <p className="text-sm text-gray-600">مرحباً، أريد الاستفسار عن الخدمة</p>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-xs text-gray-500">الآن</span>
+                        <div className="w-2 h-2 bg-red-500 rounded-full mt-1"></div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                      <span className="text-lg">📘</span>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <p className="text-sm font-medium text-gray-800">سارة أحمد</p>
+                          <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">فيسبوك</span>
+                        </div>
+                        <p className="text-sm text-gray-600">شكراً لكم على الخدمة الممتازة</p>
+                      </div>
+                      <span className="text-xs text-gray-500">5 دقائق</span>
+                    </div>
+                    <div className="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                      <span className="text-lg">📷</span>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <p className="text-sm font-medium text-gray-800">محمد علي</p>
+                          <span className="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded">إنستغرام</span>
+                        </div>
+                        <p className="text-sm text-gray-600">متى يمكنني بدء الخدمة؟</p>
+                      </div>
+                      <span className="text-xs text-gray-500">10 دقائق</span>
+                    </div>
                   </div>
-                  <span className="text-xs text-gray-500">10 دقائق</span>
                 </div>
               </div>
             </div>

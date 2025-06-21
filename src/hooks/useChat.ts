@@ -1,7 +1,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Message } from '@/types/chat';
-import { chatWithOpenAI } from '@/utils/openai';
 
 export const useChat = () => {
   const [message, setMessage] = useState('');
@@ -39,6 +38,114 @@ export const useChat = () => {
     scrollToBottom();
   }, [messages]);
 
+  const chatWithOpenAI = async (userMessage: string) => {
+    const openaiApiKey = import.meta.env.VITE_OPENAI_API_KEY;
+    const assistantId = import.meta.env.VITE_ASSISTANT_ID;
+
+    if (!openaiApiKey) {
+      throw new Error('OpenAI API key not configured');
+    }
+
+    // If we have an assistant ID, use the Assistants API
+    if (assistantId) {
+      // Create a thread
+      const threadResponse = await fetch('https://api.openai.com/v1/threads', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${openaiApiKey}`,
+          'Content-Type': 'application/json',
+          'OpenAI-Beta': 'assistants=v2'
+        },
+        body: JSON.stringify({})
+      });
+
+      const thread = await threadResponse.json();
+
+      // Add message to thread
+      await fetch(`https://api.openai.com/v1/threads/${thread.id}/messages`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${openaiApiKey}`,
+          'Content-Type': 'application/json',
+          'OpenAI-Beta': 'assistants=v2'
+        },
+        body: JSON.stringify({
+          role: 'user',
+          content: userMessage
+        })
+      });
+
+      // Run the assistant
+      const runResponse = await fetch(`https://api.openai.com/v1/threads/${thread.id}/runs`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${openaiApiKey}`,
+          'Content-Type': 'application/json',
+          'OpenAI-Beta': 'assistants=v2'
+        },
+        body: JSON.stringify({
+          assistant_id: assistantId
+        })
+      });
+
+      const run = await runResponse.json();
+
+      // Poll for completion
+      let runStatus = run;
+      while (runStatus.status !== 'completed' && runStatus.status !== 'failed') {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        const statusResponse = await fetch(`https://api.openai.com/v1/threads/${thread.id}/runs/${run.id}`, {
+          headers: {
+            'Authorization': `Bearer ${openaiApiKey}`,
+            'OpenAI-Beta': 'assistants=v2'
+          }
+        });
+        runStatus = await statusResponse.json();
+      }
+
+      if (runStatus.status === 'failed') {
+        throw new Error('Assistant run failed');
+      }
+
+      // Get messages
+      const messagesResponse = await fetch(`https://api.openai.com/v1/threads/${thread.id}/messages`, {
+        headers: {
+          'Authorization': `Bearer ${openaiApiKey}`,
+          'OpenAI-Beta': 'assistants=v2'
+        }
+      });
+
+      const messagesData = await messagesResponse.json();
+      const lastMessage = messagesData.data[0];
+      
+      return lastMessage.content[0].text.value;
+    } else {
+      // Use regular chat completion
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${openaiApiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'gpt-4o-mini',
+          messages: [
+            { 
+              role: 'system', 
+              content: 'أنت مساعد ذكي لخدمة العملاء في شركة اوتوربلاي التي تقدم خدمات WhatsApp API. أجب بالعربية بطريقة مهنية ومفيدة.' 
+            },
+            { role: 'user', content: userMessage }
+          ],
+          max_tokens: 500,
+          temperature: 0.7
+        }),
+      });
+
+      const data = await response.json();
+      return data.choices[0].message.content;
+    }
+  };
+
   const handleSendMessage = async () => {
     if (message.trim() && !isLoading) {
       const newMessage: Message = {
@@ -49,101 +156,36 @@ export const useChat = () => {
         isBot: false
       };
 
-      // Add user message immediately
       setMessages(prev => [...prev, newMessage]);
       
       const userMessage = message;
       setMessage('');
       setIsLoading(true);
 
-      // Add empty bot message for streaming
-      const botMessageId = Date.now() + 1;
-      const initialBotMessage: Message = {
-        id: botMessageId,
-        text: '',
-        sender: 'autorply',
-        time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }),
-        isBot: true
-      };
-      
-      setMessages(prev => [...prev, initialBotMessage]);
-
       try {
-        const response = await chatWithOpenAI(userMessage);
-
-        if (process.env.USE_STREAMING === 'true' && response.body) {
-          const reader = response.body.getReader();
-          const decoder = new TextDecoder();
-          let fullResponse = '';
-
-          while (true) {
-            const { done, value } = await reader.read();
-            if (done) break;
-
-            const chunk = decoder.decode(value, { stream: true });
-            const lines = chunk.split('\n');
-
-            for (const line of lines) {
-              if (line.startsWith('data: ') && line !== 'data: [DONE]') {
-                try {
-                  const jsonData = JSON.parse(line.slice(6));
-                  if (jsonData.choices?.[0]?.delta?.content) {
-                    fullResponse += jsonData.choices[0].delta.content;
-                    
-                    setMessages(prev => {
-                      const newMessages = [...prev];
-                      const messageIndex = newMessages.findIndex(msg => msg.id === botMessageId);
-                      
-                      if (messageIndex !== -1) {
-                        newMessages[messageIndex] = {
-                          ...newMessages[messageIndex],
-                          text: fullResponse
-                        };
-                      }
-                      
-                      return newMessages;
-                    });
-                  }
-                } catch (e) {
-                  console.error('Error parsing JSON:', e);
-                }
-              }
-            }
-          }
-        } else {
-          const data = await response.json();
-          const reply = data.choices?.[0]?.message?.content || 'عذراً، حدث خطأ في النظام. يرجى المحاولة مرة أخرى.';
-          
-          setMessages(prev => {
-            const newMessages = [...prev];
-            const messageIndex = newMessages.findIndex(msg => msg.id === botMessageId);
-            
-            if (messageIndex !== -1) {
-              newMessages[messageIndex] = {
-                ...newMessages[messageIndex],
-                text: reply
-              };
-            }
-            
-            return newMessages;
-          });
-        }
+        const reply = await chatWithOpenAI(userMessage);
+        
+        const botMessage: Message = {
+          id: Date.now() + 1,
+          text: reply,
+          sender: 'autorply',
+          time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }),
+          isBot: true
+        };
+        
+        setMessages(prev => [...prev, botMessage]);
       } catch (error) {
         console.error('Failed to get AI response:', error);
         
-        setMessages(prev => {
-          const newMessages = [...prev];
-          const messageIndex = newMessages.findIndex(msg => msg.id === botMessageId);
-          
-          if (messageIndex !== -1) {
-            newMessages[messageIndex] = {
-              ...newMessages[messageIndex],
-              text: 'عذراً، حدث خطأ في النظام. يرجى المحاولة مرة أخرى.'
-            };
-          }
-          
-          return newMessages;
-        });
+        const errorMessage: Message = {
+          id: Date.now() + 1,
+          text: 'عذراً، حدث خطأ في النظام. يرجى المحاولة مرة أخرى.',
+          sender: 'autorply',
+          time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }),
+          isBot: true
+        };
+        
+        setMessages(prev => [...prev, errorMessage]);
       } finally {
         setIsLoading(false);
       }
