@@ -1,20 +1,22 @@
+
 import { useState } from 'react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import MetaPartnerBadge from '../components/MetaPartnerBadge';
 import Features from '../components/Features';
+import CarouselCards from '../components/CarouselCards';
+import OmnichannelSection from '../components/OmnichannelSection';
 import MultiChannelSection from '../components/MultiChannelSection';
 import AutoSlider from '../components/AutoSlider';
-import OmnichannelSection from '../components/OmnichannelSection';
+import SmartSurveys from '../components/SmartSurveys';
+import SmartSolutions from '../components/SmartSolutions';
+import AppointmentBooking from '../components/AppointmentBooking';
+import Integrations from '../components/Integrations';
 import Pricing from '../components/Pricing';
 import LeadForm from '../components/LeadForm';
 import Clients from '../components/Clients';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
-import SmartSurveys from '../components/SmartSurveys';
-import SmartSolutions from '../components/SmartSolutions';
-import Integrations from '../components/Integrations';
-import CarouselCards from '../components/CarouselCards';
 
 const Index = () => {
   return (
@@ -24,11 +26,12 @@ const Index = () => {
       <MetaPartnerBadge />
       <Features />
       <CarouselCards />
+      <OmnichannelSection />
       <MultiChannelSection />
       <AutoSlider />
-      <OmnichannelSection />
       <SmartSurveys />
       <SmartSolutions />
+      <AppointmentBooking />
       <Integrations />
       <Pricing />
       <LeadForm />

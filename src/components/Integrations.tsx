@@ -52,16 +52,16 @@ const Integrations = () => {
           {integrations.map((integration, index) => (
             <motion.div
               key={index}
-              className="flex items-center justify-center p-2"
+              className="flex items-center justify-center p-4 group"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
+              transition={{ duration: 0.5, delay: index * 0.02 }}
               whileHover={{ scale: 1.1, y: -5 }}
             >
               <img 
                 src={integration.logo} 
-                className="h-12 w-12 object-contain hover:scale-110 transition-transform duration-300"
+                className="h-12 w-12 object-contain filter grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100"
                 alt={integration.name}
               />
             </motion.div>
