@@ -25,10 +25,10 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="py-20 px-6 bg-gradient-to-br from-blue-50 via-white to-green-50 relative overflow-hidden">
+    <section className="py-20 px-6 bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full opacity-10 -translate-y-48 translate-x-48"></div>
-      <div className="absolute bottom-0 left-0 w-72 h-72 bg-green-100 rounded-full opacity-10 translate-y-36 -translate-x-36"></div>
+      <div className="absolute bottom-0 left-0 w-72 h-72 bg-indigo-100 rounded-full opacity-10 translate-y-36 -translate-x-36"></div>
       
       <div className="max-w-4xl mx-auto relative z-10">
         <motion.div 
@@ -63,7 +63,7 @@ const FAQ = () => {
                 >
                   <AccordionTrigger className="px-6 py-4 text-right hover:no-underline group">
                     <div className="flex items-center gap-4 w-full">
-                      <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-green-500 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                      <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
                         {index + 1}
                       </div>
                       <span className="text-lg font-semibold text-gray-800 text-right flex-1 group-hover:text-blue-600 transition-colors">
@@ -72,7 +72,7 @@ const FAQ = () => {
                     </div>
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-6">
-                    <div className="mr-12 bg-gradient-to-r from-blue-50 to-green-50 rounded-xl p-4 border-r-4 border-blue-400">
+                    <div className="mr-12 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 border-r-4 border-blue-400">
                       <p className="text-gray-700 leading-relaxed text-right">
                         {faq.answer}
                       </p>
@@ -92,7 +92,7 @@ const FAQ = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <div className="bg-gradient-to-r from-blue-600 to-green-600 rounded-2xl p-8 text-white shadow-xl">
+          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-8 text-white shadow-xl">
             <h3 className="text-2xl font-bold mb-4">لديك سؤال آخر؟</h3>
             <p className="text-blue-100 mb-6">فريقنا جاهز للإجابة على جميع استفساراتك</p>
             <motion.a
