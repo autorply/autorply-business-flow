@@ -13,7 +13,7 @@ import SmartSolutions from '../components/SmartSolutions';
 import AppointmentBooking from '../components/AppointmentBooking';
 import Integrations from '../components/Integrations';
 import Pricing from '../components/Pricing';
-import LeadForm from '../components/LeadForm';
+import FAQ from '../components/FAQ';
 import Clients from '../components/Clients';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
@@ -34,7 +34,7 @@ const Index = () => {
       <AppointmentBooking />
       <Integrations />
       <Pricing />
-      <LeadForm />
+      <FAQ />
       <Clients />
       <Contact />
       <Footer />
