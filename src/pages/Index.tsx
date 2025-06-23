@@ -4,8 +4,8 @@ import Header from '../components/Header';
 import Hero from '../components/Hero';
 import MetaPartnerBadge from '../components/MetaPartnerBadge';
 import Features from '../components/Features';
-import CarouselCards from '../components/CarouselCards';
 import OmnichannelSection from '../components/OmnichannelSection';
+import CarouselCards from '../components/CarouselCards';
 import MultiChannelSection from '../components/MultiChannelSection';
 import AutoSlider from '../components/AutoSlider';
 import SmartSurveys from '../components/SmartSurveys';
@@ -25,8 +25,8 @@ const Index = () => {
       <Hero />
       <MetaPartnerBadge />
       <Features />
-      <CarouselCards />
       <OmnichannelSection />
+      <CarouselCards />
       <MultiChannelSection />
       <AutoSlider />
       <SmartSurveys />

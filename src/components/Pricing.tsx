@@ -4,35 +4,82 @@ import { motion } from 'framer-motion';
 const Pricing = () => {
   const plans = [
     {
-      title: "الباقة الأساسية",
-      price: "99 ر.س / شهريًا",
+      title: "باقة Start",
+      price: "99 ريال / شهريًا",
       features: [
-        "ربط واتساب API",
-        "عدد رسائل شهري محدود",
-        "تقرير شهري بسيط"
+        "شات بوت تلقائي",
+        "ذكاء اصطناعي محدود للردود (أساسي)",
+        "حملات واتساب جماعية",
+        "رسائل تفاعلية (أزرار + قوائم)",
+        "نموذج واتساب واحد",
+        "ربط متجرك (سلة / زد / شوبيفاي / ووكومرس)",
+        "مستخدم واحد",
+        "تصدير المشتركين",
+        "دعم فني خلال أوقات العمل"
       ],
       delay: 0
     },
     {
-      title: "الباقة المتقدمة",
-      price: "199 ر.س / شهريًا",
+      title: "باقة أعمال",
+      price: "199 ريال / شهريًا",
       features: [
-        "عدد رسائل غير محدود",
-        "تقارير متقدمة",
-        "دعم فني مباشر"
+        "شات بوت تلقائي",
+        "ذكاء اصطناعي للردود",
+        "حملات واتساب جماعية",
+        "رسائل تفاعلية (أزرار + قوائم)",
+        "نماذج واتساب",
+        "رسائل البطاقات (Carousel)",
+        "ربط المتجر (WooCommerce / سلة / زد / شوبيفاي)",
+        "3 مستخدمين",
+        "تحويل المحادثات على الموظفين",
+        "تقارير وتحليلات (أساسية)",
+        "تصدير المشتركين",
+        "دعم فني مباشر",
+        "دعم API متكامل"
       ],
       delay: 0.1,
       featured: true
     },
     {
-      title: "الباقة الشاملة",
-      price: "299 ر.س / شهريًا",
+      title: "باقة احترافية",
+      price: "299 ريال / شهريًا",
       features: [
-        "كل الميزات",
-        "لوحة تحكم كاملة",
-        "ربط API مخصص"
+        "شات بوت تلقائي",
+        "ذكاء اصطناعي متقدم للردود",
+        "حملات واتساب جماعية بدون قيود",
+        "رسائل تفاعلية (أزرار + قوائم)",
+        "نماذج واتساب مع ربط خارجي",
+        "رسائل البطاقات (Carousel)",
+        "ربط المتجر (WooCommerce / سلة / زد / شوبيفاي)",
+        "5 مستخدمين",
+        "تحويل المحادثات تلقائي على الفريق",
+        "تقارير وتحليلات متقدمة",
+        "تصدير المشتركين",
+        "دعم فني مباشر وسريع",
+        "دعم API متكامل"
       ],
       delay: 0.2
+    },
+    {
+      title: "باقة Enterprise",
+      price: "حسب الطلب",
+      features: [
+        "شات بوت احترافي متقدم",
+        "ذكاء اصطناعي بدون حدود",
+        "حملات واتساب إعلانية وتسلسلية",
+        "رسائل تفاعلية + بطاقات Carousel",
+        "نماذج واتساب مع ربط خارجي",
+        "رسائل البطاقات (Carousel)",
+        "تكامل كامل مع المتاجر والمنصات الخارجية",
+        "عدد غير محدود من المستخدمين",
+        "تحويل المحادثات تلقائي على الفريق",
+        "تصدير وتحليل بيانات المشتركين",
+        "تصدير المشتركين",
+        "دعم فني مباشر 24/7",
+        "تكامل API متقدم",
+        "تخصيص شامل حسب احتياج المنشأة"
+      ],
+      delay: 0.3
     }
   ];
 
@@ -49,11 +96,11 @@ const Pricing = () => {
         <p className="text-gray-600">اختر الباقة التي تناسب نشاطك التجاري</p>
       </motion.div>
       
-      <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
         {plans.map((plan, index) => (
           <motion.div
             key={index}
-            className={`border p-6 rounded-3xl shadow-sm bg-white ${
+            className={`border p-6 rounded-3xl shadow-sm bg-white h-fit ${
               plan.featured ? 'ring-2 ring-blue-500 shadow-lg' : ''
             }`}
             initial={{ opacity: 0, y: 50 }}
@@ -67,23 +114,28 @@ const Pricing = () => {
                 الأكثر شعبية
               </div>
             )}
-            <h3 className="text-xl font-semibold text-blue-600 mb-4">{plan.title}</h3>
-            <p className="text-2xl font-bold mb-2 text-gray-800">{plan.price}</p>
-            <ul className="text-gray-600 mb-4 space-y-2">
-              {plan.features.map((feature, featureIndex) => (
-                <li key={featureIndex} className="flex items-center">
-                  <span className="text-green-500 mr-2">✓</span>
-                  {feature}
-                </li>
-              ))}
-            </ul>
+            <h3 className="text-lg font-semibold text-blue-600 mb-3">{plan.title}</h3>
+            <p className="text-xl font-bold mb-4 text-gray-800">{plan.price}</p>
+            
+            <div className="mb-4">
+              <h4 className="text-sm font-semibold text-gray-800 mb-2">تشمل:</h4>
+              <ul className="text-gray-600 space-y-1">
+                {plan.features.map((feature, featureIndex) => (
+                  <li key={featureIndex} className="flex items-start text-xs">
+                    <span className="text-green-500 ml-1 mt-0.5 flex-shrink-0">✓</span>
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
             <motion.a 
               href="#" 
-              className="inline-block bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 text-white py-2.5 px-6 rounded-full shadow-md hover:shadow-lg transition-all duration-300 w-full text-center"
+              className="inline-block bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 text-white py-2.5 px-4 rounded-full shadow-md hover:shadow-lg transition-all duration-300 w-full text-center text-sm font-medium"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              اشترك الآن
+              {plan.title === "باقة Enterprise" ? "تواصل معنا" : "اشترك الآن"}
             </motion.a>
           </motion.div>
         ))}

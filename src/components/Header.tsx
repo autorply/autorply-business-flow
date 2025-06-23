@@ -1,94 +1,136 @@
 
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-    setIsMenuOpen(false);
-  };
+  const menuItems = [
+    { name: 'الرئيسية', href: '/' },
+    { name: 'المدونة', href: 'https://autorply.sa/blogs' },
+    { name: 'الأسعار', href: '/pricing' },
+    { name: 'تواصل معنا', href: '#contact' },
+  ];
 
   return (
-    <header className="bg-white shadow-md fixed top-0 w-full z-50">
-      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <motion.a 
-          href="#" 
-          className="flex items-center space-x-2 space-x-reverse"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <img src="https://autorply.sa/assets/img/logo_64.svg" alt="شعار اوتوربلاي" className="h-10 w-10" />
-          <span className="text-xl font-bold text-blue-700">اوتوربلاي</span>
-        </motion.a>
+    <header className="bg-white shadow-sm fixed w-full top-0 z-50" dir="rtl">
+      <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center">
+              <span className="text-white font-bold text-xl">A</span>
+            </div>
+            <span className="text-2xl font-bold text-blue-600">أوتوربلاي</span>
+          </Link>
 
-        <nav className="hidden md:flex items-center space-x-6 space-x-reverse">
-          <motion.button 
-            onClick={() => scrollToSection('features')} 
-            className="text-gray-700 hover:text-blue-600 transition"
-            whileHover={{ y: -2 }}
-          >
-            المميزات
-          </motion.button>
-          <motion.button 
-            onClick={() => scrollToSection('pricing')} 
-            className="text-gray-700 hover:text-blue-600 transition"
-            whileHover={{ y: -2 }}
-          >
-            الباقات
-          </motion.button>
-          <motion.button 
-            onClick={() => scrollToSection('contact')} 
-            className="text-gray-700 hover:text-blue-600 transition"
-            whileHover={{ y: -2 }}
-          >
-            تواصل معنا
-          </motion.button>
-        </nav>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-8">
+            {menuItems.map((item, index) => (
+              <div key={index}>
+                {item.href.startsWith('http') ? (
+                  <a
+                    href={item.href}
+                    className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {item.name}
+                  </a>
+                ) : item.href.startsWith('#') ? (
+                  <a
+                    href={item.href}
+                    className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
+                  >
+                    {item.name}
+                  </a>
+                ) : (
+                  <Link
+                    to={item.href}
+                    className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
+                  >
+                    {item.name}
+                  </Link>
+                )}
+              </div>
+            ))}
+          </nav>
 
-        <div className="hidden md:block">
-          <motion.a 
-            href="https://wa.me/966564455333" 
-            target="_blank" 
-            className="inline-block bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 text-white py-2 px-5 rounded-full shadow-md hover:shadow-lg transition-all duration-300"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            ابدأ الآن
-          </motion.a>
-        </div>
+          {/* CTA Button */}
+          <div className="hidden md:block">
+            <motion.a
+              href="#"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-medium transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              ابدأ مجاناً
+            </motion.a>
+          </div>
 
-        <div className="md:hidden">
-          <button 
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-gray-700 focus:outline-none"
+          {/* Mobile Menu Toggle */}
+          <button
+            className="md:hidden p-2"
+            onClick={() => setIsOpen(!isOpen)}
           >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
-      </div>
 
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div 
-            className="md:hidden px-6 pb-4 bg-white border-t"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
+        {/* Mobile Menu */}
+        {isOpen && (
+          <motion.div
+            className="md:hidden mt-4 pb-4 border-t border-gray-100"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
           >
-            <button onClick={() => scrollToSection('features')} className="block text-gray-700 py-2 w-full text-right">المميزات</button>
-            <button onClick={() => scrollToSection('pricing')} className="block text-gray-700 py-2 w-full text-right">الباقات</button>
-            <button onClick={() => scrollToSection('contact')} className="block text-gray-700 py-2 w-full text-right">تواصل معنا</button>
-            <a href="https://wa.me/966564455333" target="_blank" className="block bg-blue-600 text-white text-center py-2 mt-2 rounded-full">ابدأ الآن</a>
+            <div className="flex flex-col gap-4 mt-4">
+              {menuItems.map((item, index) => (
+                <div key={index}>
+                  {item.href.startsWith('http') ? (
+                    <a
+                      href={item.href}
+                      className="text-gray-700 hover:text-blue-600 transition-colors font-medium block py-2"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.name}
+                    </a>
+                  ) : item.href.startsWith('#') ? (
+                    <a
+                      href={item.href}
+                      className="text-gray-700 hover:text-blue-600 transition-colors font-medium block py-2"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.name}
+                    </a>
+                  ) : (
+                    <Link
+                      to={item.href}
+                      className="text-gray-700 hover:text-blue-600 transition-colors font-medium block py-2"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  )}
+                </div>
+              ))}
+              <motion.a
+                href="#"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-medium transition-colors text-center mt-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                ابدأ مجاناً
+              </motion.a>
+            </div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </div>
     </header>
   );
 };
