@@ -12,7 +12,7 @@ const MultiChannelSection = () => {
         </svg>
       ),
       color: 'text-black',
-      bgColor: 'bg-black'
+      bgColor: 'bg-white'
     },
     {
       name: 'X',
@@ -22,7 +22,7 @@ const MultiChannelSection = () => {
         </svg>
       ),
       color: 'text-black',
-      bgColor: 'bg-black'
+      bgColor: 'bg-white'
     },
     {
       name: 'WhatsApp',
@@ -32,7 +32,7 @@ const MultiChannelSection = () => {
         </svg>
       ),
       color: 'text-green-500',
-      bgColor: 'bg-green-500'
+      bgColor: 'bg-white'
     },
     {
       name: 'Facebook',
@@ -42,7 +42,7 @@ const MultiChannelSection = () => {
         </svg>
       ),
       color: 'text-blue-600',
-      bgColor: 'bg-blue-600'
+      bgColor: 'bg-white'
     },
     {
       name: 'Instagram',
@@ -52,7 +52,7 @@ const MultiChannelSection = () => {
         </svg>
       ),
       color: 'text-pink-500',
-      bgColor: 'bg-gradient-to-r from-purple-500 to-pink-500'
+      bgColor: 'bg-white'
     }
   ];
 
@@ -88,10 +88,10 @@ const MultiChannelSection = () => {
               >
                 <div className="relative">
                   {/* Platform Icon Container */}
-                  <div className={`w-20 h-20 rounded-2xl ${platform.name === 'Instagram' ? platform.bgColor : `bg-white`} 
-                    shadow-lg border border-gray-100 flex items-center justify-center 
+                  <div className={`w-20 h-20 rounded-2xl ${platform.bgColor} 
+                    shadow-lg border border-gray-200 flex items-center justify-center 
                     transition-all duration-300 group-hover:shadow-xl`}>
-                    <div className={platform.name === 'Instagram' ? 'text-white' : platform.color}>
+                    <div className={platform.color}>
                       {platform.icon}
                     </div>
                   </div>
@@ -127,89 +127,6 @@ const MultiChannelSection = () => {
             </div>
           </motion.div>
         </div>
-
-        {/* iPhone Frames - Updated to White */}
-        <motion.div 
-          className="flex flex-col lg:flex-row items-center gap-12 mt-20"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="flex-1 lg:order-1">
-            <div className="relative max-w-md mx-auto">
-              {/* White iPhone Frame */}
-              <div className="relative bg-white rounded-[3rem] p-2 shadow-2xl border-8 border-white">
-                <div className="bg-gray-900 rounded-[2.5rem] overflow-hidden">
-                  {/* iPhone Screen Content */}
-                  <div className="bg-white h-[600px] relative">
-                    {/* Status Bar */}
-                    <div className="flex justify-between items-center px-6 py-3 bg-gray-50">
-                      <span className="text-sm font-medium text-gray-800">9:41</span>
-                      <div className="flex items-center gap-1">
-                        <div className="w-4 h-2 bg-gray-800 rounded-sm"></div>
-                        <div className="w-1 h-2 bg-gray-800 rounded-sm"></div>
-                        <div className="w-6 h-3 border-2 border-gray-800 rounded-sm">
-                          <div className="w-full h-full bg-green-500 rounded-sm"></div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* App Interface */}
-                    <div className="p-4">
-                      <div className="flex items-center gap-3 mb-6">
-                        <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
-                          <span className="text-white font-bold">A</span>
-                        </div>
-                        <div>
-                          <h3 className="font-bold text-gray-800">Autorply</h3>
-                          <p className="text-xs text-gray-500">موثق ✓</p>
-                        </div>
-                      </div>
-                      
-                      <div className="space-y-4">
-                        <div className="bg-blue-100 p-3 rounded-lg rounded-tl-none">
-                          <p className="text-sm text-gray-800">مرحباً! تم توثيق حسابك بنجاح</p>
-                        </div>
-                        <div className="bg-gray-100 p-3 rounded-lg rounded-tr-none text-right">
-                          <p className="text-sm text-gray-800">رائع! شكراً لكم</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex-1 lg:order-2">
-            <h2 className="text-3xl font-bold text-blue-700 mb-6">
-              تكامل آمن مع جميع المنصات
-            </h2>
-            <p className="text-lg text-gray-700 leading-relaxed mb-6">
-              ربط مباشر وآمن مع جميع منصات التواصل الاجتماعي الرئيسية. 
-              إدارة مركزية لجميع الرسائل والتفاعلات مع ضمان الحماية الكاملة لبياناتك.
-            </p>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
-                <CheckCircle className="w-5 h-5 text-green-600" />
-                <span className="text-sm font-medium text-gray-700">حماية متقدمة</span>
-              </div>
-              <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
-                <CheckCircle className="w-5 h-5 text-blue-600" />
-                <span className="text-sm font-medium text-gray-700">ربط فوري</span>
-              </div>
-              <div className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg">
-                <CheckCircle className="w-5 h-5 text-purple-600" />
-                <span className="text-sm font-medium text-gray-700">إدارة مركزية</span>
-              </div>
-              <div className="flex items-center gap-3 p-3 bg-indigo-50 rounded-lg">
-                <CheckCircle className="w-5 h-5 text-indigo-600" />
-                <span className="text-sm font-medium text-gray-700">توثيق موثوق</span>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
