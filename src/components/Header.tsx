@@ -22,7 +22,7 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
             <img 
-              src="/uploads/51c3d52f-d028-437c-b302-4e363f262687.png" 
+              src="/uploads/autorply.svg" 
               alt="أوتوربلاي" 
               className="w-10 h-10 rounded-xl"
             />
