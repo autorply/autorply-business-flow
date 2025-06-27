@@ -6,6 +6,7 @@ import MetaPartnerBadge from '../components/MetaPartnerBadge';
 import Features from '../components/Features';
 import OmnichannelSection from '../components/OmnichannelSection';
 import CarouselCards from '../components/CarouselCards';
+import LiveChatSection from '../components/LiveChatSection';
 import MultiChannelSection from '../components/MultiChannelSection';
 import AutoSlider from '../components/AutoSlider';
 import SmartSurveys from '../components/SmartSurveys';
@@ -27,6 +28,7 @@ const Index = () => {
       <Features />
       <OmnichannelSection />
       <CarouselCards />
+      <LiveChatSection />
       <MultiChannelSection />
       <AutoSlider />
       <SmartSurveys />
