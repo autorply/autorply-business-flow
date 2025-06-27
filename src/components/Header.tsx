@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -12,6 +11,7 @@ const Header = () => {
     { name: 'المدونة', href: 'https://autorply.sa/blogs' },
     { name: 'الأسعار', href: '/pricing' },
     { name: 'من نحن', href: '/about-us' },
+    { name: 'الرسائل الإعلانية', href: '/campaign' },
     { name: 'تواصل معنا', href: '#contact' },
   ];
 
