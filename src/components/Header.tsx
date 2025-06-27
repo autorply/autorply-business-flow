@@ -11,6 +11,7 @@ const Header = () => {
     { name: 'الرئيسية', href: '/' },
     { name: 'المدونة', href: 'https://autorply.sa/blogs' },
     { name: 'الأسعار', href: '/pricing' },
+    { name: 'من نحن', href: '/about-us' },
     { name: 'تواصل معنا', href: '#contact' },
   ];
 
