@@ -152,7 +152,7 @@ const Footer = () => {
           ))}
         </div>
         
-        {/* Copyright with random logo */}
+        {/* Copyright with Autorply logo */}
         <motion.div
           className="mt-8 pt-8 border-t border-gray-700"
           initial={{ opacity: 0, y: 20 }}
@@ -164,8 +164,8 @@ const Footer = () => {
             <p className="text-gray-400">© 2025 جميع الحقوق محفوظة لاوتوربلاي</p>
             <span className="text-gray-400">By</span>
             <img 
-              src="/uploads/328ed69d-c8c4-40cb-883a-6752c3aacffa.png" 
-              alt="Partner Logo" 
+              src="/uploads/51c3d52f-d028-437c-b302-4e363f262687.png" 
+              alt="أوتوربلاي" 
               className="h-6 w-auto opacity-70"
             />
           </div>
