@@ -26,31 +26,30 @@ const AppointmentBooking = () => {
         >
           {/* Phone 1 - Initial Contact */}
           <div className="relative mx-auto">
-            <div className="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black rounded-[2rem] p-2 shadow-2xl transform hover:scale-105 transition-transform duration-300" style={{ width: '250px', height: '480px' }}>
-              <div className="absolute inset-2 bg-gradient-to-br from-white/10 to-transparent rounded-[1.5rem] pointer-events-none"></div>
+            <div className="relative bg-white border-2 border-gray-200 rounded-[2rem] p-2 shadow-lg transform hover:scale-105 transition-transform duration-300" style={{ width: '250px', height: '480px' }}>
               
               {/* iPhone Status Bar */}
-              <div className="relative z-10 flex items-center justify-between text-white text-xs px-4 py-3">
+              <div className="relative z-10 flex items-center justify-between text-gray-800 text-xs px-4 py-3">
                 <div className="flex items-center gap-1">
                   <div className="flex gap-1">
-                    <div className="w-1 h-1 bg-white rounded-full opacity-60"></div>
-                    <div className="w-1 h-1 bg-white rounded-full opacity-80"></div>
-                    <div className="w-1 h-1 bg-white rounded-full"></div>
+                    <div className="w-1 h-1 bg-gray-800 rounded-full opacity-60"></div>
+                    <div className="w-1 h-1 bg-gray-800 rounded-full opacity-80"></div>
+                    <div className="w-1 h-1 bg-gray-800 rounded-full"></div>
                   </div>
                 </div>
-                <div className="text-white font-semibold">9:41</div>
+                <div className="text-gray-800 font-semibold">9:41</div>
                 <div className="flex items-center gap-1">
                   <span className="text-xs">📶</span>
                   <span className="text-xs">🔋</span>
                 </div>
               </div>
 
-              <div className="bg-white rounded-[1.5rem] overflow-hidden flex flex-col shadow-inner" style={{ height: 'calc(100% - 44px)' }}>
+              <div className="bg-white rounded-[1.5rem] overflow-hidden flex flex-col shadow-inner border border-gray-100" style={{ height: 'calc(100% - 44px)' }}>
                 {/* WhatsApp Header */}
                 <div className="bg-[#075E54] text-white p-3 flex items-center gap-2 flex-shrink-0">
                   <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center overflow-hidden shadow-sm">
                     <img 
-                      src="/lovable-uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" 
+                      src="/uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" 
                       alt="Autorply Logo" 
                       className="w-full h-full object-contain"
                     />
@@ -91,29 +90,28 @@ const AppointmentBooking = () => {
 
           {/* Phone 2 - Service Selection */}
           <div className="relative mx-auto">
-            <div className="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black rounded-[2rem] p-2 shadow-2xl transform hover:scale-105 transition-transform duration-300" style={{ width: '250px', height: '480px' }}>
-              <div className="absolute inset-2 bg-gradient-to-br from-white/10 to-transparent rounded-[1.5rem] pointer-events-none"></div>
+            <div className="relative bg-white border-2 border-gray-200 rounded-[2rem] p-2 shadow-lg transform hover:scale-105 transition-transform duration-300" style={{ width: '250px', height: '480px' }}>
               
-              <div className="relative z-10 flex items-center justify-between text-white text-xs px-4 py-3">
+              <div className="relative z-10 flex items-center justify-between text-gray-800 text-xs px-4 py-3">
                 <div className="flex items-center gap-1">
                   <div className="flex gap-1">
-                    <div className="w-1 h-1 bg-white rounded-full opacity-60"></div>
-                    <div className="w-1 h-1 bg-white rounded-full opacity-80"></div>
-                    <div className="w-1 h-1 bg-white rounded-full"></div>
+                    <div className="w-1 h-1 bg-gray-800 rounded-full opacity-60"></div>
+                    <div className="w-1 h-1 bg-gray-800 rounded-full opacity-80"></div>
+                    <div className="w-1 h-1 bg-gray-800 rounded-full"></div>
                   </div>
                 </div>
-                <div className="text-white font-semibold">9:41</div>
+                <div className="text-gray-800 font-semibold">9:41</div>
                 <div className="flex items-center gap-1">
                   <span className="text-xs">📶</span>
                   <span className="text-xs">🔋</span>
                 </div>
               </div>
 
-              <div className="bg-white rounded-[1.5rem] overflow-hidden flex flex-col shadow-inner" style={{ height: 'calc(100% - 44px)' }}>
+              <div className="bg-white rounded-[1.5rem] overflow-hidden flex flex-col shadow-inner border border-gray-100" style={{ height: 'calc(100% - 44px)' }}>
                 <div className="bg-[#075E54] text-white p-3 flex items-center gap-2 flex-shrink-0">
                   <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center overflow-hidden shadow-sm">
                     <img 
-                      src="/lovable-uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" 
+                      src="/uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" 
                       alt="Autorply Logo" 
                       className="w-full h-full object-contain"
                     />
@@ -158,29 +156,28 @@ const AppointmentBooking = () => {
 
           {/* Phone 3 - Date & Time Selection */}
           <div className="relative mx-auto">
-            <div className="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black rounded-[2rem] p-2 shadow-2xl transform hover:scale-105 transition-transform duration-300" style={{ width: '250px', height: '480px' }}>
-              <div className="absolute inset-2 bg-gradient-to-br from-white/10 to-transparent rounded-[1.5rem] pointer-events-none"></div>
+            <div className="relative bg-white border-2 border-gray-200 rounded-[2rem] p-2 shadow-lg transform hover:scale-105 transition-transform duration-300" style={{ width: '250px', height: '480px' }}>
               
-              <div className="relative z-10 flex items-center justify-between text-white text-xs px-4 py-3">
+              <div className="relative z-10 flex items-center justify-between text-gray-800 text-xs px-4 py-3">
                 <div className="flex items-center gap-1">
                   <div className="flex gap-1">
-                    <div className="w-1 h-1 bg-white rounded-full opacity-60"></div>
-                    <div className="w-1 h-1 bg-white rounded-full opacity-80"></div>
-                    <div className="w-1 h-1 bg-white rounded-full"></div>
+                    <div className="w-1 h-1 bg-gray-800 rounded-full opacity-60"></div>
+                    <div className="w-1 h-1 bg-gray-800 rounded-full opacity-80"></div>
+                    <div className="w-1 h-1 bg-gray-800 rounded-full"></div>
                   </div>
                 </div>
-                <div className="text-white font-semibold">9:41</div>
+                <div className="text-gray-800 font-semibold">9:41</div>
                 <div className="flex items-center gap-1">
                   <span className="text-xs">📶</span>
                   <span className="text-xs">🔋</span>
                 </div>
               </div>
 
-              <div className="bg-white rounded-[1.5rem] overflow-hidden flex flex-col shadow-inner" style={{ height: 'calc(100% - 44px)' }}>
+              <div className="bg-white rounded-[1.5rem] overflow-hidden flex flex-col shadow-inner border border-gray-100" style={{ height: 'calc(100% - 44px)' }}>
                 <div className="bg-[#075E54] text-white p-3 flex items-center gap-2 flex-shrink-0">
                   <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center overflow-hidden shadow-sm">
                     <img 
-                      src="/lovable-uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" 
+                      src="/uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" 
                       alt="Autorply Logo" 
                       className="w-full h-full object-contain"
                     />
@@ -231,29 +228,28 @@ const AppointmentBooking = () => {
 
           {/* Phone 4 - Personal Details */}
           <div className="relative mx-auto">
-            <div className="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black rounded-[2rem] p-2 shadow-2xl transform hover:scale-105 transition-transform duration-300" style={{ width: '250px', height: '480px' }}>
-              <div className="absolute inset-2 bg-gradient-to-br from-white/10 to-transparent rounded-[1.5rem] pointer-events-none"></div>
+            <div className="relative bg-white border-2 border-gray-200 rounded-[2rem] p-2 shadow-lg transform hover:scale-105 transition-transform duration-300" style={{ width: '250px', height: '480px' }}>
               
-              <div className="relative z-10 flex items-center justify-between text-white text-xs px-4 py-3">
+              <div className="relative z-10 flex items-center justify-between text-gray-800 text-xs px-4 py-3">
                 <div className="flex items-center gap-1">
                   <div className="flex gap-1">
-                    <div className="w-1 h-1 bg-white rounded-full opacity-60"></div>
-                    <div className="w-1 h-1 bg-white rounded-full opacity-80"></div>
-                    <div className="w-1 h-1 bg-white rounded-full"></div>
+                    <div className="w-1 h-1 bg-gray-800 rounded-full opacity-60"></div>
+                    <div className="w-1 h-1 bg-gray-800 rounded-full opacity-80"></div>
+                    <div className="w-1 h-1 bg-gray-800 rounded-full"></div>
                   </div>
                 </div>
-                <div className="text-white font-semibold">9:41</div>
+                <div className="text-gray-800 font-semibold">9:41</div>
                 <div className="flex items-center gap-1">
                   <span className="text-xs">📶</span>
                   <span className="text-xs">🔋</span>
                 </div>
               </div>
 
-              <div className="bg-white rounded-[1.5rem] overflow-hidden flex flex-col shadow-inner" style={{ height: 'calc(100% - 44px)' }}>
+              <div className="bg-white rounded-[1.5rem] overflow-hidden flex flex-col shadow-inner border border-gray-100" style={{ height: 'calc(100% - 44px)' }}>
                 <div className="bg-[#075E54] text-white p-3 flex items-center gap-2 flex-shrink-0">
                   <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center overflow-hidden shadow-sm">
                     <img 
-                      src="/lovable-uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" 
+                      src="/uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" 
                       alt="Autorply Logo" 
                       className="w-full h-full object-contain"
                     />
@@ -308,22 +304,20 @@ const AppointmentBooking = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
         >
           <div className="relative">
-            {/* Half Phone Frame with enhanced design */}
-            <div className="relative bg-gradient-to-br from-gray-800 via-gray-900 to-black rounded-t-[2rem] p-2 shadow-2xl mx-auto transform hover:scale-105 transition-transform duration-300" style={{ width: '300px', height: '280px' }}>
-              {/* Screen reflection effect */}
-              <div className="absolute inset-2 bg-gradient-to-br from-white/10 to-transparent rounded-t-[1.5rem] pointer-events-none"></div>
+            {/* Half Phone Frame with white design */}
+            <div className="relative bg-white border-2 border-gray-200 rounded-t-[2rem] p-2 shadow-lg mx-auto transform hover:scale-105 transition-transform duration-300" style={{ width: '300px', height: '280px' }}>
               
-              <div className="bg-white rounded-t-[1.5rem] h-full overflow-hidden shadow-inner">
+              <div className="bg-white rounded-t-[1.5rem] h-full overflow-hidden shadow-inner border border-gray-100">
                 {/* iPhone Status Bar */}
-                <div className="relative z-10 flex items-center justify-between text-black text-xs px-4 py-3 bg-white">
+                <div className="relative z-10 flex items-center justify-between text-gray-800 text-xs px-4 py-3 bg-white">
                   <div className="flex items-center gap-1">
                     <div className="flex gap-1">
-                      <div className="w-1 h-1 bg-black rounded-full opacity-60"></div>
-                      <div className="w-1 h-1 bg-black rounded-full opacity-80"></div>
-                      <div className="w-1 h-1 bg-black rounded-full"></div>
+                      <div className="w-1 h-1 bg-gray-800 rounded-full opacity-60"></div>
+                      <div className="w-1 h-1 bg-gray-800 rounded-full opacity-80"></div>
+                      <div className="w-1 h-1 bg-gray-800 rounded-full"></div>
                     </div>
                   </div>
-                  <div className="text-black font-semibold">9:41</div>
+                  <div className="text-gray-800 font-semibold">9:41</div>
                   <div className="flex items-center gap-1">
                     <span className="text-xs">📶</span>
                     <span className="text-xs">🔋</span>
@@ -334,7 +328,7 @@ const AppointmentBooking = () => {
                 <div className="bg-[#075E54] text-white p-3 flex items-center gap-2">
                   <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center overflow-hidden shadow-sm">
                     <img 
-                      src="/lovable-uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" 
+                      src="/uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" 
                       alt="Autorply Logo" 
                       className="w-full h-full object-contain"
                     />
@@ -345,9 +339,9 @@ const AppointmentBooking = () => {
                   </div>
                 </div>
 
-                {/* Confirmation Message - Received by Client */}
-                <div className="p-4 bg-[#E5DDD5]">
-                  <div className="bg-white rounded-2xl p-4 text-right shadow-lg ml-8 max-w-[85%]">
+                {/* Success Message */}
+                <div className="p-4 bg-[#E5DDD5] h-full">
+                  <div className="bg-white rounded-2xl p-4 text-right shadow-lg ml-8 max-w-[85%] h-full flex flex-col justify-center">
                     <div className="flex items-center justify-center mb-3">
                       <div className="w-12 h-12 bg-[#E8F5E8] rounded-full flex items-center justify-center shadow-sm">
                         <span className="text-[#25D366] text-2xl">✅</span>

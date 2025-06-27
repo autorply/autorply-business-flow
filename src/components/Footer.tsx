@@ -105,7 +105,7 @@ const Footer = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <img src="/lovable-uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" alt="Meta Partner" className="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+              <img src="/uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" alt="Meta Partner" className="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity" />
             </motion.div>
             
             <motion.div
@@ -114,7 +114,7 @@ const Footer = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <img src="/lovable-uploads/14caefca-39ff-4152-9289-55b52c714582.png" alt="منشآت" className="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+              <img src="/uploads/14caefca-39ff-4152-9289-55b52c714582.png" alt="منشآت" className="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity" />
             </motion.div>
             
             <motion.div
@@ -123,7 +123,7 @@ const Footer = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <img src="/lovable-uploads/ebef3426-c087-41c9-9726-3423f1b8d47f.png" alt="STC" className="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+              <img src="/uploads/ebef3426-c087-41c9-9726-3423f1b8d47f.png" alt="STC" className="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity" />
             </motion.div>
           </div>
         </div>
@@ -152,7 +152,7 @@ const Footer = () => {
           ))}
         </div>
         
-        {/* Copyright - "By" text with background color to make it invisible */}
+        {/* Copyright with random logo */}
         <motion.div
           className="mt-8 pt-8 border-t border-gray-700"
           initial={{ opacity: 0, y: 20 }}
@@ -162,7 +162,12 @@ const Footer = () => {
         >
           <div className="flex items-center justify-center gap-2 text-sm">
             <p className="text-gray-400">© 2025 جميع الحقوق محفوظة لاوتوربلاي</p>
-            <span className="text-gray-900">By</span>
+            <span className="text-gray-400">By</span>
+            <img 
+              src="/uploads/328ed69d-c8c4-40cb-883a-6752c3aacffa.png" 
+              alt="Partner Logo" 
+              className="h-6 w-auto opacity-70"
+            />
           </div>
         </motion.div>
       </div>
