@@ -8,7 +8,7 @@ const Header = () => {
 
   const menuItems = [
     { name: 'الرئيسية', href: '/' },
-    { name: 'المدونة', href: 'https://autorply.sa/blogs' },
+    { name: 'المدونة', href: '/blogs' },
     { name: 'الأسعار', href: '/pricing' },
     { name: 'من نحن', href: '/about-us' },
     { name: 'الرسائل الإعلانية', href: '/campaign' },
