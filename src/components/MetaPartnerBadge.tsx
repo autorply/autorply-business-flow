@@ -20,7 +20,7 @@ const MetaPartnerBadge = () => {
           whileHover={{ scale: 1.05 }}
         >
           <img 
-            src="/uploads/meta.png" 
+            src="/uploads/Meta-Badge.webp" 
             alt="Meta Business Partner Badge" 
             className="mx-auto h-32 w-auto rounded-lg shadow-lg"
           />
