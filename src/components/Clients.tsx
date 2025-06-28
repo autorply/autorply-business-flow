@@ -89,4 +89,5 @@ const Clients = () => {
   );
 };
 
-//export default Clients;
+const Clients = () => <></>;
+export default Clients;
