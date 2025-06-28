@@ -37,7 +37,7 @@ const Header = () => {
                   <a
                     href={item.href}
                     className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-                    target="_blank"
+                    target="_self"
                     rel="noopener noreferrer"
                   >
                     {item.name}
@@ -97,7 +97,7 @@ const Header = () => {
                     <a
                       href={item.href}
                       className="text-gray-700 hover:text-blue-600 transition-colors font-medium block py-2"
-                      target="_blank"
+                      target="_self"
                       rel="noopener noreferrer"
                       onClick={() => setIsOpen(false)}
                     >
