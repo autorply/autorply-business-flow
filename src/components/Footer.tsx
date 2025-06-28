@@ -124,7 +124,7 @@ const Footer = () => {
 
         <div className="bg-gray-800 py-8 rounded-lg mb-8">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8 items-center justify-items-center">
-            {["/uploads/Meta_Business_Partners_inline_lockup_negative_primary_RGB.svg", "/uploads/uploads/m_Logo.png", "/uploads/2030.svg"].map((src, index) => (
+            {["/uploads/Meta_Business_Partners_inline_lockup_negative_primary_RGB.svg", "/uploads/m_Logo.png", "/uploads/2030.svg"].map((src, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
