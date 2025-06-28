@@ -8,7 +8,7 @@ const Header = () => {
 
   const menuItems = [
     { name: 'الرئيسية', href: '/' },
-    { name: 'المدونة', href: 'https://autorply.sa/blogs' },
+    { name: 'المدونة', external: true, href: 'https://autorply.sa/blogs' },
     { name: 'الأسعار', href: '/pricing' },
     { name: 'من نحن', href: '/about-us' },
     { name: 'الرسائل الإعلانية', href: '/campaign' },
@@ -33,7 +33,7 @@ const Header = () => {
           <nav className="hidden md:flex items-center gap-8">
             {menuItems.map((item, index) => (
               <div key={index}>
-                {item.href.startsWith('http') ? (
+                {item.external ? (
                   <a
                     href={item.href}
                     className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
@@ -93,7 +93,7 @@ const Header = () => {
             <div className="flex flex-col gap-4 mt-4">
               {menuItems.map((item, index) => (
                 <div key={index}>
-                  {item.href.startsWith('http') ? (
+                  {item.external ? (
                     <a
                       href={item.href}
                       className="text-gray-700 hover:text-blue-600 transition-colors font-medium block py-2"
