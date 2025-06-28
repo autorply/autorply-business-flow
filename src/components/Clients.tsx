@@ -1,3 +1,4 @@
+
 import { motion } from 'framer-motion';
 
 const Clients = () => {
@@ -66,7 +67,7 @@ const Clients = () => {
         transition={{ duration: 0.8, delay: 0.5 }}
       >
         <div className="bg-gray-50 rounded-3xl p-6 mx-4 max-w-2xl mx-auto">
-          <h3 className="text-xl font-bold text-gray-800 mb-2">+500 شركة تثق بنا</h3>
+          <h3 className="text-xl font-bold text-gray-800 mb-2">+3000 شركة تثق بنا</h3>
           <p className="text-gray-600 text-sm">نساعد الشركات على تحقيق النجاح من خلال حلولنا التقنية المبتكرة</p>
         </div>
       </motion.div>
@@ -88,4 +89,4 @@ const Clients = () => {
   );
 };
 
-export default Clients;
+//export default Clients;
