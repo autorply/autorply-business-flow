@@ -1,6 +1,7 @@
-
 import { motion } from 'framer-motion';
 
+// # بداية تعليق مكون Clients
+/*
 const Clients = () => {
   const partners = [
     { name: 'شركة التقنية المتطورة', logo: '/uploads/c1bc3fd0-f64a-44ec-80ae-771c1e6ed006.png', category: 'تقنية' },
@@ -30,7 +31,7 @@ const Clients = () => {
           <div className="w-16 h-1 bg-gradient-to-l from-green-500 to-transparent rounded"></div>
         </div>
       </motion.div>
-      
+
       <div className="relative">
         {/* First row - moving right */}
         <div className="flex animate-[marquee_8s_linear_infinite] hover:pause mb-8">
@@ -51,8 +52,6 @@ const Clients = () => {
             </motion.div>
           ))}
         </div>
-
-
 
         {/* Gradient overlays */}
         <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent pointer-events-none z-10"></div>
@@ -88,6 +87,8 @@ const Clients = () => {
     </section>
   );
 };
+// # نهاية تعليق مكون Clients
 
+// نسخة فارغة مؤقتة لتجنب الأخطاء
 const Clients = () => <></>;
 export default Clients;
