@@ -31,9 +31,8 @@ const Clients = () => {
           <div className="w-16 h-1 bg-gradient-to-l from-green-500 to-transparent rounded"></div>
         </div>
       </motion.div>
-
+      
       <div className="relative">
-        {/* First row - moving right */}
         <div className="flex animate-[marquee_8s_linear_infinite] hover:pause mb-8">
           {[...partners, ...partners, ...partners].map((partner, index) => (
             <motion.div
@@ -53,7 +52,6 @@ const Clients = () => {
           ))}
         </div>
 
-        {/* Gradient overlays */}
         <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent pointer-events-none z-10"></div>
         <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"></div>
       </div>
@@ -87,8 +85,9 @@ const Clients = () => {
     </section>
   );
 };
+*/
 // # نهاية تعليق مكون Clients
 
-// نسخة فارغة مؤقتة لتجنب الأخطاء
+// نسخة فارغة لتجنب أخطاء البناء
 const Clients = () => <></>;
 export default Clients;
