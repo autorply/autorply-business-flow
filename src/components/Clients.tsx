@@ -51,45 +51,7 @@ const Clients = () => {
           ))}
         </div>
 
-        {/* Second row - moving left */}
-        <div className="flex animate-[marquee-reverse_10s_linear_infinite] hover:pause mb-8">
-          {[...partners.slice().reverse(), ...partners.slice().reverse(), ...partners.slice().reverse()].map((partner, index) => (
-            <motion.div
-              key={`row2-${index}`}
-              className="flex-shrink-0 mx-6 group"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="w-32 h-20 flex items-center justify-center">
-                <img 
-                  src={partner.logo} 
-                  alt={partner.name}
-                  className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                />
-              </div>
-            </motion.div>
-          ))}
-        </div>
 
-        {/* Third row - moving right faster */}
-        <div className="flex animate-[marquee_6s_linear_infinite] hover:pause">
-          {[...partners, ...partners, ...partners].map((partner, index) => (
-            <motion.div
-              key={`row3-${index}`}
-              className="flex-shrink-0 mx-6 group"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="w-32 h-20 flex items-center justify-center">
-                <img 
-                  src={partner.logo} 
-                  alt={partner.name}
-                  className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                />
-              </div>
-            </motion.div>
-          ))}
-        </div>
 
         {/* Gradient overlays */}
         <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent pointer-events-none z-10"></div>
