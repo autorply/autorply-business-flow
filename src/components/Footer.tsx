@@ -1,3 +1,4 @@
+
 import { motion } from 'framer-motion';
 import { Facebook, Instagram, MessageCircle, Send } from 'lucide-react';
 
@@ -13,8 +14,8 @@ const footerSections = [
   {
     title: 'خدماتنا',
     links: [
-      { label: 'WhatsApp API', href: '/services/whatsapp-api' },
-      { label: 'الشات بوت', href: '/services/chatbot' },
+      { label: 'الخدمات', href: '/services' },
+      { label: 'الشات بوت', href: '/services' },
       { label: 'الحملات التسويقية', href: '/campaign' }
     ]
   },
@@ -29,64 +30,64 @@ const footerSections = [
   {
     title: 'التكاملات',
     links: [
-      { label: 'Shopify', href: '/integrations/shopify' },
-      { label: 'WooCommerce', href: '/integrations/woocommerce' },
-      { label: 'Salesforce', href: '/integrations/salesforce' }
+      { label: 'Shopify', href: '/tech-partners' },
+      { label: 'WooCommerce', href: '/tech-partners' },
+      { label: 'Salesforce', href: '/tech-partners' }
     ]
   },
   {
     title: 'الأسئلة الشائعة',
     links: [
       { label: 'الأسئلة العامة', href: '/faq' },
-      { label: 'التقنية', href: '/faq/' },
-      { label: 'الفوترة', href: '/faq/' }
+      { label: 'التقنية', href: '/technology' },
+      { label: 'الفوترة', href: '/billing' }
     ]
   },
   {
     title: 'الأسعار والباقات',
     links: [
-      { label: 'الباقة المجانية', href: '/pricing/' },
-      { label: 'الباقة المتقدمة', href: '/pricing/' },
-      { label: 'الباقة الإحترافية', href: '/pricing/' }
+      { label: 'الباقة المجانية', href: '/pricing' },
+      { label: 'الباقة المتقدمة', href: '/pricing' },
+      { label: 'الباقة الإحترافية', href: '/pricing' }
     ]
   },
   {
     title: 'سياسات الاستخدام',
     links: [
-      { label: 'شروط الخدمة', href: '/policies/terms' },
-      { label: 'سياسة الاستخدام', href: '/policies/usage' },
-      { label: 'القواعد العامة', href: '/policies/rules' }
+      { label: 'شروط الخدمة', href: '/terms-of-service' },
+      { label: 'سياسة الاستخدام', href: '/terms-of-service' },
+      { label: 'القواعد العامة', href: '/terms-of-service' }
     ]
   },
   {
     title: 'الخصوصية والأمان',
     links: [
-      { label: 'سياسة الخصوصية', href: '/privacy/policy' },
-      { label: 'الأمان', href: '/privacy/security' },
-      { label: 'حماية البيانات', href: '/privacy/data-protection' }
+      { label: 'سياسة الخصوصية', href: '/privacy-policy' },
+      { label: 'الأمان', href: '/technology' },
+      { label: 'حماية البيانات', href: '/privacy-policy' }
     ]
   },
   {
     title: 'شركاؤنا',
     links: [
-      { label: 'Meta Partner', href: '/partners/meta' },
-      { label: 'شركاء التقنية', href: '/partners/tech' },
-      { label: 'شركاء الأعمال', href: '/partners/business' }
+      { label: 'Meta Partner', href: 'https://www.facebook.com/business/partner-directory/search?solution_type=messaging', external: true },
+      { label: 'شركاء التقنية', href: '/tech-partners' },
+      { label: 'شركاء الأعمال', href: '/business-partners' }
     ]
   },
   {
     title: 'فرص العمل',
     links: [
-      { label: 'الوظائف المتاحة', href: '/careers/jobs' },
-      { label: 'التدريب', href: '/careers/internships' },
-      { label: 'بيئة العمل', href: '/careers/culture' }
+      { label: 'الوظائف المتاحة', href: '/contact' },
+      { label: 'التدريب', href: '/contact' },
+      { label: 'بيئة العمل', href: '/contact' }
     ]
   },
   {
     title: 'المستندات API',
     links: [
       { label: 'دليل المطور', href: 'https://live.autorply.com/api/developer/console' },
-      { label: 'أمثلة الكود', href: '/docs/examples' },
+      { label: 'أمثلة الكود', href: '/technology' },
       { label: 'مراجع API', href: 'https://live.autorply.com/api/developer/console' }
     ]
   },
@@ -94,8 +95,8 @@ const footerSections = [
     title: 'التواصل معنا',
     links: [
       { label: 'الاتصال بنا', href: '/contact' },
-      { label: 'فروعنا', href: '/contact/branches' },
-      { label: 'خدمة العملاء', href: '/contact/support' }
+      { label: 'فروعنا', href: '/contact' },
+      { label: 'خدمة العملاء', href: '/contact' }
     ]
   }
 ];
@@ -151,9 +152,20 @@ const Footer = () => {
               <ul className="space-y-2 text-sm">
                 {section.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
-                    <a href={link.href} className="hover:text-blue-400 transition-colors">
-                      {link.label}
-                    </a>
+                    {link.external ? (
+                      <a 
+                        href={link.href} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="hover:text-blue-400 transition-colors"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <a href={link.href} className="hover:text-blue-400 transition-colors">
+                        {link.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -168,15 +180,15 @@ const Footer = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-<div className="flex items-center justify-center gap-2 text-sm">
-  <p className="text-gray-400">© 2025 جميع الحقوق محفوظة لـ اوتوربلاي</p>
-  <img 
-    src="/uploads/slogo.svg" 
-    alt="أوتوربلاي" 
-    className="h-6 w-auto opacity-70"
-  />
-  <span className="text-[#181c24]">By</span>
-</div>
+          <div className="flex items-center justify-center gap-2 text-sm">
+            <p className="text-gray-400">© 2025 جميع الحقوق محفوظة لـ اوتوربلاي</p>
+            <img 
+              src="/uploads/slogo.svg" 
+              alt="أوتوربلاي" 
+              className="h-6 w-auto opacity-70"
+            />
+            <span className="text-[#181c24]">By</span>
+          </div>
         </motion.div>
       </div>
     </footer>

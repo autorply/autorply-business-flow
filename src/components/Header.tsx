@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -8,11 +9,11 @@ const Header = () => {
 
   const menuItems = [
     { name: 'الرئيسية', href: '/' },
-    { name: 'المدونة', external: true, href: 'https://autorply.sa/blogs' },
+    { name: 'الخدمات', href: '/services' },
+    { name: 'الرسائل الإعلانية', href: '/campaign' },
     { name: 'الأسعار', href: '/pricing' },
     { name: 'من نحن', href: '/about-us' },
-    { name: 'الرسائل الإعلانية', href: '/campaign' },
-    { name: 'تواصل معنا', href: '#contact' },
+    { name: 'تواصل معنا', href: '/contact' },
   ];
 
   return (
@@ -32,32 +33,13 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {menuItems.map((item, index) => (
-              <div key={index}>
-                {item.external ? (
-                  <a
-                    href={item.href}
-                    className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-                    target="_self"
-                    rel="noopener noreferrer"
-                  >
-                    {item.name}
-                  </a>
-                ) : item.href.startsWith('#') ? (
-                  <a
-                    href={item.href}
-                    className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-                  >
-                    {item.name}
-                  </a>
-                ) : (
-                  <Link
-                    to={item.href}
-                    className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-                  >
-                    {item.name}
-                  </Link>
-                )}
-              </div>
+              <Link
+                key={index}
+                to={item.href}
+                className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
+              >
+                {item.name}
+              </Link>
             ))}
           </nav>
 
@@ -92,35 +74,14 @@ const Header = () => {
           >
             <div className="flex flex-col gap-4 mt-4">
               {menuItems.map((item, index) => (
-                <div key={index}>
-                  {item.external ? (
-                    <a
-                      href={item.href}
-                      className="text-gray-700 hover:text-blue-600 transition-colors font-medium block py-2"
-                      target="_self"
-                      rel="noopener noreferrer"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {item.name}
-                    </a>
-                  ) : item.href.startsWith('#') ? (
-                    <a
-                      href={item.href}
-                      className="text-gray-700 hover:text-blue-600 transition-colors font-medium block py-2"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {item.name}
-                    </a>
-                  ) : (
-                    <Link
-                      to={item.href}
-                      className="text-gray-700 hover:text-blue-600 transition-colors font-medium block py-2"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {item.name}
-                    </Link>
-                  )}
-                </div>
+                <Link
+                  key={index}
+                  to={item.href}
+                  className="text-gray-700 hover:text-blue-600 transition-colors font-medium block py-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.name}
+                </Link>
               ))}
               <motion.a
                 href="#"
