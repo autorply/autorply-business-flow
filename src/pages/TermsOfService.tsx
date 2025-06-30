@@ -306,7 +306,7 @@ const TermsOfService = () => {
               </div>
 
               <p className="mt-12 text-sm text-gray-500 text-center">
-                آخر تحديث: يونيو 2025 | Last updated: June 2025
+                آخر تحديث: مارس 2024 | Last updated: March 2024
               </p>
             </motion.div>
           </div>
