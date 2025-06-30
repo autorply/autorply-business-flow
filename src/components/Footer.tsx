@@ -95,8 +95,7 @@ const footerSections = [
     title: 'التواصل معنا',
     links: [
       { label: 'الاتصال بنا', href: '/contact' },
-      { label: 'فروعنا', href: '/contact' },
-      { label: 'خدمة العملاء', href: '/contact' }
+      { label: 'خدمة العملاء', href: 'https://wa.me/966594959443?text=خدمة%20العملاء' }
     ]
   }
 ];

@@ -11,6 +11,7 @@ const Header = () => {
     { name: 'الرئيسية', href: '/' },
     { name: 'الخدمات', href: '/services' },
     { name: 'الرسائل الإعلانية', href: '/campaign' },
+    { name: 'المدونة', href: 'https://autorply.sa/blogs', external: true },
     { name: 'الأسعار', href: '/pricing' },
     { name: 'من نحن', href: '/about-us' },
     { name: 'تواصل معنا', href: '/contact' },
@@ -33,13 +34,25 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {menuItems.map((item, index) => (
-              <Link
-                key={index}
-                to={item.href}
-                className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-              >
-                {item.name}
-              </Link>
+              item.external ? (
+                <a
+                  key={index}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
+                >
+                  {item.name}
+                </a>
+              ) : (
+                <Link
+                  key={index}
+                  to={item.href}
+                  className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
+                >
+                  {item.name}
+                </Link>
+              )
             ))}
           </nav>
 
@@ -74,14 +87,27 @@ const Header = () => {
           >
             <div className="flex flex-col gap-4 mt-4">
               {menuItems.map((item, index) => (
-                <Link
-                  key={index}
-                  to={item.href}
-                  className="text-gray-700 hover:text-blue-600 transition-colors font-medium block py-2"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.name}
-                </Link>
+                item.external ? (
+                  <a
+                    key={index}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-700 hover:text-blue-600 transition-colors font-medium block py-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.name}
+                  </a>
+                ) : (
+                  <Link
+                    key={index}
+                    to={item.href}
+                    className="text-gray-700 hover:text-blue-600 transition-colors font-medium block py-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                )
               ))}
               <motion.a
                 href="#"
