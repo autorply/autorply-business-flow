@@ -182,7 +182,7 @@ const Footer = () => {
           <div className="flex items-center justify-center gap-2 text-sm">
             <p className="text-gray-400">© 2025 جميع الحقوق محفوظة لـ اوتوربلاي</p>
             <img 
-              src="/uploads/slogo.svg" 
+              src="/uploads/solutions_stc.svg" 
               alt="أوتوربلاي" 
               className="h-6 w-auto opacity-70"
             />
