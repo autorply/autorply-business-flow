@@ -1,4 +1,3 @@
-
 import { motion } from 'framer-motion';
 import { Facebook, Instagram, MessageCircle, Send } from 'lucide-react';
 
@@ -52,18 +51,10 @@ const footerSections = [
     ]
   },
   {
-    title: 'سياسات الاستخدام',
+    title: 'الشروط والسياسات',
     links: [
-      { label: 'شروط الخدمة', href: '/terms-of-service' },
-      { label: 'سياسة الاستخدام', href: '/terms-of-service' },
-      { label: 'القواعد العامة', href: '/terms-of-service' }
-    ]
-  },
-  {
-    title: 'الخصوصية والأمان',
-    links: [
+      { label: 'الشروط والأحكام', href: '/terms-of-service' },
       { label: 'سياسة الخصوصية', href: '/privacy-policy' },
-      { label: 'الأمان', href: '/technology' },
       { label: 'حماية البيانات', href: '/privacy-policy' }
     ]
   },
