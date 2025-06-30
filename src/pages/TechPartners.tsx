@@ -1,19 +1,19 @@
 
 import { motion } from 'framer-motion';
-import { Link2, Code, Zap } from 'lucide-react';
+import { Link2, Code, Zap, ShoppingCart, Globe, Workflow, Settings, Users, Database, CreditCard } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const TechPartners = () => {
   const partners = [
-    { name: 'Salla', category: 'التجارة الإلكترونية', logo: '/uploads/slogo.svg' },
-    { name: 'Zid', category: 'التجارة الإلكترونية', logo: '/uploads/slogo.svg' },
-    { name: 'Shopify', category: 'التجارة الإلكترونية', logo: '/uploads/slogo.svg' },
-    { name: 'WooCommerce', category: 'التجارة الإلكترونية', logo: '/uploads/slogo.svg' },
-    { name: 'Zapier', category: 'الأتمتة', logo: '/uploads/slogo.svg' },
-    { name: 'Make', category: 'الأتمتة', logo: '/uploads/slogo.svg' },
-    { name: 'Odoo', category: 'ERP', logo: '/uploads/slogo.svg' },
-    { name: 'Salesforce', category: 'CRM', logo: '/uploads/slogo.svg' }
+    { name: 'Salla', category: 'التجارة الإلكترونية', icon: ShoppingCart, color: 'text-green-600' },
+    { name: 'Zid', category: 'التجارة الإلكترونية', icon: Globe, color: 'text-blue-600' },
+    { name: 'Shopify', category: 'التجارة الإلكترونية', icon: ShoppingCart, color: 'text-emerald-600' },
+    { name: 'WooCommerce', category: 'التجارة الإلكترونية', icon: Code, color: 'text-purple-600' },
+    { name: 'Zapier', category: 'الأتمتة', icon: Zap, color: 'text-orange-600' },
+    { name: 'Make', category: 'الأتمتة', icon: Workflow, color: 'text-indigo-600' },
+    { name: 'Odoo', category: 'ERP', icon: Database, color: 'text-red-600' },
+    { name: 'Salesforce', category: 'CRM', icon: Users, color: 'text-blue-500' }
   ];
 
   return (
@@ -50,15 +50,15 @@ const TechPartners = () => {
               {partners.map((partner, index) => (
                 <motion.div
                   key={index}
-                  className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 text-center"
+                  className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 text-center group"
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: index * 0.1 }}
                   whileHover={{ y: -5 }}
                 >
-                  <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                    <img src={partner.logo} alt={partner.name} className="max-w-full max-h-full" />
+                  <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center rounded-full bg-gray-50 group-hover:bg-gray-100 transition-colors">
+                    <partner.icon className={`w-8 h-8 ${partner.color}`} />
                   </div>
                   <h3 className="text-xl font-bold text-gray-800 mb-2">{partner.name}</h3>
                   <p className="text-gray-600 text-sm">{partner.category}</p>
