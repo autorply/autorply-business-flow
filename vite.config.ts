@@ -20,6 +20,10 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  define: {
+    // Add crypto polyfill for build environment
+    global: 'globalThis',
+  },
   build: {
     // Optimize bundle size
     rollupOptions: {
@@ -32,17 +36,21 @@ export default defineConfig(({ mode }) => ({
         }
       }
     },
-    // Only enable terser in production and when available
+    // Use esbuild for minification (more stable than terser)
     minify: mode === 'production' ? 'esbuild' : false,
     // Reduce chunk size
     chunkSizeWarningLimit: 1000,
-    // Optimize for better performance
-    target: 'esnext',
-    sourcemap: mode === 'development'
+    // Use more stable target
+    target: 'es2020',
+    sourcemap: mode === 'development',
+    // Add commonjs options for better compatibility
+    commonjsOptions: {
+      transformMixedEsModules: true
+    }
   },
-  // Add esbuild optimization
+  // Add esbuild optimization with stable target
   esbuild: {
-    target: 'esnext',
+    target: 'es2020',
     minifyIdentifiers: mode === 'production',
     minifySyntax: mode === 'production',
     minifyWhitespace: mode === 'production'
@@ -50,6 +58,9 @@ export default defineConfig(({ mode }) => ({
   // Add optimizeDeps to handle version conflicts
   optimizeDeps: {
     include: ['react', 'react-dom', 'framer-motion', 'lucide-react'],
-    force: false
+    force: false,
+    esbuildOptions: {
+      target: 'es2020'
+    }
   }
 }));
