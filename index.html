@@ -15,7 +15,7 @@
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     
     <!-- Meta Description -->
-    <meta name="description" content="منصة متكاملة تتيح لك التواصل مع عملائك بسهولة عبر واتساب، مع دعم كامل للردود التلقائية والحملات" />
+    <meta name="description" content="منصة متكاملة تتيح لك التواصل مع عملائك بسهولة عبر واتساب، مع دعم كامل للردود الآلية والحملات" />
     <meta name="keywords" content="واتساب, WhatsApp API, الردود الآلية, التسويق الرقمي, خدمة العملاء, السعودية, توثيق واتساب, شات بوت, الرقم الموحد, واتساب أعمال, منصة واتساب, واتساب تجاري" />
     <meta name="author" content="اوتوربلاي" />
     <meta name="robots" content="index, follow" />
@@ -30,7 +30,6 @@
     <meta property="og:image" content="https://autorply.sa/uploads/autorply.svg" />
     <meta property="og:locale" content="ar_SA" />
     <meta property="og:site_name" content="اوتوربلاي" />
-    <meta property="og:keywords" content="توثيق واتساب, WhatsApp API, شات بوت, الرقم الموحد, واتساب أعمال, منصة واتساب, واتساب المؤسسي" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -46,79 +45,112 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="اوتوربلاي" />
     
-    <!-- Critical inline CSS for font loading and basic styling -->
+    <!-- Critical inline CSS for above-the-fold content -->
     <style>
-      /* Critical font loading styles */
-      body {
+      /* Critical CSS for immediate rendering */
+      html {
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        scroll-behavior: smooth;
         font-display: swap;
+      }
+      
+      body {
+        font-feature-settings: 'kern' 1;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
         margin: 0;
         padding: 0;
+        background-color: #ffffff;
+        color: #1f2937;
+        direction: rtl;
       }
       
-      /* Prevent layout shift during font loading */
-      .font-loading {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      }
-      
-      /* Critical above-the-fold styles */
       #root {
         min-height: 100vh;
       }
       
-      /* Loading spinner for better UX */
-      .loading-spinner {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        border: 2px solid #f3f3f3;
-        border-top: 2px solid #25D366;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
+      /* Critical header styles */
+      .header-critical {
+        background: white;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 50;
       }
       
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+      /* Critical hero section styles */
+      .hero-critical {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 120px 0 80px;
+        text-align: center;
+      }
+      
+      /* Critical button styles */
+      .btn-primary {
+        background-color: #25D366;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background-color 0.2s;
+      }
+      
+      .btn-primary:hover {
+        background-color: #128C7E;
+      }
+      
+      /* Loading optimization */
+      .loading-placeholder {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+      }
+      
+      @keyframes loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+      
+      /* Essential container styles */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 16px;
+      }
+      
+      /* Hide content until fonts load to prevent FOUT */
+      .font-loading {
+        visibility: hidden;
+      }
+      
+      .fonts-loaded .font-loading {
+        visibility: visible;
       }
     </style>
     
-    <!-- Load Tajawal font asynchronously to prevent render blocking -->
+    <!-- Load Tajawal font optimally -->
     <link 
-      rel="stylesheet" 
-      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" 
-      media="print" 
-      onload="this.media='all'; document.body.style.fontFamily='Tajawal, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif';"
+      rel="preload" 
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" 
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet';document.documentElement.classList.add('fonts-loaded');"
     >
     <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     </noscript>
     
-    <!-- JSON-LD Schema for Autorply -->
+    <!-- JSON-LD Schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "اوتوربلاي",
       "alternateName": "Autorply",
-      "url": "https://autorply.sa",
-      "logo": "https://autorply.sa/uploads/autorply.svg",
-      "sameAs": [
-        "https://twitter.com/autorplycom",
-        "https://www.linkedin.com/company/107284928/",
-        "https://www.instagram.com/autorply",
-        "https://autorply.com"
-      ],
-      "description": "اوتوربلاي هي منصة رسمية لأتمتة رسائل WhatsApp Business API من السعودية، معتمدة من Meta وتقدم حلولًا متقدمة للربط والتسويق."
-    }
-    </script>
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "اوتوربلاي",
       "url": "https://autorply.sa",
       "logo": "https://autorply.sa/uploads/autorply.svg",
       "description": "منصة متكاملة تتيح لك التواصل مع عملائك بسهولة عبر واتساب، مع دعم كامل للردود الآلية والحملات",
@@ -137,37 +169,56 @@
 
   <body class="font-loading">
     <div id="root"></div>
+    
+    <!-- Load main CSS after critical rendering -->
+    <script>
+      // Load main CSS after page is ready
+      const loadCSS = () => {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = '/src/index.css';
+        document.head.appendChild(link);
+      };
+      
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadCSS);
+      } else {
+        loadCSS();
+      }
+    </script>
+    
     <script type="module" src="/src/main.tsx"></script>
     
-    <!-- Defer Google Analytics loading until after page load to improve performance -->
+    <!-- Defer Google Analytics loading completely -->
     <script>
-      // Initialize dataLayer immediately
+      // Initialize dataLayer but defer loading
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'AW-11076152229');
       
-      // Load Google Analytics script after page load
-      window.addEventListener('load', function() {
-        // Add a small delay to ensure page is fully rendered
-        setTimeout(function() {
-          var script = document.createElement('script');
-          script.async = true;
-          script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-11076152229';
-          document.head.appendChild(script);
-        }, 100);
+      // Load analytics only after user interaction or 5 seconds
+      let analyticsLoaded = false;
+      
+      const loadAnalytics = () => {
+        if (analyticsLoaded) return;
+        analyticsLoaded = true;
+        
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-11076152229';
+        script.onload = () => {
+          gtag('js', new Date());
+          gtag('config', 'AW-11076152229');
+        };
+        document.head.appendChild(script);
+      };
+      
+      // Load after user interaction
+      ['click', 'scroll', 'keydown', 'touchstart'].forEach(event => {
+        document.addEventListener(event, loadAnalytics, { once: true, passive: true });
       });
       
-      // Fallback: load after 3 seconds if load event doesn't fire
-      setTimeout(function() {
-        if (!window.gtag_loaded) {
-          var script = document.createElement('script');
-          script.async = true;
-          script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-11076152229';
-          document.head.appendChild(script);
-          window.gtag_loaded = true;
-        }
-      }, 3000);
+      // Or after 5 seconds as fallback
+      setTimeout(loadAnalytics, 5000);
     </script>
   </body>
 </html>
