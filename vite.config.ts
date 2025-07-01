@@ -32,15 +32,15 @@ export default defineConfig(({ mode }) => ({
         }
       }
     },
-    // Enable tree shaking
-    minify: 'terser',
-    terserOptions: {
+    // Only enable terser in production
+    minify: mode === 'production' ? 'terser' : false,
+    terserOptions: mode === 'production' ? {
       compress: {
-        drop_console: mode === 'production',
+        drop_console: true,
         drop_debugger: true,
         pure_funcs: ['console.log', 'console.info']
       }
-    },
+    } : undefined,
     // Reduce chunk size
     chunkSizeWarningLimit: 1000
   }
