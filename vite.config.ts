@@ -1,21 +1,4 @@
 
-
-// Crypto polyfill for Node.js build environment - must be at the very top
-if (typeof globalThis.crypto === 'undefined') {
-  try {
-    const nodeCrypto = require('crypto');
-    globalThis.crypto = {
-      getRandomValues: (array: any) => {
-        return nodeCrypto.randomFillSync(array);
-      },
-      subtle: {} as any,
-      randomUUID: () => nodeCrypto.randomUUID()
-    } as any;
-  } catch (e: any) {
-    console.warn('Failed to setup crypto polyfill:', e.message);
-  }
-}
-
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";

@@ -1,6 +1,9 @@
 
 #!/usr/bin/env node
 
+// Setup crypto polyfill before any other operations
+require('./crypto-polyfill.cjs');
+
 const { execSync } = require('child_process');
 
 try {

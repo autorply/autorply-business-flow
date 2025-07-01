@@ -1,14 +1,5 @@
 
-// Crypto polyfill for build environment
-if (typeof globalThis.crypto === 'undefined') {
-  const nodeCrypto = require('crypto');
-  globalThis.crypto = {
-    getRandomValues: (array: Uint8Array) => {
-      return nodeCrypto.randomFillSync(array);
-    },
-    subtle: {} as SubtleCrypto,
-    randomUUID: () => nodeCrypto.randomUUID()
-  } as Crypto;
-}
+// Browser-only polyfills and compatibility code
+// Note: Node.js crypto polyfill is handled separately in build scripts
 
 export {};
