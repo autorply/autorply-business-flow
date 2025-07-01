@@ -1,4 +1,20 @@
 
+// Crypto polyfill for Node.js build environment - must be at the very top
+if (typeof globalThis.crypto === 'undefined') {
+  try {
+    const nodeCrypto = require('crypto');
+    globalThis.crypto = {
+      getRandomValues: (array) => {
+        return nodeCrypto.randomFillSync(array);
+      },
+      subtle: {},
+      randomUUID: () => nodeCrypto.randomUUID()
+    };
+  } catch (e) {
+    console.warn('Failed to setup crypto polyfill:', e.message);
+  }
+}
+
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -18,11 +34,20 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      // Add crypto fallback for browser
+      "crypto": "crypto-browserify",
     },
+    fallback: {
+      "crypto": "crypto-browserify",
+      "buffer": "buffer",
+      "process": "process/browser",
+    }
   },
   define: {
     // Add crypto polyfill for build environment
     global: 'globalThis',
+    // Define process for browser compatibility
+    'process.env': {},
   },
   build: {
     // Optimize bundle size
