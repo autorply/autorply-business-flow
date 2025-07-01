@@ -32,16 +32,24 @@ export default defineConfig(({ mode }) => ({
         }
       }
     },
-    // Only enable terser in production
-    minify: mode === 'production' ? 'terser' : false,
-    terserOptions: mode === 'production' ? {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info']
-      }
-    } : undefined,
+    // Only enable terser in production and when available
+    minify: mode === 'production' ? 'esbuild' : false,
     // Reduce chunk size
-    chunkSizeWarningLimit: 1000
+    chunkSizeWarningLimit: 1000,
+    // Optimize for better performance
+    target: 'esnext',
+    sourcemap: mode === 'development'
+  },
+  // Add esbuild optimization
+  esbuild: {
+    target: 'esnext',
+    minifyIdentifiers: mode === 'production',
+    minifySyntax: mode === 'production',
+    minifyWhitespace: mode === 'production'
+  },
+  // Add optimizeDeps to handle version conflicts
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'framer-motion', 'lucide-react'],
+    force: false
   }
 }));
