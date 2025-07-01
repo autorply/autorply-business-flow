@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Critical CSS - keep only essential styles */
+/* Critical CSS - essential styles only */
 @layer base {
   html {
     font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -18,7 +18,7 @@
   }
 }
 
-/* Custom animations - optimized */
+/* Optimized animations - only essential ones */
 @layer utilities {
   @keyframes marquee {
     0% { transform: translateX(0%); }
@@ -42,14 +42,25 @@
     animation-play-state: paused;
   }
 
-  /* Focus styles for accessibility */
+  /* Essential focus styles for accessibility */
   .focus-visible {
     outline: 2px solid #3b82f6;
     outline-offset: 2px;
   }
+  
+  /* Performance optimization for transforms */
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  /* Hardware acceleration for smooth animations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
 }
 
-/* Reduce motion for users who prefer it */
+/* Reduce motion for accessibility and performance */
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
   .animate-marquee-slow {
@@ -60,5 +71,14 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* Loading optimization */
+@media (max-width: 768px) {
+  /* Reduce animations on mobile for better performance */
+  .animate-marquee,
+  .animate-marquee-slow {
+    animation-duration: 45s;
   }
 }
