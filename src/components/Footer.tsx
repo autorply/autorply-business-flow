@@ -1,3 +1,4 @@
+
 import { motion } from 'framer-motion';
 import { Facebook, Instagram, MessageCircle, Send } from 'lucide-react';
 
@@ -55,7 +56,7 @@ const footerSections = [
     links: [
       { label: 'الشروط والأحكام', href: '/terms-of-service' },
       { label: 'سياسة الخصوصية', href: '/privacy-policy' },
-      { label: 'حماية البيانات', href: '/privacy-policy' }
+      // { label: 'حماية البيانات', href: '/privacy-policy' }
     ]
   },
   {
