@@ -9,6 +9,11 @@
     <link rel="apple-touch-icon" href="/uploads/autorply.svg">
     <link rel="canonical" href="https://autorply.sa" />
     
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <!-- Meta Description -->
     <meta name="description" content="منصة متكاملة تتيح لك التواصل مع عملائك بسهولة عبر واتساب، مع دعم كامل للردود التلقائية والحملات" />
     <meta name="keywords" content="واتساب, WhatsApp API, الردود الآلية, التسويق الرقمي, خدمة العملاء, السعودية, توثيق واتساب, شات بوت, الرقم الموحد, واتساب أعمال, منصة واتساب, واتساب تجاري" />
@@ -32,10 +37,7 @@
     <meta name="twitter:url" content="https://autorply.sa" />
     <meta name="twitter:title" content="اوتوربلاي - WhatsApp API" />
     <meta name="twitter:description" content="منصة متكاملة تتيح لك التواصل مع عملائك بسهولة عبر واتساب" />
-    <meta property="og:image" content="https://autorply.sa/uploads/autorply.svg" />
-    
-    <!-- Google AdSense -->
-    <meta name="google-adsense-account" content="ca-pub-9923391035414033">
+    <meta name="twitter:image" content="https://autorply.sa/uploads/autorply.svg" />
     
     <!-- Additional SEO Meta Tags -->
     <meta name="theme-color" content="#25D366" />
@@ -44,8 +46,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="اوتوربلاي" />
     
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11076152229"></script>
+    <!-- Optimized Google tag (gtag.js) - defer loading -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -93,18 +94,33 @@
     }
     </script>
     
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    
+    <!-- Critical inline CSS for font loading -->
     <style>
       body {
-        font-family: 'Tajawal', sans-serif;
+        font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-display: swap;
       }
     </style>
+    
+    <!-- Load fonts asynchronously -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    </noscript>
   </head>
 
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Load Google Analytics after page load -->
+    <script>
+      window.addEventListener('load', function() {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-11076152229';
+        document.head.appendChild(script);
+      });
+    </script>
   </body>
 </html>
