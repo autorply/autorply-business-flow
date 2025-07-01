@@ -8,9 +8,9 @@ if (typeof globalThis.crypto === 'undefined') {
       getRandomValues: (array: any) => {
         return nodeCrypto.randomFillSync(array);
       },
-      subtle: {} as SubtleCrypto,
+      subtle: {} as any,
       randomUUID: () => nodeCrypto.randomUUID()
-    } as Crypto;
+    } as any;
   } catch (e: any) {
     console.warn('Failed to setup crypto polyfill:', e.message);
   }
