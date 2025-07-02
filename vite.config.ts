@@ -8,10 +8,11 @@ import { componentTagger } from "lovable-tagger";
 if (typeof globalThis.crypto === 'undefined') {
   const crypto = require('crypto');
   globalThis.crypto = {
-    getRandomValues: (array) => crypto.randomFillSync(array),
-    subtle: {} as SubtleCrypto,
-    randomUUID: () => crypto.randomUUID()
-  };
+    getRandomValues: (array: any) => crypto.randomFillSync(array),
+    subtle: {} as any,
+    randomUUID: () => crypto.randomUUID(),
+    CryptoKey: {} as any
+  } as any;
 }
 
 // https://vitejs.dev/config/
