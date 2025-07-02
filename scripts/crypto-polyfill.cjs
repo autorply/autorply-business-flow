@@ -17,6 +17,12 @@ if (typeof globalThis.crypto === 'undefined') {
       subtle: {},
       randomUUID: () => crypto.randomUUID()
     };
+    
+    // Also set it on global for older Node.js compatibility
+    if (typeof global !== 'undefined') {
+      global.crypto = globalThis.crypto;
+    }
+    
     console.log('✅ Crypto polyfill setup completed successfully');
     console.log('✅ globalThis.crypto.getRandomValues:', typeof globalThis.crypto.getRandomValues);
   } catch (error) {
