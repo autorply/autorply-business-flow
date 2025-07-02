@@ -9,7 +9,7 @@ if (typeof globalThis.crypto === 'undefined') {
   const crypto = require('crypto');
   globalThis.crypto = {
     getRandomValues: (array) => crypto.randomFillSync(array),
-    subtle: {},
+    subtle: {} as SubtleCrypto,
     randomUUID: () => crypto.randomUUID()
   };
 }
