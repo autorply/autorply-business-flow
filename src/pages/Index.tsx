@@ -38,6 +38,13 @@ const Index = () => {
       <Pricing />
       <FAQ />
       <Clients />
+            {/* روابط داخلية لأغراض السيو */}
+      <div className="hidden">
+        <a href="/pricing">باقات واتساب</a>
+        <a href="/blogs">مقالات واتساب</a>
+        <a href="/docs/whatsapp-api">ربط API واتساب</a>
+        <a href="/contact">تواصل معنا</a>
+      </div>
       <Contact />
       <Footer />
     </div>
