@@ -30,7 +30,7 @@ const createCryptoPolyfill = () => {
           return hash.digest();
         }
       }
-    } as any; // Use type assertion to bypass TypeScript checks
+    } as any;
   }
 };
 
@@ -41,15 +41,16 @@ createCryptoPolyfill();
 const sitemapPlugin = () => {
   return {
     name: 'sitemap-generator',
-    generateBundle() {
+    generateBundle(options: any, bundle: any) {
       const urls = getSitemapUrls();
       const sitemap = generateSitemap(urls);
       
-      this.emitFile({
+      // Use the bundle context to emit files
+      bundle['sitemap.xml'] = {
         type: 'asset',
         fileName: 'sitemap.xml',
         source: sitemap
-      });
+      };
 
       // Generate robots.txt
       const robotsTxt = `User-agent: *
@@ -57,11 +58,11 @@ Allow: /
 
 Sitemap: https://autorply.sa/sitemap.xml`;
 
-      this.emitFile({
+      bundle['robots.txt'] = {
         type: 'asset',
         fileName: 'robots.txt',
         source: robotsTxt
-      });
+      };
     }
   };
 };

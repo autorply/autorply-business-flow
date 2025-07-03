@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import WebVitals from "./components/analytics/WebVitals";
 import Index from "./pages/Index";
 import Pricing from "./pages/Pricing";
 import AboutUs from "./pages/AboutUs";
@@ -28,6 +29,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <HelmetProvider>
       <TooltipProvider>
+        <WebVitals />
         <Toaster />
         <Sonner />
         <BrowserRouter>
