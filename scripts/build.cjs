@@ -1,20 +1,27 @@
-// scripts/build.cjs
+
+// Load crypto polyfill first
 require('./crypto-polyfill.cjs');
 
-console.log('🔧 Setting up crypto polyfill...');
-console.log('Current globalThis.crypto status:', typeof globalThis.crypto);
-console.log('✅ Crypto polyfill setup completed successfully');
-console.log('✅ globalThis.crypto.getRandomValues:', typeof globalThis.crypto.getRandomValues);
-console.log('✅ Crypto polyfill test passed');
-console.log('🚀 Starting build with crypto polyfill...');
+const { execSync } = require('child_process');
 
-(async () => {
-  try {
-    const { build } = await import('vite');
-    await build();
-    console.log('✅ Build completed successfully');
-  } catch (err) {
-    console.error('❌ Build failed:', err);
-    process.exit(1);
-  }
-})();
+try {
+  console.log('🚀 Starting build with crypto polyfill...');
+  
+  // Set Node.js environment variables
+  process.env.NODE_ENV = 'production';
+  process.env.NODE_OPTIONS = '--max-old-space-size=4096';
+  
+  // Run Vite build with the polyfill already loaded
+  execSync('vite build', { 
+    stdio: 'inherit',
+    env: {
+      ...process.env,
+      NODE_ENV: 'production'
+    }
+  });
+  
+  console.log('✅ Build completed successfully!');
+} catch (error) {
+  console.error('❌ Build failed:', error.message);
+  process.exit(1);
+}
