@@ -1,5 +1,6 @@
 
 import { Send, Plus, Mic, Loader2 } from 'lucide-react';
+import { memo } from 'react';
 
 interface ChatInputProps {
   message: string;
@@ -9,7 +10,7 @@ interface ChatInputProps {
   isLoading: boolean;
 }
 
-const ChatInput = ({ 
+const ChatInput = memo(({ 
   message, 
   setMessage, 
   handleSendMessage, 
@@ -54,6 +55,8 @@ const ChatInput = ({
       </button>
     </div>
   );
-};
+});
+
+ChatInput.displayName = 'ChatInput';
 
 export default ChatInput;

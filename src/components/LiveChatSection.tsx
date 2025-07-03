@@ -95,34 +95,34 @@ const LiveChatSection = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-800">خدمة العملاء</h4>
-                    <p className="text-sm text-green-500 flex items-center">
+                    <div className="text-sm text-green-500 flex items-center">
                       <div className="w-2 h-2 bg-green-500 rounded-full ml-1"></div>
-                      متاح الآن
-                    </p>
+                      <span>متاح الآن</span>
+                    </div>
                   </div>
                 </div>
               </div>
 
               <div className="space-y-4 mb-4">
                 <div className="bg-gray-100 rounded-lg p-3 max-w-xs">
-                  <p className="text-sm text-gray-700">مرحباً! كيف يمكنني مساعدتك اليوم؟</p>
-                  <span className="text-xs text-gray-500">10:30 ص</span>
+                  <div className="text-sm text-gray-700">مرحباً! كيف يمكنني مساعدتك اليوم؟</div>
+                  <div className="text-xs text-gray-500">10:30 ص</div>
                 </div>
                 
                 <div className="bg-blue-600 text-white rounded-lg p-3 max-w-xs mr-auto">
-                  <p className="text-sm">أريد معرفة المزيد عن خدماتكم</p>
-                  <span className="text-xs text-blue-200">10:31 ص</span>
+                  <div className="text-sm">أريد معرفة المزيد عن خدماتكم</div>
+                  <div className="text-xs text-blue-200">10:31 ص</div>
                 </div>
 
                 <div className="bg-gray-100 rounded-lg p-3 max-w-xs">
-                  <p className="text-sm text-gray-700">بالطبع! سأرسل لك تفاصيل شاملة عن خدماتنا...</p>
-                  <span className="text-xs text-gray-500">10:32 ص</span>
+                  <div className="text-sm text-gray-700">بالطبع! سأرسل لك تفاصيل شاملة عن خدماتنا...</div>
+                  <div className="text-xs text-gray-500">10:32 ص</div>
                 </div>
               </div>
 
               <div className="flex items-center space-x-2 space-x-reverse">
                 <div className="flex-1 bg-gray-100 rounded-full px-4 py-2">
-                  <p className="text-sm text-gray-500">اكتب رسالتك...</p>
+                  <div className="text-sm text-gray-500">اكتب رسالتك...</div>
                 </div>
                 <button className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-colors">
                   <MessageCircle className="w-4 h-4" />

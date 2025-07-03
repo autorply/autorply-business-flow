@@ -2,8 +2,9 @@
 import { motion } from 'framer-motion';
 import { useWhatsAppForm } from '@/hooks/useWhatsAppForm';
 import { Loader2 } from 'lucide-react';
+import { memo } from 'react';
 
-const WhatsAppFormDemo = () => {
+const WhatsAppFormDemo = memo(() => {
   const { formData, isLoading, isSuccess, handleInputChange, handleSubmit } = useWhatsAppForm();
 
   return (
@@ -91,6 +92,8 @@ const WhatsAppFormDemo = () => {
       </div>
     </div>
   );
-};
+});
+
+WhatsAppFormDemo.displayName = 'WhatsAppFormDemo';
 
 export default WhatsAppFormDemo;

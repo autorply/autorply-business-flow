@@ -1,7 +1,4 @@
 
-// Setup crypto polyfill before any other operations
-require('./crypto-polyfill.cjs');
-
 const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
@@ -25,11 +22,15 @@ try {
   
   // Update browserslist
   console.log('📦 Updating browserslist...');
-  execSync('npx update-browserslist-db@latest', { stdio: 'inherit' });
+  try {
+    execSync('npx update-browserslist-db@latest', { stdio: 'inherit' });
+  } catch (updateError) {
+    console.warn('⚠️ Could not update browserslist, continuing...');
+  }
   
-  // Clean build with proper Node.js flags
+  // Clean build
   console.log('🔨 Building project...');
-  execSync('NODE_OPTIONS="--max-old-space-size=4096" pnpm run build', { 
+  execSync('NODE_OPTIONS="--max-old-space-size=4096" npm run build', { 
     stdio: 'inherit',
     env: { 
       ...process.env,

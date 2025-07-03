@@ -1,7 +1,8 @@
 
 import { motion } from 'framer-motion';
+import { memo } from 'react';
 
-const Pricing = () => {
+const Pricing = memo(() => {
   const plans = [
     {
       title: "باقة Start",
@@ -101,7 +102,7 @@ const Pricing = () => {
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
         {plans.map((plan, index) => (
           <motion.div
-            key={index}
+            key={plan.title}
             className={`border p-6 rounded-3xl shadow-sm bg-white h-fit ${
               plan.featured ? 'ring-2 ring-blue-500 shadow-lg' : ''
             }`}
@@ -144,6 +145,8 @@ const Pricing = () => {
       </div>
     </section>
   );
-};
+});
+
+Pricing.displayName = 'Pricing';
 
 export default Pricing;
