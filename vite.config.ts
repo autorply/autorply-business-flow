@@ -28,8 +28,8 @@ const createCryptoPolyfill = () => {
           hash.update(data);
           return hash.digest();
         }
-      } as any
-    };
+      }
+    } as any; // Use type assertion to bypass TypeScript checks
   }
 };
 
