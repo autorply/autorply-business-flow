@@ -8,6 +8,27 @@ import { componentTagger } from "lovable-tagger";
 if (typeof globalThis.crypto === 'undefined') {
   try {
     const crypto = require('crypto');
+    
+    // Create a proper SubtleCrypto implementation
+    const subtleCrypto = {
+      decrypt: async () => { throw new Error('Not implemented'); },
+      deriveBits: async () => { throw new Error('Not implemented'); },
+      deriveKey: async () => { throw new Error('Not implemented'); },
+      digest: async (algorithm: string, data: BufferSource) => {
+        const hash = crypto.createHash(algorithm.toLowerCase().replace('-', ''));
+        hash.update(data);
+        return hash.digest();
+      },
+      encrypt: async () => { throw new Error('Not implemented'); },
+      exportKey: async () => { throw new Error('Not implemented'); },
+      generateKey: async () => { throw new Error('Not implemented'); },
+      importKey: async () => { throw new Error('Not implemented'); },
+      sign: async () => { throw new Error('Not implemented'); },
+      unwrapKey: async () => { throw new Error('Not implemented'); },
+      verify: async () => { throw new Error('Not implemented'); },
+      wrapKey: async () => { throw new Error('Not implemented'); }
+    };
+    
     globalThis.crypto = {
       getRandomValues: (array: any) => {
         const buffer = crypto.randomBytes(array.length);
@@ -17,7 +38,7 @@ if (typeof globalThis.crypto === 'undefined') {
         return array;
       },
       randomUUID: () => crypto.randomUUID(),
-      subtle: {}
+      subtle: subtleCrypto as SubtleCrypto
     };
   } catch (e) {
     console.warn('Could not setup crypto polyfill in vite config');
