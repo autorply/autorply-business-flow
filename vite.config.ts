@@ -4,6 +4,26 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
+// Load crypto polyfill for build environment
+if (typeof globalThis.crypto === 'undefined') {
+  try {
+    const crypto = require('crypto');
+    globalThis.crypto = {
+      getRandomValues: (array: any) => {
+        const buffer = crypto.randomBytes(array.length);
+        for (let i = 0; i < array.length; i++) {
+          array[i] = buffer[i];
+        }
+        return array;
+      },
+      randomUUID: () => crypto.randomUUID(),
+      subtle: {}
+    };
+  } catch (e) {
+    console.warn('Could not setup crypto polyfill in vite config');
+  }
+}
+
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
@@ -18,17 +38,13 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      "crypto": "crypto-browserify",
     },
-    fallback: {
-      "crypto": "crypto-browserify",
-      "buffer": "buffer",
-      "process": "process/browser",
-    }
   },
   define: {
     global: 'globalThis',
     'process.env': {},
+    // Ensure crypto is available in browser build
+    'globalThis.crypto': 'globalThis.crypto || {}',
   },
   build: {
     rollupOptions: {
