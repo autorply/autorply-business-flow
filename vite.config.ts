@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
+import { generateSitemap, getSitemapUrls } from "./src/utils/sitemap";
 
 // Crypto polyfill for Node.js build environment
 const createCryptoPolyfill = () => {
@@ -36,6 +37,35 @@ const createCryptoPolyfill = () => {
 // Initialize crypto polyfill
 createCryptoPolyfill();
 
+// Generate sitemap during build
+const sitemapPlugin = () => {
+  return {
+    name: 'sitemap-generator',
+    generateBundle() {
+      const urls = getSitemapUrls();
+      const sitemap = generateSitemap(urls);
+      
+      this.emitFile({
+        type: 'asset',
+        fileName: 'sitemap.xml',
+        source: sitemap
+      });
+
+      // Generate robots.txt
+      const robotsTxt = `User-agent: *
+Allow: /
+
+Sitemap: https://autorply.sa/sitemap.xml`;
+
+      this.emitFile({
+        type: 'asset',
+        fileName: 'robots.txt',
+        source: robotsTxt
+      });
+    }
+  };
+};
+
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
@@ -45,6 +75,7 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     mode === 'development' && componentTagger(),
+    mode === 'production' && sitemapPlugin(),
   ].filter(Boolean),
   resolve: {
     alias: {
@@ -62,7 +93,9 @@ export default defineConfig(({ mode }) => ({
           vendor: ['react', 'react-dom'],
           motion: ['framer-motion'],
           icons: ['lucide-react'],
-          ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu']
+          ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu'],
+          router: ['react-router-dom'],
+          seo: ['react-helmet-async']
         }
       }
     },
@@ -81,7 +114,7 @@ export default defineConfig(({ mode }) => ({
     minifyWhitespace: mode === 'production'
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'framer-motion', 'lucide-react'],
+    include: ['react', 'react-dom', 'framer-motion', 'lucide-react', 'react-router-dom', 'react-helmet-async'],
     force: false,
     esbuildOptions: {
       target: 'es2020'

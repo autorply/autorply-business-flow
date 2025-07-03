@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import Pricing from "./pages/Pricing";
 import AboutUs from "./pages/AboutUs";
@@ -25,31 +26,33 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/campaign" element={<Campaign />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/vision" element={<Vision />} />
-          <Route path="/success-story" element={<SuccessStory />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/technology" element={<Technology />} />
-          <Route path="/billing" element={<Billing />} />
-          <Route path="/tech-partners" element={<TechPartners />} />
-          <Route path="/business-partners" element={<BusinessPartners />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-of-service" element={<TermsOfService />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <HelmetProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/campaign" element={<Campaign />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/vision" element={<Vision />} />
+            <Route path="/success-story" element={<SuccessStory />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/technology" element={<Technology />} />
+            <Route path="/billing" element={<Billing />} />
+            <Route path="/tech-partners" element={<TechPartners />} />
+            <Route path="/business-partners" element={<BusinessPartners />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </HelmetProvider>
   </QueryClientProvider>
 );
 
