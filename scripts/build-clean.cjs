@@ -3,8 +3,41 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
+// Setup crypto polyfill for Node.js environment
+const setupCrypto = () => {
+  if (typeof globalThis.crypto === 'undefined') {
+    const crypto = require('crypto');
+    globalThis.crypto = {
+      getRandomValues: function(array) {
+        if (!array || typeof array.length !== 'number') {
+          throw new Error('Invalid array provided to getRandomValues');
+        }
+        const buffer = crypto.randomBytes(array.length);
+        for (let i = 0; i < array.length; i++) {
+          array[i] = buffer[i];
+        }
+        return array;
+      },
+      randomUUID: function() {
+        return crypto.randomUUID();
+      },
+      subtle: {
+        digest: async function(algorithm, data) {
+          const hash = crypto.createHash(algorithm.toLowerCase().replace('-', ''));
+          hash.update(data);
+          return hash.digest();
+        }
+      }
+    };
+    console.log('✅ Crypto polyfill initialized for clean build');
+  }
+};
+
 try {
   console.log('🧹 Cleaning build artifacts...');
+  
+  // Initialize crypto polyfill
+  setupCrypto();
   
   // Remove dist directory if it exists
   const distPath = path.join(process.cwd(), 'dist');
