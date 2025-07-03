@@ -4,17 +4,6 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-// Ensure crypto polyfill is available during config resolution
-if (typeof globalThis.crypto === 'undefined') {
-  const crypto = require('crypto');
-  globalThis.crypto = {
-    getRandomValues: (array: any) => crypto.randomFillSync(array),
-    subtle: {} as any,
-    randomUUID: () => crypto.randomUUID(),
-    CryptoKey: {} as any
-  } as any;
-}
-
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
