@@ -7,11 +7,29 @@ import { componentTagger } from "lovable-tagger";
 // Define missing types for Node.js crypto polyfill
 type BufferSource = ArrayBufferView | ArrayBuffer;
 
+interface JsonWebKey {
+  kty: string;
+  use?: string;
+  key_ops?: string[];
+  alg?: string;
+  kid?: string;
+  x5u?: string;
+  x5c?: string[];
+  x5t?: string;
+  x5t_S256?: string;
+  [key: string]: any;
+}
+
 interface CryptoKey {
   algorithm: any;
   extractable: boolean;
   type: string;
   usages: string[];
+}
+
+interface CryptoKeyPair {
+  privateKey: CryptoKey;
+  publicKey: CryptoKey;
 }
 
 interface SubtleCrypto {
@@ -33,6 +51,7 @@ interface Crypto {
   getRandomValues: <T extends ArrayBufferView>(array: T) => T;
   randomUUID: () => string;
   subtle: SubtleCrypto;
+  CryptoKey: typeof CryptoKey;
 }
 
 // Load crypto polyfill for build environment
@@ -68,10 +87,11 @@ if (typeof globalThis.crypto === 'undefined') {
         return array;
       },
       randomUUID: () => crypto.randomUUID(),
-      subtle: subtleCrypto
+      subtle: subtleCrypto,
+      CryptoKey: CryptoKey as any
     };
     
-    globalThis.crypto = cryptoPolyfill;
+    globalThis.crypto = cryptoPolyfill as any;
   } catch (e) {
     console.warn('Could not setup crypto polyfill in vite config');
   }
