@@ -20,38 +20,45 @@ interface JsonWebKey {
   [key: string]: any;
 }
 
-interface CryptoKey {
+// Create a simple CryptoKey class for compatibility
+class CryptoKeyImpl {
   algorithm: any;
   extractable: boolean;
   type: string;
   usages: string[];
+
+  constructor(algorithm: any, extractable: boolean, type: string, usages: string[]) {
+    this.algorithm = algorithm;
+    this.extractable = extractable;
+    this.type = type;
+    this.usages = usages;
+  }
 }
 
 interface CryptoKeyPair {
-  privateKey: CryptoKey;
-  publicKey: CryptoKey;
+  privateKey: CryptoKeyImpl;
+  publicKey: CryptoKeyImpl;
 }
 
 interface SubtleCrypto {
-  decrypt: (algorithm: any, key: CryptoKey, data: BufferSource) => Promise<ArrayBuffer>;
-  deriveBits: (algorithm: any, baseKey: CryptoKey, length: number) => Promise<ArrayBuffer>;
-  deriveKey: (algorithm: any, baseKey: CryptoKey, derivedKeyType: any, extractable: boolean, keyUsages: string[]) => Promise<CryptoKey>;
+  decrypt: (algorithm: any, key: CryptoKeyImpl, data: BufferSource) => Promise<ArrayBuffer>;
+  deriveBits: (algorithm: any, baseKey: CryptoKeyImpl, length: number) => Promise<ArrayBuffer>;
+  deriveKey: (algorithm: any, baseKey: CryptoKeyImpl, derivedKeyType: any, extractable: boolean, keyUsages: string[]) => Promise<CryptoKeyImpl>;
   digest: (algorithm: string, data: BufferSource) => Promise<ArrayBuffer>;
-  encrypt: (algorithm: any, key: CryptoKey, data: BufferSource) => Promise<ArrayBuffer>;
-  exportKey: (format: string, key: CryptoKey) => Promise<ArrayBuffer | JsonWebKey>;
-  generateKey: (algorithm: any, extractable: boolean, keyUsages: string[]) => Promise<CryptoKey | CryptoKeyPair>;
-  importKey: (format: string, keyData: BufferSource | JsonWebKey, algorithm: any, extractable: boolean, keyUsages: string[]) => Promise<CryptoKey>;
-  sign: (algorithm: any, key: CryptoKey, data: BufferSource) => Promise<ArrayBuffer>;
-  unwrapKey: (format: string, wrappedKey: BufferSource, unwrappingKey: CryptoKey, unwrapAlgorithm: any, unwrappedKeyAlgorithm: any, extractable: boolean, keyUsages: string[]) => Promise<CryptoKey>;
-  verify: (algorithm: any, key: CryptoKey, signature: BufferSource, data: BufferSource) => Promise<boolean>;
-  wrapKey: (format: string, key: CryptoKey, wrappingKey: CryptoKey, wrapAlgorithm: any) => Promise<ArrayBuffer>;
+  encrypt: (algorithm: any, key: CryptoKeyImpl, data: BufferSource) => Promise<ArrayBuffer>;
+  exportKey: (format: string, key: CryptoKeyImpl) => Promise<ArrayBuffer | JsonWebKey>;
+  generateKey: (algorithm: any, extractable: boolean, keyUsages: string[]) => Promise<CryptoKeyImpl | CryptoKeyPair>;
+  importKey: (format: string, keyData: BufferSource | JsonWebKey, algorithm: any, extractable: boolean, keyUsages: string[]) => Promise<CryptoKeyImpl>;
+  sign: (algorithm: any, key: CryptoKeyImpl, data: BufferSource) => Promise<ArrayBuffer>;
+  unwrapKey: (format: string, wrappedKey: BufferSource, unwrappingKey: CryptoKeyImpl, unwrapAlgorithm: any, unwrappedKeyAlgorithm: any, extractable: boolean, keyUsages: string[]) => Promise<CryptoKeyImpl>;
+  verify: (algorithm: any, key: CryptoKeyImpl, signature: BufferSource, data: BufferSource) => Promise<boolean>;
+  wrapKey: (format: string, key: CryptoKeyImpl, wrappingKey: CryptoKeyImpl, wrapAlgorithm: any) => Promise<ArrayBuffer>;
 }
 
 interface Crypto {
   getRandomValues: <T extends ArrayBufferView>(array: T) => T;
   randomUUID: () => string;
   subtle: SubtleCrypto;
-  CryptoKey: typeof CryptoKey;
 }
 
 // Load crypto polyfill for build environment
@@ -87,8 +94,7 @@ if (typeof globalThis.crypto === 'undefined') {
         return array;
       },
       randomUUID: () => crypto.randomUUID(),
-      subtle: subtleCrypto,
-      CryptoKey: CryptoKey as any
+      subtle: subtleCrypto
     };
     
     globalThis.crypto = cryptoPolyfill as any;
