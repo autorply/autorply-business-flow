@@ -4,20 +4,51 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
+// Define missing types for Node.js crypto polyfill
+type BufferSource = ArrayBufferView | ArrayBuffer;
+
+interface CryptoKey {
+  algorithm: any;
+  extractable: boolean;
+  type: string;
+  usages: string[];
+}
+
+interface SubtleCrypto {
+  decrypt: (algorithm: any, key: CryptoKey, data: BufferSource) => Promise<ArrayBuffer>;
+  deriveBits: (algorithm: any, baseKey: CryptoKey, length: number) => Promise<ArrayBuffer>;
+  deriveKey: (algorithm: any, baseKey: CryptoKey, derivedKeyType: any, extractable: boolean, keyUsages: string[]) => Promise<CryptoKey>;
+  digest: (algorithm: string, data: BufferSource) => Promise<ArrayBuffer>;
+  encrypt: (algorithm: any, key: CryptoKey, data: BufferSource) => Promise<ArrayBuffer>;
+  exportKey: (format: string, key: CryptoKey) => Promise<ArrayBuffer | JsonWebKey>;
+  generateKey: (algorithm: any, extractable: boolean, keyUsages: string[]) => Promise<CryptoKey | CryptoKeyPair>;
+  importKey: (format: string, keyData: BufferSource | JsonWebKey, algorithm: any, extractable: boolean, keyUsages: string[]) => Promise<CryptoKey>;
+  sign: (algorithm: any, key: CryptoKey, data: BufferSource) => Promise<ArrayBuffer>;
+  unwrapKey: (format: string, wrappedKey: BufferSource, unwrappingKey: CryptoKey, unwrapAlgorithm: any, unwrappedKeyAlgorithm: any, extractable: boolean, keyUsages: string[]) => Promise<CryptoKey>;
+  verify: (algorithm: any, key: CryptoKey, signature: BufferSource, data: BufferSource) => Promise<boolean>;
+  wrapKey: (format: string, key: CryptoKey, wrappingKey: CryptoKey, wrapAlgorithm: any) => Promise<ArrayBuffer>;
+}
+
+interface Crypto {
+  getRandomValues: <T extends ArrayBufferView>(array: T) => T;
+  randomUUID: () => string;
+  subtle: SubtleCrypto;
+}
+
 // Load crypto polyfill for build environment
 if (typeof globalThis.crypto === 'undefined') {
   try {
     const crypto = require('crypto');
     
     // Create a proper SubtleCrypto implementation
-    const subtleCrypto = {
+    const subtleCrypto: SubtleCrypto = {
       decrypt: async () => { throw new Error('Not implemented'); },
       deriveBits: async () => { throw new Error('Not implemented'); },
       deriveKey: async () => { throw new Error('Not implemented'); },
       digest: async (algorithm: string, data: BufferSource) => {
         const hash = crypto.createHash(algorithm.toLowerCase().replace('-', ''));
-        hash.update(data);
-        return hash.digest();
+        hash.update(Buffer.from(data as ArrayBuffer));
+        return hash.digest().buffer;
       },
       encrypt: async () => { throw new Error('Not implemented'); },
       exportKey: async () => { throw new Error('Not implemented'); },
@@ -29,17 +60,18 @@ if (typeof globalThis.crypto === 'undefined') {
       wrapKey: async () => { throw new Error('Not implemented'); }
     };
     
-    globalThis.crypto = {
-      getRandomValues: (array: any) => {
-        const buffer = crypto.randomBytes(array.length);
-        for (let i = 0; i < array.length; i++) {
-          array[i] = buffer[i];
-        }
+    const cryptoPolyfill: Crypto = {
+      getRandomValues: <T extends ArrayBufferView>(array: T): T => {
+        const buffer = crypto.randomBytes(array.byteLength);
+        const view = new Uint8Array(array.buffer, array.byteOffset, array.byteLength);
+        view.set(buffer);
         return array;
       },
       randomUUID: () => crypto.randomUUID(),
-      subtle: subtleCrypto as SubtleCrypto
+      subtle: subtleCrypto
     };
+    
+    globalThis.crypto = cryptoPolyfill;
   } catch (e) {
     console.warn('Could not setup crypto polyfill in vite config');
   }
