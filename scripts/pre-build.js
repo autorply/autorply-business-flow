@@ -1,6 +1,4 @@
 
-#!/usr/bin/env node
-
 // Setup crypto polyfill before any other operations
 require('./crypto-polyfill.cjs');
 

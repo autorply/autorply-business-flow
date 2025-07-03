@@ -1,6 +1,4 @@
 
-#!/usr/bin/env node
-
 // CommonJS crypto polyfill for Node.js build environment
 const crypto = require('crypto');
 
