@@ -122,8 +122,6 @@ export default defineConfig(({ mode }) => ({
   define: {
     global: 'globalThis',
     'process.env': {},
-    // Ensure crypto is available in browser build
-    'globalThis.crypto': 'globalThis.crypto || {}',
   },
   build: {
     rollupOptions: {
