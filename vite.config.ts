@@ -22,13 +22,13 @@ const createCryptoPolyfill = () => {
       randomUUID: function() {
         return crypto.randomUUID();
       },
-      subtle: {
+      subtle: crypto.webcrypto?.subtle || {
         digest: async function(algorithm: string, data: any) {
           const hash = crypto.createHash(algorithm.toLowerCase().replace('-', ''));
           hash.update(data);
           return hash.digest();
         }
-      }
+      } as any
     };
   }
 };
@@ -54,7 +54,6 @@ export default defineConfig(({ mode }) => ({
   define: {
     global: 'globalThis',
     'process.env': {},
-    'globalThis.crypto': 'globalThis.crypto',
   },
   build: {
     rollupOptions: {
