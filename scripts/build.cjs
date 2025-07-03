@@ -12,7 +12,7 @@ try {
   process.env.NODE_OPTIONS = '--max-old-space-size=4096';
   
   // Run Vite build with the polyfill already loaded
-  execSync('vite build', { 
+  execSync('pnpm vite build', { 
     stdio: 'inherit',
     env: {
       ...process.env,
