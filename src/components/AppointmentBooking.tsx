@@ -49,7 +49,7 @@ const AppointmentBooking = () => {
                 <div className="bg-[#075E54] text-white p-3 flex items-center gap-2 flex-shrink-0">
                   <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center overflow-hidden shadow-sm">
                     <img 
-                      src="/uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" 
+                      src="/uploads/autorply.png" 
                       alt="Autorply Logo" 
                       className="w-full h-full object-contain"
                     />
@@ -111,7 +111,7 @@ const AppointmentBooking = () => {
                 <div className="bg-[#075E54] text-white p-3 flex items-center gap-2 flex-shrink-0">
                   <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center overflow-hidden shadow-sm">
                     <img 
-                      src="/uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" 
+                      src="/uploads/autorply.png" 
                       alt="Autorply Logo" 
                       className="w-full h-full object-contain"
                     />
@@ -177,7 +177,7 @@ const AppointmentBooking = () => {
                 <div className="bg-[#075E54] text-white p-3 flex items-center gap-2 flex-shrink-0">
                   <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center overflow-hidden shadow-sm">
                     <img 
-                      src="/uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" 
+                      src="/uploads/autorply.png" 
                       alt="Autorply Logo" 
                       className="w-full h-full object-contain"
                     />
@@ -249,7 +249,7 @@ const AppointmentBooking = () => {
                 <div className="bg-[#075E54] text-white p-3 flex items-center gap-2 flex-shrink-0">
                   <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center overflow-hidden shadow-sm">
                     <img 
-                      src="/uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" 
+                      src="/uploads/autorply.png" 
                       alt="Autorply Logo" 
                       className="w-full h-full object-contain"
                     />
@@ -328,7 +328,7 @@ const AppointmentBooking = () => {
                 <div className="bg-[#075E54] text-white p-3 flex items-center gap-2">
                   <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center overflow-hidden shadow-sm">
                     <img 
-                      src="/uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" 
+                      src="/uploads/autorply.png" 
                       alt="Autorply Logo" 
                       className="w-full h-full object-contain"
                     />
