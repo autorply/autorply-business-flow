@@ -20,7 +20,7 @@ const Integrations = () => {
   { name: 'OpenAI', logo: 'https://autorply.sa/uploads/openai.svg' },
   { name: 'Google Translate', logo: 'https://autorply.sa/uploads/google-trans.svg' },
   { name: 'Google', logo: 'https://autorply.sa/uploads/google.svg' },
-  { name: 'Gemini', logo: 'https://autorply.sa/uploads/gemini.jpg' },
+  { name: 'Gemini', logo: 'https://autorply.sa/uploads/gemini.png' },
   { name: 'Daftara', logo: 'https://autorply.sa/uploads/daftra-logo.jpg' },
   { name: 'ClickUp', logo: 'https://autorply.sa/uploads/clickup.png' },
   { name: 'Calendly', logo: 'https://autorply.sa/uploads/calendly.png' },
@@ -36,7 +36,7 @@ const Integrations = () => {
   { name: 'n8n', logo: 'https://autorply.sa/uploads/n8n.png' },
   { name: 'GPT', logo: 'https://autorply.sa/uploads/gpt.jpeg' },
   { name: 'Phenix', logo: 'https://autorply.sa/uploads/phenix.webp' },
-  { name: 'iOS', logo: 'https://autorply.sa/uploads/ios.jpg' },
+  { name: 'iOS', logo: 'https://autorply.sa/uploads/ios.svg' },
   { name: 'Google Forms', logo: 'https://autorply.sa/uploads/google-forms.png' }
 ];
 
