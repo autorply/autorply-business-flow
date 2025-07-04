@@ -100,12 +100,12 @@ const SmartSurveys = () => {
                 <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center overflow-hidden">
                   <img 
                     src="https://autorply.sa/assets/img/logo_64.svg" 
-                    alt="Autorply" 
+                    alt="أوتوربلاي" 
                     className="w-5 h-5 object-contain"
                   />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-sm">Autorply</h3>
+                  <h3 className="font-semibold text-sm">أوتوربلاي</h3>
                   <p className="text-xs opacity-75">متصل الآن</p>
                 </div>
               </div>
@@ -115,7 +115,7 @@ const SmartSurveys = () => {
 
               {/* Autorply Badge - Better positioned and styled */}
               <div className="absolute bottom-4 left-0 right-0 text-center">
-                <p className="text-xs text-gray-500 bg-white/90 inline-block px-3 py-1 rounded-full shadow-sm">تديره Autorply</p>
+                <p className="text-xs text-gray-500 bg-white/90 inline-block px-3 py-1 rounded-full shadow-sm">تديره أوتوربلاي</p>
               </div>
             </div>
           </div>

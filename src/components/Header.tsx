@@ -24,9 +24,9 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
             <img 
-              src="/uploads/autorply.svg" 
+              src="https://autorply.sa/assets/img/logo_64.svg" 
               alt="أوتوربلاي" 
-              className="w-10 h-10 rounded-xl"
+              className="w-10 h-10"
             />
             <span className="text-2xl font-bold text-blue-600">أوتوربلاي</span>
           </Link>

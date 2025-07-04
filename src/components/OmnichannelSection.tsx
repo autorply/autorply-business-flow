@@ -86,7 +86,7 @@ const OmnichannelSection = () => {
 
       {/* Platform Icons */}
       <motion.div 
-        className="flex justify-center items-center gap-8 mb-16"
+        className="flex justify-center items-center gap-4 sm:gap-8 mb-16 flex-wrap"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -102,10 +102,10 @@ const OmnichannelSection = () => {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             whileHover={{ scale: 1.1, y: -5 }}
           >
-            <div className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 ${platform.bgColor} ${platform.color} shadow-md hover:shadow-lg`}>
+            <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-all duration-300 ${platform.bgColor} ${platform.color} shadow-md hover:shadow-lg`}>
               {platform.icon}
             </div>
-            <span className="text-sm text-gray-600 mt-2 font-medium">{platform.name}</span>
+            <span className="text-xs sm:text-sm text-gray-600 mt-2 font-medium">{platform.name}</span>
           </motion.div>
         ))}
       </motion.div>
@@ -118,79 +118,79 @@ const OmnichannelSection = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
       >
-        <div className="bg-white rounded-3xl shadow-2xl p-8 mx-4">
+        <div className="bg-white rounded-3xl shadow-2xl p-4 sm:p-8 mx-4">
           {/* Platform Interface */}
           <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl border border-gray-200 overflow-hidden">
             {/* Header with Logo */}
             <div className="bg-white border-b border-gray-200 p-4 flex items-center">
               <div className="flex items-center gap-3">
                 <img 
-                  src="/uploads/autorply.svg" 
+                  src="https://autorply.sa/assets/img/logo_64.svg" 
                   alt="أوتوربلاي" 
-                  className="w-10 h-10 rounded-xl"
+                  className="w-8 h-8 sm:w-10 sm:h-10"
                 />
                 <div>
-                  <h3 className="text-lg font-bold text-gray-800">Autorply</h3>
+                  <h3 className="text-base sm:text-lg font-bold text-gray-800">أوتوربلاي</h3>
                   <p className="text-xs text-gray-500">منصة إدارة المحادثات</p>
                 </div>
               </div>
             </div>
 
-            <div className="flex">
+            <div className="flex flex-col lg:flex-row">
               {/* Sidebar */}
-              <div className="w-64 bg-white border-r border-gray-200 p-4 min-h-[500px]">
+              <div className="w-full lg:w-64 bg-white border-r border-gray-200 p-4 min-h-[300px] lg:min-h-[500px]">
                 <div className="space-y-2">
                   <div className="flex items-center gap-3 p-3 rounded-lg bg-blue-100 text-blue-700 border-r-2 border-blue-600 cursor-pointer hover:bg-blue-200 transition-colors">
-                    <Home className="w-5 h-5" />
-                    <span className="text-sm font-medium flex-1">القائمة الرئيسية</span>
+                    <Home className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="text-xs sm:text-sm font-medium flex-1">القائمة الرئيسية</span>
                   </div>
                   <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700 cursor-pointer transition-colors">
-                    <MessageCircle className="w-5 h-5" />
-                    <span className="text-sm font-medium flex-1">المحادثات</span>
+                    <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="text-xs sm:text-sm font-medium flex-1">المحادثات</span>
                     <span className="bg-red-500 text-white text-xs rounded-full px-2 py-1">24</span>
                   </div>
                   <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700 cursor-pointer transition-colors">
-                    <Smartphone className="w-5 h-5" />
-                    <span className="text-sm font-medium flex-1">قناة واتساب</span>
+                    <Smartphone className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="text-xs sm:text-sm font-medium flex-1">قناة واتساب</span>
                     <div className="w-2 h-2 rounded-full bg-green-500" />
                   </div>
                   <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700 cursor-pointer transition-colors">
-                    <Instagram className="w-5 h-5" />
-                    <span className="text-sm font-medium flex-1">قناة انستغرام</span>
+                    <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="text-xs sm:text-sm font-medium flex-1">قناة انستغرام</span>
                     <div className="w-2 h-2 rounded-full bg-green-500" />
                   </div>
                   <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700 cursor-pointer transition-colors">
-                    <Twitter className="w-5 h-5" />
-                    <span className="text-sm font-medium flex-1">قناة تويتر</span>
+                    <Twitter className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="text-xs sm:text-sm font-medium flex-1">قناة تويتر</span>
                     <div className="w-2 h-2 rounded-full bg-green-500" />
                   </div>
                   <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700 cursor-pointer transition-colors">
-                    <Facebook className="w-5 h-5" />
-                    <span className="text-sm font-medium flex-1">قناة فيسبوك</span>
+                    <Facebook className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="text-xs sm:text-sm font-medium flex-1">قناة فيسبوك</span>
                     <div className="w-2 h-2 rounded-full bg-green-500" />
                   </div>
                   <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700 cursor-pointer transition-colors">
-                    <Send className="w-5 h-5" />
-                    <span className="text-sm font-medium flex-1">قناة تليجرام</span>
+                    <Send className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="text-xs sm:text-sm font-medium flex-1">قناة تليجرام</span>
                     <div className="w-2 h-2 rounded-full bg-green-500" />
                   </div>
-                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700 cursor-pointer transition-colors">
+                  <div className="hidden lg:flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700 cursor-pointer transition-colors">
                     <Megaphone className="w-5 h-5" />
                     <span className="text-sm font-medium flex-1">الحملات الإعلانية</span>
                   </div>
-                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700 cursor-pointer transition-colors">
+                  <div className="hidden lg:flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700 cursor-pointer transition-colors">
                     <Zap className="w-5 h-5" />
                     <span className="text-sm font-medium flex-1">الأتمتة</span>
                   </div>
-                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700 cursor-pointer transition-colors">
+                  <div className="hidden lg:flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700 cursor-pointer transition-colors">
                     <FileText className="w-5 h-5" />
                     <span className="text-sm font-medium flex-1">القوالب</span>
                   </div>
-                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700 cursor-pointer transition-colors">
+                  <div className="hidden lg:flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700 cursor-pointer transition-colors">
                     <Settings className="w-5 h-5" />
                     <span className="text-sm font-medium flex-1">الإعدادات</span>
                   </div>
-                  <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700 cursor-pointer transition-colors">
+                  <div className="hidden lg:flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700 cursor-pointer transition-colors">
                     <HelpCircle className="w-5 h-5" />
                     <span className="text-sm font-medium flex-1">المساعدة</span>
                   </div>
@@ -198,22 +198,24 @@ const OmnichannelSection = () => {
               </div>
 
               {/* Main Content Area */}
-              <div className="flex-1 p-6">
+              <div className="flex-1 p-4 sm:p-6">
                 <div className="mb-6">
-                  <h4 className="text-xl font-bold text-gray-800 mb-2">لوحة المحادثات</h4>
-                  <p className="text-gray-600">إدارة جميع المحادثات من منصة واحدة</p>
+                  <h4 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">لوحة المحادثات</h4>
+                  <p className="text-sm sm:text-base text-gray-600">إدارة جميع المحادثات من منصة واحدة</p>
                 </div>
 
                 {/* Platform Statistics */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                   {platforms.map((platform, index) => (
-                    <div key={index} className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                    <div key={index} className="bg-white rounded-xl p-3 sm:p-4 shadow-sm border border-gray-100">
                       <div className="text-center">
                         <div className={`flex justify-center items-center mb-2 ${platform.color}`}>
-                          {platform.icon}
+                          <div className="w-6 h-6 sm:w-8 sm:h-8">
+                            {platform.icon}
+                          </div>
                         </div>
-                        <p className="text-sm font-medium text-gray-700 mb-2">{platform.name}</p>
-                        <div className="text-lg font-bold text-blue-600">{Math.floor(Math.random() * 50) + 10}</div>
+                        <p className="text-xs sm:text-sm font-medium text-gray-700 mb-2">{platform.name}</p>
+                        <div className="text-sm sm:text-lg font-bold text-blue-600">{Math.floor(Math.random() * 50) + 10}</div>
                         <p className="text-xs text-gray-500">رسالة جديدة</p>
                       </div>
                     </div>
@@ -225,13 +227,13 @@ const OmnichannelSection = () => {
                   <h5 className="text-sm font-semibold text-gray-700 mb-3">المحادثات الأخيرة</h5>
                   <div className="space-y-3">
                     <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
-                      <Smartphone className="w-5 h-5 text-green-600" />
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2">
+                      <Smartphone className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
                           <p className="text-sm font-medium text-gray-800">أحمد محمد</p>
                           <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">واتساب</span>
                         </div>
-                        <p className="text-sm text-gray-600">مرحباً، أريد الاستفسار عن الخدمة</p>
+                        <p className="text-xs sm:text-sm text-gray-600 truncate">مرحباً، أريد الاستفسار عن الخدمة</p>
                       </div>
                       <div className="text-right">
                         <span className="text-xs text-gray-500">الآن</span>
@@ -239,24 +241,24 @@ const OmnichannelSection = () => {
                       </div>
                     </div>
                     <div className="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg transition-colors">
-                      <Facebook className="w-5 h-5 text-blue-600" />
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2">
+                      <Facebook className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
                           <p className="text-sm font-medium text-gray-800">سارة أحمد</p>
                           <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">فيسبوك</span>
                         </div>
-                        <p className="text-sm text-gray-600">شكراً لكم على الخدمة الممتازة</p>
+                        <p className="text-xs sm:text-sm text-gray-600 truncate">شكراً لكم على الخدمة الممتازة</p>
                       </div>
                       <span className="text-xs text-gray-500">5 دقائق</span>
                     </div>
                     <div className="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg transition-colors">
-                      <Instagram className="w-5 h-5 text-pink-600" />
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2">
+                      <Instagram className="w-4 h-4 sm:w-5 sm:h-5 text-pink-600" />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
                           <p className="text-sm font-medium text-gray-800">محمد علي</p>
                           <span className="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded">إنستغرام</span>
                         </div>
-                        <p className="text-sm text-gray-600">متى يمكنني بدء الخدمة؟</p>
+                        <p className="text-xs sm:text-sm text-gray-600 truncate">متى يمكنني بدء الخدمة؟</p>
                       </div>
                       <span className="text-xs text-gray-500">10 دقائق</span>
                     </div>

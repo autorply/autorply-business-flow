@@ -12,13 +12,13 @@ interface MetaTagsProps {
 }
 
 const MetaTags = ({
-  title = 'اوتوربلاي - WhatsApp API',
+  title = 'أوتوربلاي - WhatsApp API',
   description = 'منصة متكاملة تتيح لك التواصل مع عملائك بسهولة عبر واتساب، مع دعم كامل للردود الآلية والحملات',
   keywords = 'واتساب, WhatsApp API, الردود الآلية, التسويق الرقمي, خدمة العملاء, السعودية',
-  image = 'https://autorply.sa/uploads/autorply.svg',
+  image = 'https://autorply.sa/assets/img/logo_64.svg',
   url = 'https://autorply.sa',
   type = 'website',
-  author = 'اوتوربلاي'
+  author = 'أوتوربلاي'
 }: MetaTagsProps) => {
   return (
     <Helmet>
@@ -34,7 +34,7 @@ const MetaTags = ({
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
       <meta property="og:locale" content="ar_SA" />
-      <meta property="og:site_name" content="اوتوربلاي" />
+      <meta property="og:site_name" content="أوتوربلاي" />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
