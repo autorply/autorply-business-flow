@@ -36,7 +36,7 @@ const Integrations = () => {
   { name: 'n8n', logo: 'https://autorply.sa/uploads/n8n.png' },
   { name: 'GPT', logo: 'https://autorply.sa/uploads/gpt.jpeg' },
   { name: 'Phenix', logo: 'https://autorply.sa/uploads/phenix.webp' },
-  { name: 'iOS', logo: 'https://autorply.sa/uploads/ios.svg' },
+  { name: 'iOS', logo: 'https://autorply.sa/uploads/ios.png' },
   { name: 'Google Forms', logo: 'https://autorply.sa/uploads/google-forms.png' }
 ];
 
