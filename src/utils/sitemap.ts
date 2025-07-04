@@ -113,6 +113,12 @@ export const getSitemapUrls = (): SitemapUrl[] => {
       lastmod: currentDate,
       changefreq: 'yearly',
       priority: 0.3
+    },
+    {
+      loc: `${baseUrl}/sitemap`,
+      lastmod: currentDate,
+      changefreq: 'monthly',
+      priority: 0.4
     }
   ];
 };
