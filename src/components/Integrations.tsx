@@ -21,7 +21,7 @@ const Integrations = () => {
   { name: 'Google Translate', logo: 'https://autorply.sa/uploads/google-trans.svg' },
   { name: 'Google', logo: 'https://autorply.sa/uploads/google.svg' },
   { name: 'Gemini', logo: 'https://autorply.sa/uploads/gemini.jpg' },
-  { name: 'Daftara', logo: 'https://autorply.sa/uploads/daftara-logo.jpg' },
+  { name: 'Daftara', logo: 'https://autorply.sa/uploads/daftra-logo.jpg' },
   { name: 'ClickUp', logo: 'https://autorply.sa/uploads/clickup.png' },
   { name: 'Calendly', logo: 'https://autorply.sa/uploads/calendly.png' },
   { name: 'Aramex', logo: 'https://autorply.sa/uploads/aramx.png' },
