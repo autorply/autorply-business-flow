@@ -3,7 +3,7 @@
 <html lang="ar" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <title>أوتوربلاي - WhatsApp API</title>
     <link rel="icon" href="https://autorply.sa/assets/img/logo_64.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="https://autorply.sa/assets/img/logo_64.svg">
@@ -12,6 +12,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    
+    <!-- Prerendering optimization meta tags -->
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="theme-color" content="#2563eb" />
+    <meta name="msapplication-TileColor" content="#2563eb" />
     
     <!-- Ahrefs Analytics -->
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="rOfsZmyRZ8272MBP8cbJhA" async></script>
@@ -75,7 +81,17 @@
         background-color: #128C7E;
       }
       
-      /* Loading optimization */
+      /* Loading optimization for prerendered content */
+      .prerender-loading {
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+      
+      .prerender-loaded {
+        opacity: 1;
+      }
+      
+      /* Loading placeholder for hydration */
       .loading-placeholder {
         background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
         background-size: 200% 100%;
@@ -94,13 +110,14 @@
         padding: 0 16px;
       }
       
-      /* Hide content until fonts load to prevent FOUT */
-      .font-loading {
+      /* Hide content until hydration completes for prerendered pages */
+      [data-prerendered="true"] .hydration-content {
         visibility: hidden;
       }
       
-      .fonts-loaded .font-loading {
+      .hydration-content {
         visibility: visible;
+        transition: visibility 0.1s;
       }
     </style>
     
@@ -109,15 +126,33 @@
       rel="preload" 
       href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" 
       as="style"
-      onload="this.onload=null;this.rel='stylesheet';document.documentElement.classList.add('fonts-loaded');"
+      onload="this.onload=null;this.rel='stylesheet';"
     >
     <noscript>
       <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     </noscript>
   </head>
 
-  <body class="font-loading">
+  <body>
     <div id="root"></div>
+    
+    <!-- Prerendering detection script -->
+    <script>
+      // Detect if this is a prerendered page
+      if (typeof window !== 'undefined' && document.documentElement.getAttribute('data-prerendered') === 'true') {
+        // Add class to body for prerendered styling
+        document.body.classList.add('prerendered-page');
+        
+        // Remove prerendered attribute after hydration
+        window.addEventListener('load', function() {
+          setTimeout(function() {
+            document.documentElement.removeAttribute('data-prerendered');
+            document.body.classList.remove('prerendered-page');
+            document.body.classList.add('hydrated-page');
+          }, 100);
+        });
+      }
+    </script>
     
     <!-- Load main CSS after critical rendering -->
     <script>

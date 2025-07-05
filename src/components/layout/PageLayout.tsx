@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import MetaTags from '../seo/MetaTags';
 import StructuredData from '../seo/StructuredData';
+import PrerenderedPage from '../PrerenderedPage';
 import { useSEO } from '../../hooks/useSEO';
 
 interface PageLayoutProps {
@@ -31,9 +32,11 @@ const PageLayout = ({
 
   return (
     <HelmetProvider>
-      <MetaTags {...metaProps} />
-      <StructuredData type={structuredDataType} />
-      {children}
+      <PrerenderedPage>
+        <MetaTags {...metaProps} />
+        <StructuredData type={structuredDataType} />
+        {children}
+      </PrerenderedPage>
     </HelmetProvider>
   );
 };

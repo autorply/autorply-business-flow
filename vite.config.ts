@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
+import { PrerenderSPAPlugin } from 'vite-plugin-prerender-spa';
 import { generateSitemap, getSitemapUrls } from "./src/utils/sitemap";
 
 // Crypto polyfill for Node.js build environment
@@ -36,6 +37,26 @@ const createCryptoPolyfill = () => {
 
 // Initialize crypto polyfill
 createCryptoPolyfill();
+
+// Define routes to prerender
+const routesToPrerender = [
+  '/',
+  '/services',
+  '/pricing',
+  '/about-us',
+  '/contact',
+  '/faq',
+  '/vision',
+  '/success-story',
+  '/campaign',
+  '/technology',
+  '/tech-partners',
+  '/business-partners',
+  '/billing',
+  '/privacy-policy',
+  '/terms-of-service',
+  '/sitemap'
+];
 
 // Generate sitemap during build
 const sitemapPlugin = () => {
@@ -77,6 +98,28 @@ export default defineConfig(({ mode }) => ({
     react(),
     mode === 'development' && componentTagger(),
     mode === 'production' && sitemapPlugin(),
+    mode === 'production' && PrerenderSPAPlugin({
+      staticDir: path.join(__dirname, 'dist'),
+      routes: routesToPrerender,
+      renderer: '@prerenderer/renderer-puppeteer',
+      rendererOptions: {
+        headless: true,
+        renderAfterTime: 2000,
+        renderAfterElementExists: '#root',
+        skipThirdPartyRequests: true,
+        ignoreHTTPSErrors: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+      },
+      postProcess: (renderedRoute: any) => {
+        // Clean up the HTML
+        renderedRoute.html = renderedRoute.html
+          .replace(/data-reactroot=""/g, '')
+          .replace(/data-react-helmet="true"/g, '')
+          .replace(/<!--[\s\S]*?-->/g, ''); // Remove comments
+        
+        return renderedRoute;
+      }
+    })
   ].filter(Boolean),
   resolve: {
     alias: {

@@ -1,5 +1,5 @@
 
-import { Helmet } from 'react-helmet-async';
+import PrerenderedMetaTags from './PrerenderedMetaTags';
 
 interface MetaTagsProps {
   title?: string;
@@ -11,42 +11,8 @@ interface MetaTagsProps {
   author?: string;
 }
 
-const MetaTags = ({
-  title = 'أوتوربلاي - WhatsApp API',
-  description = 'منصة متكاملة تتيح لك التواصل مع عملائك بسهولة عبر واتساب، مع دعم كامل للردود الآلية والحملات',
-  keywords = 'واتساب, WhatsApp API, الردود الآلية, التسويق الرقمي, خدمة العملاء, السعودية',
-  image = 'https://autorply.sa/assets/img/logo_64.svg',
-  url = 'https://autorply.sa',
-  type = 'website',
-  author = 'أوتوربلاي'
-}: MetaTagsProps) => {
-  return (
-    <Helmet>
-      <title>{title}</title>
-      <meta name="description" content={description} />
-      <meta name="keywords" content={keywords} />
-      <meta name="author" content={author} />
-      
-      {/* Open Graph / Facebook */}
-      <meta property="og:type" content={type} />
-      <meta property="og:url" content={url} />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
-      <meta property="og:locale" content="ar_SA" />
-      <meta property="og:site_name" content="أوتوربلاي" />
-
-      {/* Twitter */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:url" content={url} />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
-      
-      {/* Canonical URL */}
-      <link rel="canonical" href={url} />
-    </Helmet>
-  );
+const MetaTags = (props: MetaTagsProps) => {
+  return <PrerenderedMetaTags {...props} />;
 };
 
 export default MetaTags;
