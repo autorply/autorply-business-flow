@@ -13,6 +13,7 @@ interface PageLayoutProps {
     description?: string;
     keywords?: string;
     image?: string;
+    url?: string;
   };
 }
 
