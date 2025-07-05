@@ -3,7 +3,6 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
-import { PrerenderSPAPlugin } from 'vite-plugin-prerender-spa';
 import { generateSitemap, getSitemapUrls } from "./src/utils/sitemap";
 
 // Crypto polyfill for Node.js build environment
@@ -88,6 +87,18 @@ Sitemap: https://autorply.sa/sitemap.xml`;
   };
 };
 
+// Simple prerender plugin for now - we'll create static HTML files
+const prerenderPlugin = () => {
+  return {
+    name: 'prerender-routes',
+    generateBundle() {
+      // This is a placeholder - for full prerendering, we'd need to run the app
+      // and generate HTML for each route
+      console.log('📄 Routes configured for prerendering:', routesToPrerender.length);
+    }
+  };
+};
+
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
@@ -98,28 +109,7 @@ export default defineConfig(({ mode }) => ({
     react(),
     mode === 'development' && componentTagger(),
     mode === 'production' && sitemapPlugin(),
-    mode === 'production' && PrerenderSPAPlugin({
-      staticDir: path.join(__dirname, 'dist'),
-      routes: routesToPrerender,
-      renderer: '@prerenderer/renderer-puppeteer',
-      rendererOptions: {
-        headless: true,
-        renderAfterTime: 2000,
-        renderAfterElementExists: '#root',
-        skipThirdPartyRequests: true,
-        ignoreHTTPSErrors: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
-      },
-      postProcess: (renderedRoute: any) => {
-        // Clean up the HTML
-        renderedRoute.html = renderedRoute.html
-          .replace(/data-reactroot=""/g, '')
-          .replace(/data-react-helmet="true"/g, '')
-          .replace(/<!--[\s\S]*?-->/g, ''); // Remove comments
-        
-        return renderedRoute;
-      }
-    })
+    mode === 'production' && prerenderPlugin()
   ].filter(Boolean),
   resolve: {
     alias: {

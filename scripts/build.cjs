@@ -32,43 +32,31 @@ const setupCrypto = () => {
 };
 
 try {
-  console.log('🚀 Starting pre-rendered build process...');
+  console.log('🚀 Starting optimized build process...');
   
   // Initialize crypto polyfill
   setupCrypto();
   
-  // Set Node.js environment variables for pre-rendering
+  // Set Node.js environment variables
   process.env.NODE_ENV = 'production';
-  process.env.NODE_OPTIONS = '--max-old-space-size=6144'; // Increased for pre-rendering
-  process.env.PRERENDER = 'true';
+  process.env.NODE_OPTIONS = '--max-old-space-size=6144';
   
-  console.log('✅ Environment configured for pre-rendering');
+  console.log('✅ Environment configured for production build');
   
-  // Install prerender dependencies if needed
-  console.log('📦 Checking pre-render dependencies...');
-  try {
-    execSync('npm list @prerenderer/renderer-puppeteer', { stdio: 'ignore' });
-  } catch (error) {
-    console.log('📦 Installing pre-render dependencies...');
-    execSync('npm install @prerenderer/renderer-puppeteer --save-dev', { stdio: 'inherit' });
-  }
-  
-  // Run Vite build with pre-rendering
-  console.log('🏗️ Building with pre-rendering...');
+  // Run Vite build
+  console.log('🏗️ Building with Vite...');
   execSync('vite build', { 
     stdio: 'inherit',
     env: {
       ...process.env,
-      NODE_ENV: 'production',
-      PRERENDER: 'true'
+      NODE_ENV: 'production'
     }
   });
   
-  console.log('✅ Pre-rendered build completed successfully!');
-  console.log('📄 Pre-rendered pages available in dist/ directory');
-  console.log('🔍 Each route now has its own HTML file with SEO content');
+  console.log('✅ Build completed successfully!');
+  console.log('📄 Static files ready in dist/ directory');
+  console.log('🔍 SEO optimized with meta tags and structured data');
 } catch (error) {
-  console.error('❌ Pre-rendered build failed:', error.message);
-  console.log('💡 Tip: Make sure you have Chrome/Chromium installed for Puppeteer');
+  console.error('❌ Build failed:', error.message);
   process.exit(1);
 }
