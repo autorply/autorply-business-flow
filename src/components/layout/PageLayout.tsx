@@ -9,6 +9,7 @@ import { useSEO } from '../../hooks/useSEO';
 interface PageLayoutProps {
   children: ReactNode;
   structuredDataType?: 'Organization' | 'WebSite' | 'Article' | 'Product' | 'Service';
+  includeOrganization?: boolean;
   customMetaTags?: {
     title?: string;
     description?: string;
@@ -21,6 +22,7 @@ interface PageLayoutProps {
 const PageLayout = ({ 
   children, 
   structuredDataType = 'Organization',
+  includeOrganization = false,
   customMetaTags 
 }: PageLayoutProps) => {
   const seoData = useSEO();
@@ -34,7 +36,13 @@ const PageLayout = ({
     <HelmetProvider>
       <PrerenderedPage>
         <MetaTags {...metaProps} />
+        
+        {/* Include both Organization and the specified type for homepage */}
+        {includeOrganization && structuredDataType !== 'Organization' && (
+          <StructuredData type="Organization" />
+        )}
         <StructuredData type={structuredDataType} />
+        
         {children}
       </PrerenderedPage>
     </HelmetProvider>

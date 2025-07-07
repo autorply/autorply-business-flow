@@ -20,7 +20,7 @@ const StructuredData = ({ type = 'Organization', data }: StructuredDataProps) =>
           name: "اوتوربلاي",
           alternateName: "Autorply",
           url: "https://autorply.sa",
-          logo: "https://autorply.sa/uploads/autorply.svg",
+          logo: "https://autorply.sa/assets/img/logo_64.svg",
           description: "منصة متكاملة تتيح لك التواصل مع عملائك بسهولة عبر واتساب، مع دعم كامل للردود الآلية والحملات",
           address: {
             "@type": "PostalAddress",
@@ -29,11 +29,15 @@ const StructuredData = ({ type = 'Organization', data }: StructuredDataProps) =>
           contactPoint: {
             "@type": "ContactPoint",
             telephone: "+966594959443",
-            contactType: "customer service"
+            contactType: "customer support",
+            areaServed: "SA",
+            availableLanguage: ["Arabic", "English"]
           },
           sameAs: [
-            "https://twitter.com/autorply",
-            "https://linkedin.com/company/autorply"
+            "https://www.tiktok.com/@autorply",
+            "https://x.com/Autorplycom",
+            "https://www.linkedin.com/company/autorply",
+            "https://wa.me/autorply"
           ],
           ...data
         };

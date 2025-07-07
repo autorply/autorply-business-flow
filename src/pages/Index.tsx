@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import PageLayout from '../components/layout/PageLayout';
 import Header from '../components/Header';
@@ -24,6 +25,7 @@ const Index = () => {
   return (
     <PageLayout 
       structuredDataType="WebSite"
+      includeOrganization={true}
       customMetaTags={{
         title: 'اوتوربلاي - WhatsApp API | منصة واتساب الأعمال الرائدة في السعودية',
         description: 'منصة متكاملة تتيح لك التواصل مع عملائك بسهولة عبر واتساب، مع دعم كامل للردود الآلية والحملات التسويقية. شريك Meta المعتمد.',
