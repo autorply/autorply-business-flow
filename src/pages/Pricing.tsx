@@ -11,6 +11,7 @@ const Pricing = () => {
     {
       title: "باقة Start",
       price: "99 ريال / شهريًا",
+      link: "https://store.autorply.sa/ar/ezvRAR",
       features: [
         "شات بوت تلقائي",
         "ذكاء اصطناعي محدود للردود (أساسي)",
@@ -27,6 +28,7 @@ const Pricing = () => {
     {
       title: "باقة أعمال",
       price: "199 ريال / شهريًا",
+      link: "https://store.autorply.sa/ar/WaYGVV",
       features: [
         "شات بوت تلقائي",
         "ذكاء اصطناعي للردود",
@@ -48,6 +50,7 @@ const Pricing = () => {
     {
       title: "باقة احترافية",
       price: "299 ريال / شهريًا",
+      link: "https://store.autorply.sa/ar/ABByBdY",
       features: [
         "شات بوت تلقائي",
         "ذكاء اصطناعي متقدم",
@@ -61,7 +64,7 @@ const Pricing = () => {
         "تحويل المحادثات تلقائي على الفريق",
         "تقارير وتحليلات متقدمة",
         "تصدير المشتركين",
-        "دعم فني مباشر",
+        "دعم فني",
         "دعم API متكامل"
       ],
       delay: 0.2
@@ -69,6 +72,7 @@ const Pricing = () => {
     {
       title: "باقة Enterprise",
       price: "حسب الطلب",
+      link: "https://wa.me/966594959443",
       features: [
         "شات بوت احترافي متقدم",
         "ذكاء اصطناعي بدون حدود",
@@ -81,7 +85,7 @@ const Pricing = () => {
         "تحويل المحادثات تلقائي على الفريق",
         "تصدير وتحليل بيانات المشتركين",
         "تصدير المشتركين",
-        "دعم فني مباشر",
+        "دعم فني",
         "تكامل API متقدم",
         "تخصيص شامل حسب احتياج النشاط التجاري"
       ],
@@ -150,7 +154,9 @@ const Pricing = () => {
                   </div>
                   
                   <motion.a 
-                    href="#" 
+                    href={plan.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-block bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 text-white py-3 px-6 rounded-full shadow-md hover:shadow-lg transition-all duration-300 w-full text-center font-medium"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}

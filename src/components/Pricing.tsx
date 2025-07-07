@@ -7,6 +7,7 @@ const Pricing = memo(() => {
     {
       title: "باقة Start",
       price: "99 ريال / شهريًا",
+      link: "https://store.autorply.sa/ar/ezvRAR",
       features: [
         "شات بوت تلقائي",
         "ذكاء اصطناعي محدود (أساسي)",
@@ -23,6 +24,7 @@ const Pricing = memo(() => {
     {
       title: "باقة أعمال",
       price: "199 ريال / شهريًا",
+      link: "https://store.autorply.sa/ar/WaYGVV",
       features: [
         "شات بوت تلقائي",
         "ذكاء اصطناعي للردود",
@@ -45,6 +47,7 @@ const Pricing = memo(() => {
     {
       title: "باقة احترافية",
       price: "299 ريال / شهريًا",
+      link: "https://store.autorply.sa/ar/ABByBdY",
       features: [
         "شات بوت تلقائي",
         "ذكاء اصطناعي متقدم ",
@@ -58,7 +61,7 @@ const Pricing = memo(() => {
         "تحويل المحادثات تلقائي الى الفريق",
         "تقارير وتحليلات ",
         "تصدير المشتركين",
-        "دعم فني مباشر وسريع",
+        "دعم فني وسريع",
         "دعم API متكامل"
       ],
       delay: 0.2
@@ -66,6 +69,7 @@ const Pricing = memo(() => {
     {
       title: "باقة Enterprise",
       price: "حسب الطلب",
+      link: "https://wa.me/966594959443",
       features: [
         "شات بوت احترافي متقدم",
         "ذكاء اصطناعي بدون حدود",
@@ -78,7 +82,7 @@ const Pricing = memo(() => {
         "تحويل المحادثات تلقائي على الفريق",
         "تصدير وتحليل بيانات المشتركين",
         "تصدير المشتركين",
-        "دعم فني مباشر",
+        "دعم فني",
         "تكامل API متقدم",
         "تخصيص شامل حسب احتياج النشاط"
       ],
@@ -133,7 +137,9 @@ const Pricing = memo(() => {
             </div>
             
             <motion.a 
-              href="#" 
+              href={plan.link}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 text-white py-2.5 px-4 rounded-full shadow-md hover:shadow-lg transition-all duration-300 w-full text-center text-sm font-medium"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
