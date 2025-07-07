@@ -24,7 +24,13 @@ const StructuredData = ({ type = 'Organization', data }: StructuredDataProps) =>
           description: "منصة متكاملة تتيح لك التواصل مع عملائك بسهولة عبر واتساب، مع دعم كامل للردود الآلية والحملات",
           address: {
             "@type": "PostalAddress",
-            addressCountry: "SA"
+            streetAddress: "7541 يحيى الأنصاري، 3505",
+            addressLocality: "جدة",
+            postalCode: "23831",
+            addressCountry: {
+              "@type": "Country",
+              name: "SA"
+            }
           },
           contactPoint: {
             "@type": "ContactPoint",
