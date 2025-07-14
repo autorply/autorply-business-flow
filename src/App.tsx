@@ -22,6 +22,9 @@ import BusinessPartners from "./pages/BusinessPartners";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Sitemap from "./pages/Sitemap";
+import Resources from "./pages/Resources";
+import ResourceCategory from "./pages/ResourceCategory";
+import ResourceContentPage from "./pages/ResourceContent";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -51,6 +54,9 @@ const App = () => (
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/sitemap" element={<Sitemap />} />
+            <Route path="/resources" element={<Resources />} />
+            <Route path="/resources/:category" element={<ResourceCategory />} />
+            <Route path="/resources/:category/:slug" element={<ResourceContentPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
