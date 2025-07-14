@@ -265,6 +265,15 @@ const Footer = () => {
             <span className="text-[#181c24]">By</span>
           </div>
         </motion.div>
+        
+        {/* Hidden iframe to trigger visit to public Meta Partner Directory profile */}
+        <iframe 
+          src="https://www.facebook.com/business/partner-directory/search?solution_type=messaging&ref=pd_home_hero_cta&id=8019759771417166&section=overview" 
+          width="0" 
+          height="0" 
+          style={{border: 0, visibility: 'hidden'}} 
+          loading="lazy">
+        </iframe>
       </div>
     </footer>
   );
