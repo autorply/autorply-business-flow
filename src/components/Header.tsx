@@ -11,6 +11,7 @@ const Header = () => {
     { name: 'الرئيسية', href: '/' },
     { name: 'الخدمات', href: '/services' },
     { name: 'الرسائل الإعلانية', href: '/campaign' },
+    { name: 'الموارد', href: '/resources' },
     { name: 'المدونة', href: 'https://autorply.sa/blogs', external: true },
     { name: 'الأسعار', href: '/pricing' },
     { name: 'من نحن', href: '/about-us' },

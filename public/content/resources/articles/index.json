@@ -1,0 +1,15 @@
+[
+  {
+    "title": "كيفية استخدام واتساب API للأعمال",
+    "description": "دليل شامل للبدء في استخدام واتساب API لتطوير أعمالك وأتمتة المحادثات مع العملاء",
+    "author": "فريق اوتوربلاي",
+    "date": "2024-01-15",
+    "category": "articles",
+    "tags": ["واتساب API", "أتمتة", "أعمال"],
+    "image": "/uploads/api.png",
+    "slug": "whatsapp-api-guide",
+    "readTime": "5 دقائق",
+    "featured": true,
+    "content": "article-1.md"
+  }
+]

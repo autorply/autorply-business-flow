@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Search, Filter } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface Resource {
   title: string;
@@ -48,7 +49,7 @@ const ResourcesList = ({ category }: ResourcesListProps) => {
 
       for (const cat of categories) {
         try {
-          const response = await fetch(`/src/content/resources/${cat}/index.json`);
+          const response = await fetch(`/content/resources/${cat}/index.json`);
           if (response.ok) {
             const categoryResources = await response.json();
             allResources.push(...categoryResources);
@@ -149,6 +150,50 @@ const ResourcesList = ({ category }: ResourcesListProps) => {
         <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
           اكتشف مجموعة متنوعة من الموارد المفيدة لتطوير أعمالك باستخدام واتساب API
         </p>
+      </div>
+
+      {/* Category Navigation */}
+      <div className="flex flex-wrap gap-4 justify-center">
+        <Link 
+          to="/resources" 
+          className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+            !category 
+              ? 'bg-primary text-primary-foreground' 
+              : 'bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground'
+          }`}
+        >
+          📚 جميع الموارد
+        </Link>
+        <Link 
+          to="/resources?category=articles" 
+          className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+            category === 'articles' 
+              ? 'bg-primary text-primary-foreground' 
+              : 'bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground'
+          }`}
+        >
+          📄 المقالات
+        </Link>
+        <Link 
+          to="/resources?category=tutorials" 
+          className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+            category === 'tutorials' 
+              ? 'bg-primary text-primary-foreground' 
+              : 'bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground'
+          }`}
+        >
+          🎓 الشروحات
+        </Link>
+        <Link 
+          to="/resources?category=comparisons" 
+          className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+            category === 'comparisons' 
+              ? 'bg-primary text-primary-foreground' 
+              : 'bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground'
+          }`}
+        >
+          ⚖️ المقارنات
+        </Link>
       </div>
 
       {/* Search and Filters */}

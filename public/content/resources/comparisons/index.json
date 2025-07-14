@@ -1,0 +1,15 @@
+[
+  {
+    "title": "مقارنة بين واتساب API وواتساب العادي للأعمال",
+    "description": "مقارنة شاملة ومفصلة بين واتساب API وواتساب العادي لمساعدتك في اختيار الحل الأنسب لأعمالك",
+    "author": "فريق اوتوربلاي",
+    "date": "2024-01-25",
+    "category": "comparisons",
+    "tags": ["مقارنة", "واتساب API", "أعمال"],
+    "image": "/uploads/whatsapp.png",
+    "slug": "whatsapp-api-vs-regular",
+    "readTime": "8 دقائق",
+    "featured": true,
+    "content": "comparison-1.md"
+  }
+]

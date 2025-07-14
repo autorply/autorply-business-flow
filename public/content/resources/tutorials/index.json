@@ -1,0 +1,16 @@
+[
+  {
+    "title": "إنشاء شات بوت واتساب متقدم",
+    "description": "تدريب عملي خطوة بخطوة لإنشاء شات بوت واتساب ذكي يمكنه التعامل مع استفسارات العملاء",
+    "author": "فريق اوتوربلاي",
+    "date": "2024-01-20",
+    "category": "tutorials",
+    "tags": ["شات بوت", "تدريب", "واتساب"],
+    "image": "/uploads/autorply.png",
+    "slug": "advanced-chatbot-tutorial",
+    "readTime": "15 دقيقة",
+    "difficulty": "متوسط",
+    "featured": true,
+    "content": "tutorial-1.md"
+  }
+]

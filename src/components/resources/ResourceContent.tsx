@@ -40,7 +40,7 @@ const ResourceContent = () => {
 
     try {
       // Load resource metadata
-      const indexResponse = await fetch(`/src/content/resources/${category}/index.json`);
+      const indexResponse = await fetch(`/content/resources/${category}/index.json`);
       if (!indexResponse.ok) throw new Error('Resource not found');
       
       const resources: Resource[] = await indexResponse.json();
@@ -53,7 +53,7 @@ const ResourceContent = () => {
       setResource(foundResource);
 
       // Load markdown content
-      const contentResponse = await fetch(`/src/content/resources/${category}/${foundResource.content}`);
+      const contentResponse = await fetch(`/content/resources/${category}/${foundResource.content}`);
       if (!contentResponse.ok) throw new Error('Content not found');
       
       const markdownContent = await contentResponse.text();
@@ -169,14 +169,25 @@ const ResourceContent = () => {
       <div className="max-w-4xl mx-auto">
         {/* Breadcrumb */}
         <nav className="mb-8">
-          <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-            <Link to="/resources" className="hover:text-primary">الموارد</Link>
+          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
+            <Link to="/" className="hover:text-primary transition-colors">الرئيسية</Link>
             <span>/</span>
-            <Link to={`/resources/${category}`} className="hover:text-primary">
+            <Link to="/resources" className="hover:text-primary transition-colors">الموارد</Link>
+            <span>/</span>
+            <Link to={`/resources?category=${category}`} className="hover:text-primary transition-colors">
               {getCategoryName(category!)}
             </Link>
             <span>/</span>
-            <span className="text-foreground">{resource.title}</span>
+            <span className="text-foreground font-medium">{resource.title}</span>
+          </div>
+          
+          <div className="mb-6">
+            <Link 
+              to="/resources" 
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              ← العودة إلى الموارد
+            </Link>
           </div>
         </nav>
 
@@ -266,27 +277,64 @@ const ResourceContent = () => {
           </CardContent>
         </Card>
 
-        {/* CTA */}
-        <Card className="bg-primary/5 border-primary/20">
-          <CardContent className="p-8 text-center">
-            <h3 className="text-2xl font-bold mb-4">هل أعجبك هذا المحتوى؟</h3>
-            <p className="text-muted-foreground mb-6">
-              اكتشف المزيد من الموارد المفيدة لتطوير أعمالك
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <Link to="/resources">
-                <Button variant="outline">
-                  تصفح المزيد من الموارد
-                </Button>
-              </Link>
-              <Link to="/contact">
-                <Button>
-                  تواصل معنا
-                </Button>
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
+        {/* Navigation and Related Content */}
+        <div className="space-y-8">
+          {/* Category Navigation */}
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Link 
+              to="/resources?category=articles" 
+              className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+                category === 'articles' 
+                  ? 'bg-primary text-primary-foreground' 
+                  : 'bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              📄 المقالات
+            </Link>
+            <Link 
+              to="/resources?category=tutorials" 
+              className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+                category === 'tutorials' 
+                  ? 'bg-primary text-primary-foreground' 
+                  : 'bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              🎓 الشروحات
+            </Link>
+            <Link 
+              to="/resources?category=comparisons" 
+              className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+                category === 'comparisons' 
+                  ? 'bg-primary text-primary-foreground' 
+                  : 'bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              ⚖️ المقارنات
+            </Link>
+          </div>
+
+          {/* CTA */}
+          <Card className="bg-primary/5 border-primary/20">
+            <CardContent className="p-8 text-center">
+              <h3 className="text-2xl font-bold mb-4">جاهز لتطوير أعمالك مع واتساب API؟</h3>
+              <p className="text-muted-foreground mb-6">
+                احصل على استشارة مجانية من خبرائنا واكتشف كيف يمكن لحلول اوتوربلاي تحويل تجربة عملائك
+              </p>
+              <div className="flex flex-wrap gap-4 justify-center">
+                <Link to="/contact">
+                  <Button>
+                    احجز استشارة مجانية
+                  </Button>
+                </Link>
+                <Link to="/resources">
+                  <Button variant="outline">
+                    تصفح المزيد من الموارد
+                  </Button>
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </>
   );
