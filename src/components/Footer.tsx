@@ -43,7 +43,7 @@ const footerSections = [
   {
     title: 'الأسعار والباقات',
     links: [
-      { label: 'جميع الباقات', href: '/pricing' },
+      { label: 'جميع الباقات', href: 'https://mahally.com/stores/1625912801/', external: true },
       { label: 'الباقة المجانية', href: '/pricing' },
       { label: 'الباقة المتقدمة', href: '/pricing' },
       { label: 'الباقة الإحترافية', href: '/pricing' }
