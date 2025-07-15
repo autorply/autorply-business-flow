@@ -113,7 +113,7 @@ const ResourceCard = ({
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <Avatar className="w-6 h-6">
-                <AvatarImage src={getAuthorAvatar(author)} alt={author} />
+                <AvatarImage src={getAuthorAvatar(author, title)} alt={author} />
                 <AvatarFallback>{author.charAt(0)}</AvatarFallback>
               </Avatar>
               <span>{author}</span>
