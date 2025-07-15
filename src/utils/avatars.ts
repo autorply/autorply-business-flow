@@ -13,9 +13,18 @@ const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6, avatar7, 
 
 /**
  * Get a consistent avatar for an author based on their name
+ * For "فريق اوتوربلاي", uses different avatars to show team diversity
  */
 export const getAuthorAvatar = (authorName: string): string => {
-  // Create a simple hash from the author name
+  // For "فريق اوتوربلاي", cycle through different avatars based on timestamp or other factor
+  if (authorName === "فريق اوتوربلاي") {
+    // Use current timestamp to get a pseudo-random but consistent avatar for each article
+    const now = Date.now();
+    const index = Math.floor((now / 86400000)) % avatars.length; // Changes daily
+    return avatars[index];
+  }
+  
+  // Create a simple hash from the author name for other authors
   let hash = 0;
   for (let i = 0; i < authorName.length; i++) {
     const char = authorName.charCodeAt(i);

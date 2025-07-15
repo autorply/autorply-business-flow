@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Calendar, Clock, User, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { getAuthorAvatar } from "@/utils/avatars";
-import { formatHijriDate } from "@/utils/hijriDate";
+import { format, parseISO } from "date-fns";
 
 interface ResourceCardProps {
   title: string;
@@ -121,7 +121,7 @@ const ResourceCard = ({
             
             <div className="flex items-center gap-1">
               <Calendar className="w-4 h-4" />
-              <span>{formatHijriDate(new Date(date))}</span>
+              <span>{format(parseISO(date), 'dd/MM/yyyy')}</span>
             </div>
           </div>
           
