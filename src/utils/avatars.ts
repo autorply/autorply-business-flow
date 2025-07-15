@@ -1,14 +1,14 @@
-// Avatar placeholder URLs for different authors
+// Local avatar images for different authors
 const avatars = [
-  "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=150&h=150&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=150&h=150&fit=crop&crop=face", 
-  "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=150&h=150&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=150&h=150&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1501286353178-1ec881214838?w=150&h=150&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face"
+  "/src/assets/avatars/avatar-1.jpg",
+  "/src/assets/avatars/avatar-2.jpg", 
+  "/src/assets/avatars/avatar-3.jpg",
+  "/src/assets/avatars/avatar-4.jpg",
+  "/src/assets/avatars/avatar-5.jpg",
+  "/src/assets/avatars/avatar-6.jpg",
+  "/src/assets/avatars/avatar-7.jpg",
+  "/src/assets/avatars/avatar-8.jpg",
+  "/src/assets/avatars/avatar-9.jpg"
 ];
 
 /**
