@@ -1,7 +1,10 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Calendar, Clock, User, Star } from "lucide-react";
 import { Link } from "react-router-dom";
+import { getAuthorAvatar } from "@/utils/avatars";
+import { formatHijriDate } from "@/utils/hijriDate";
 
 interface ResourceCardProps {
   title: string;
@@ -60,16 +63,16 @@ const ResourceCard = ({
       )}
       
       {image && (
-        <div className="h-48 overflow-hidden">
+        <div className="h-48 overflow-hidden bg-muted">
           <img 
             src={image} 
             alt={title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
           />
         </div>
       )}
       
-      <CardHeader className="pb-3">
+      <CardHeader className="pb-3 mt-4">
         <div className="flex items-center justify-between mb-2">
           <Badge className={getCategoryColor(category)}>
             {getCategoryName(category)}
@@ -108,14 +111,17 @@ const ResourceCard = ({
         
         <div className="flex items-center justify-between text-sm text-muted-foreground">
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-1">
-              <User className="w-4 h-4" />
+            <div className="flex items-center gap-2">
+              <Avatar className="w-6 h-6">
+                <AvatarImage src={getAuthorAvatar(author)} alt={author} />
+                <AvatarFallback>{author.charAt(0)}</AvatarFallback>
+              </Avatar>
               <span>{author}</span>
             </div>
             
             <div className="flex items-center gap-1">
               <Calendar className="w-4 h-4" />
-              <span>{new Date(date).toLocaleDateString('ar-SA')}</span>
+              <span>{formatHijriDate(new Date(date))}</span>
             </div>
           </div>
           

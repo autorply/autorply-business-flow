@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Search, Filter } from "lucide-react";
 import { Link } from "react-router-dom";
+import { convertToHijri } from "@/utils/hijriDate";
 
 interface Resource {
   title: string;
@@ -59,11 +60,19 @@ const ResourcesList = ({ category }: ResourcesListProps) => {
         }
       }
 
-      // Sort by featured first, then by date
+      // Sort by featured first, then by Hijri date
       allResources.sort((a, b) => {
         if (a.featured && !b.featured) return -1;
         if (!a.featured && b.featured) return 1;
-        return new Date(b.date).getTime() - new Date(a.date).getTime();
+        
+        // Convert to Hijri for comparison
+        const hijriA = convertToHijri(new Date(a.date));
+        const hijriB = convertToHijri(new Date(b.date));
+        
+        // Compare by year, then month, then day
+        if (hijriB.year !== hijriA.year) return hijriB.year - hijriA.year;
+        if (hijriB.month !== hijriA.month) return hijriB.month - hijriA.month;
+        return hijriB.day - hijriA.day;
       });
 
       setResources(allResources);
