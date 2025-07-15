@@ -1,14 +1,12 @@
-// Local avatar images for different authors
+// Local team images for different team members
 const avatars = [
-  "/src/assets/avatars/avatar-1.jpg",
-  "/src/assets/avatars/avatar-2.jpg", 
-  "/src/assets/avatars/avatar-3.jpg",
-  "/src/assets/avatars/avatar-4.jpg",
-  "/src/assets/avatars/avatar-5.jpg",
-  "/src/assets/avatars/avatar-6.jpg",
-  "/src/assets/avatars/avatar-7.jpg",
-  "/src/assets/avatars/avatar-8.jpg",
-  "/src/assets/avatars/avatar-9.jpg"
+  "/src/assets/teams/team1.png",
+  "/src/assets/teams/team2.png", 
+  "/src/assets/teams/team3.png",
+  "/src/assets/teams/team5.png",
+  "/src/assets/teams/Team6.png",
+  "/src/assets/teams/Team8.png",
+  "/src/assets/teams/Team11.png"
 ];
 
 /**
