@@ -1,11 +1,11 @@
 // Import team images
-import team1 from "@/assets/teams/team1.png";
-import team2 from "@/assets/teams/team2.png";
-import team3 from "@/assets/teams/team3.png";
-import team5 from "@/assets/teams/team5.png";
-import team6 from "@/assets/teams/Team6.png";
-import team8 from "@/assets/teams/Team8.png";
-import team11 from "@/assets/teams/Team11.png";
+import team1 from "../assets/teams/team1.png";
+import team2 from "../assets/teams/team2.png";
+import team3 from "../assets/teams/team3.png";
+import team5 from "../assets/teams/team5.png";
+import team6 from "../assets/teams/Team6.png";
+import team8 from "../assets/teams/Team8.png";
+import team11 from "../assets/teams/Team11.png";
 
 // Local team images for different team members
 const avatars = [
