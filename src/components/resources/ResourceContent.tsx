@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, Clock, User, ArrowRight, Share2, BookOpen } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import { format, parseISO } from "date-fns";
 
 interface Resource {
   title: string;
@@ -235,7 +236,7 @@ const ResourceContent = () => {
 
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
-                <span>16/07/2025</span>
+                <span>{format(parseISO(resource.date), 'dd/MM/yyyy')}</span>
               </div>
 
               {resource.readTime && (
