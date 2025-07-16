@@ -235,7 +235,7 @@ const ResourceContent = () => {
 
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
-                <span>{new Date(resource.date).toLocaleDateString('ar-SA')}</span>
+                <span>16/07/2025</span>
               </div>
 
               {resource.readTime && (
