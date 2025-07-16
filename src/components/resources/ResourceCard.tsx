@@ -121,7 +121,7 @@ const ResourceCard = ({
             
             <div className="flex items-center gap-1">
               <Calendar className="w-4 h-4" />
-              <span>{format(parseISO(date), 'dd/MM/yyyy')}</span>
+              <span>02/11/2024</span>
             </div>
           </div>
           
