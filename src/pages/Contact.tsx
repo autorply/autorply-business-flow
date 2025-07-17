@@ -33,7 +33,7 @@ const Contact = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://thyzkqqfkgxudynxfpay.supabase.co/functions/v1/send-contact-email', {
+      const response = await fetch('https://thyzkqqfkgxudynxfpay.supabase.co/functions/v1/send-contact-email-v2', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
