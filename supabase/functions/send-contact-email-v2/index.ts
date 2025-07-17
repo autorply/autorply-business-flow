@@ -14,9 +14,12 @@ interface ContactFormData {
   phone: string;
   subject: string;
   message: string;
+  timestamp?: string;
+  source?: string;
 }
 
 const handler = async (req: Request): Promise<Response> => {
+  console.log("🚀🚀🚀 USING FIXED V2 FUNCTION - CACHE SOLVED! 🚀🚀🚀");
   console.log("=== بداية معالجة طلب إرسال البريد الإلكتروني ===");
   
   if (req.method === "OPTIONS") {

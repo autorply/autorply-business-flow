@@ -33,13 +33,24 @@ const Contact = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://thyzkqqfkgxudynxfpay.supabase.co/functions/v1/send-contact-email-v2', {
+      // إضافة timestamp فريد لتجنب الـ cache
+      const requestData = {
+        ...formData,
+        timestamp: new Date().toISOString(),
+        source: 'contact-form-v2'
+      };
+
+      console.log('Sending to FIXED function v2:', requestData);
+
+      const response = await fetch(`https://thyzkqqfkgxudynxfpay.supabase.co/functions/v1/send-contact-email-v2?t=${Date.now()}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRoeXprcXFma2d4dWR5bnhmcGF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTAwMTc4NjMsImV4cCI6MjA2NTU5Mzg2M30.l1CmnxnEVu4CkMQNQUhhkiyb2kCVXXVSFuIe99FAoFk`,
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(requestData),
       });
 
       const result = await response.json();
