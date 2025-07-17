@@ -17,7 +17,6 @@ interface ContactFormData {
 }
 
 const handler = async (req: Request): Promise<Response> => {
-  // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -35,7 +34,6 @@ const handler = async (req: Request): Promise<Response> => {
 
     const { name, email, phone, subject, message } = formData;
 
-    // Validate required fields
     if (!name || !email || !message) {
       return new Response(
         JSON.stringify({ error: "الرجاء ملء جميع الحقول المطلوبة" }),
@@ -46,14 +44,12 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Clean and validate data
     const cleanName = name.trim();
     const cleanEmail = email.trim().toLowerCase();
     const cleanMessage = message.trim();
-    
+
     console.log("Cleaned form data:", { name: cleanName, email: cleanEmail, phone, subject });
 
-    // Send email using Resend with proper formatting
     const emailContent = [
       "رسالة جديدة من نموذج التواصل",
       "",
@@ -72,7 +68,7 @@ const handler = async (req: Request): Promise<Response> => {
     ].filter(line => line !== "").join("\n");
 
     const emailResponse = await resend.emails.send({
-      from: "info@autorply.com",
+      from: "Autorply Contact <info@autorply.com>",
       to: "info@autorply.sa",
       subject: "رسالة جديدة من نموذج التواصل",
       text: emailContent,
