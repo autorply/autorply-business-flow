@@ -63,7 +63,7 @@ const handler = async (req: Request): Promise<Response> => {
       cleanMessage,
       "",
       "---",
-      "تم إرسال هذه الرسالة من موقع AutoReply",
+      "تم إرسال هذه الرسالة من موقع Autorply",
       `وقت الإرسال: ${new Date().toLocaleString('ar-SA')}`
     ].filter(line => line !== "").join("\n");
 
