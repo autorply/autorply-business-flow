@@ -56,7 +56,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Send email using Resend - simplified version for diagnosis
     const emailResponse = await resend.emails.send({
       from: "info@autorply.com",
-      to: ["info@autorply.sa"],
+      to: "info@autorply.sa",
       subject: "رسالة جديدة من نموذج التواصل",
       text: `
 رسالة جديدة من نموذج التواصل
