@@ -12,7 +12,7 @@ import { useToast } from '../hooks/use-toast';
 const Contact = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
-    fullName: '',
+    name: '',
     email: '',
     phone: '',
     subject: '',
@@ -33,42 +33,40 @@ const Contact = () => {
     setIsLoading(true);
 
     try {
-      // This would use environment variables in a real implementation
-      const apiUrl = process.env.CONTACT_API_URL || 'https://api.autorply.sa/send-contact';
-      const apiKey = process.env.CONTACT_API_KEY || 'xyz123abc';
-
-      const response = await fetch(apiUrl, {
+      const response = await fetch('https://thyzkqqfkgxudynxfpay.supabase.co/functions/v1/send-contact-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRoeXprcXFma2d4dWR5bnhmcGF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTAwMTc4NjMsImV4cCI6MjA2NTU5Mzg2M30.l1CmnxnEVu4CkMQNQUhhkiyb2kCVXXVSFuIe99FAoFk`,
         },
-        body: JSON.stringify({
-          ...formData,
-          to: 'info@autorply.sa'
-        })
+        body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-        toast({
-          title: "تم إرسال الرسالة بنجاح",
-          description: "شكراً لتواصلك معنا، سنرد عليك في أقرب وقت ممكن"
-        });
-        setFormData({
-          fullName: '',
-          email: '',
-          phone: '',
-          subject: '',
-          message: ''
-        });
-      } else {
-        throw new Error('فشل في إرسال الرسالة');
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'فشل في إرسال الرسالة');
       }
-    } catch (error) {
+      
       toast({
-        title: "حدث خطأ",
-        description: "لم نتمكن من إرسال رسالتك، يرجى المحاولة مرة أخرى",
-        variant: "destructive"
+        title: "تم إرسال الرسالة بنجاح",
+        description: result.message || "شكراً لك! سنتواصل معك قريباً.",
+      });
+
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: ''
+      });
+
+    } catch (error: any) {
+      console.error('Error sending message:', error);
+      toast({
+        variant: "destructive",
+        title: "خطأ في الإرسال",
+        description: error.message || "حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى.",
       });
     } finally {
       setIsLoading(false);
@@ -118,15 +116,15 @@ const Contact = () => {
                 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                       الاسم الكامل *
                     </label>
                     <Input
-                      id="fullName"
-                      name="fullName"
+                      id="name"
+                      name="name"
                       type="text"
                       required
-                      value={formData.fullName}
+                      value={formData.name}
                       onChange={handleInputChange}
                       className="w-full"
                       placeholder="أدخل اسمك الكامل"
