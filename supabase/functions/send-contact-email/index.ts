@@ -67,12 +67,16 @@ const handler = async (req: Request): Promise<Response> => {
       `وقت الإرسال: ${new Date().toLocaleString('ar-SA')}`
     ].filter(line => line !== "").join("\n");
 
-    const emailResponse = await resend.emails.send({
+    const emailData = {
       from: "Autorply Contact <info@autorply.com>",
       to: "info@autorply.sa",
       subject: "رسالة جديدة من نموذج التواصل",
       text: emailContent,
-    });
+    };
+
+    console.log("Email data being sent to Resend:", JSON.stringify(emailData, null, 2));
+
+    const emailResponse = await resend.emails.send(emailData);
 
     console.log("Resend API Response:", JSON.stringify(emailResponse, null, 2));
     
