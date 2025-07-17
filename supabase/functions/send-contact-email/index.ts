@@ -48,7 +48,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send email using Resend
     const emailResponse = await resend.emails.send({
-      from: "info@autorply.com",
+      from: "Autorply Contact <info@autorply.com>",
       to: ["info@autorply.sa"],
       subject: "رسالة جديدة من نموذج التواصل",
       html: `
