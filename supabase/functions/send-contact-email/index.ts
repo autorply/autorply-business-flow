@@ -46,39 +46,42 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Send email using Resend
+    // Clean and validate data
+    const cleanName = name.trim();
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanMessage = message.trim();
+    
+    console.log("Cleaned form data:", { name: cleanName, email: cleanEmail, phone, subject });
+
+    // Send email using Resend - simplified version for diagnosis
     const emailResponse = await resend.emails.send({
-      from: "Autorply Contact <info@autorply.com>",
+      from: "info@autorply.com",
       to: ["info@autorply.sa"],
       subject: "رسالة جديدة من نموذج التواصل",
-      html: `
-        <div dir="rtl" style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h2 style="color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 10px;">
-            رسالة جديدة من نموذج التواصل
-          </h2>
-          
-          <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="color: #1e40af; margin-top: 0;">تفاصيل المرسل:</h3>
-            <p><strong>الاسم:</strong> ${name}</p>
-            <p><strong>البريد الإلكتروني:</strong> ${email}</p>
-            ${phone ? `<p><strong>رقم الهاتف:</strong> ${phone}</p>` : ''}
-            ${subject ? `<p><strong>الموضوع:</strong> ${subject}</p>` : ''}
-          </div>
-          
-          <div style="background-color: #ffffff; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
-            <h3 style="color: #1e40af; margin-top: 0;">الرسالة:</h3>
-            <p style="line-height: 1.6; white-space: pre-wrap;">${message}</p>
-          </div>
-          
-          <div style="margin-top: 20px; padding: 15px; background-color: #dbeafe; border-radius: 8px; font-size: 12px; color: #1e40af;">
-            <p style="margin: 0;">تم إرسال هذه الرسالة من نموذج التواصل في موقع AutoReply</p>
-            <p style="margin: 5px 0 0 0;">وقت الإرسال: ${new Date().toLocaleString('ar-SA')}</p>
-          </div>
-        </div>
+      text: `
+رسالة جديدة من نموذج التواصل
+
+تفاصيل المرسل:
+الاسم: ${cleanName}
+البريد الإلكتروني: ${cleanEmail}
+${phone ? `رقم الهاتف: ${phone}` : ''}
+${subject ? `الموضوع: ${subject}` : ''}
+
+الرسالة:
+${cleanMessage}
+
+---
+تم إرسال هذه الرسالة من موقع AutoReply
+وقت الإرسال: ${new Date().toLocaleString('ar-SA')}
       `,
     });
 
-    console.log("Email sent successfully:", emailResponse);
+    console.log("Resend API Response:", JSON.stringify(emailResponse, null, 2));
+    
+    if (emailResponse.error) {
+      console.error("Resend API Error Details:", JSON.stringify(emailResponse.error, null, 2));
+      throw new Error(`Resend API Error: ${emailResponse.error.message || 'Unknown error'}`);
+    }
 
     return new Response(
       JSON.stringify({ 
