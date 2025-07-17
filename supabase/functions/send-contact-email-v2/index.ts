@@ -6,6 +6,7 @@ const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
 interface ContactFormData {
@@ -20,22 +21,15 @@ interface ContactFormData {
 
 const handler = async (req: Request): Promise<Response> => {
   console.log("🚀🚀🚀 USING FIXED V2 FUNCTION - CACHE SOLVED! 🚀🚀🚀");
-  console.log("=== بداية معالجة طلب إرسال البريد الإلكتروني ===");
-  
-if (req.method === "OPTIONS") {
-  console.log("طلب OPTIONS - إرجاع CORS headers");
-  return new Response("ok", {
-    status: 200,
-    headers: {
-      ...corsHeaders,
-      "Access-Control-Allow-Methods": "POST, OPTIONS",
-    },
-  });
-}
 
+  if (req.method === "OPTIONS") {
+    return new Response("ok", {
+      status: 200,
+      headers: corsHeaders,
+    });
+  }
 
   if (req.method !== "POST") {
-    console.log("طريقة غير مسموحة:", req.method);
     return new Response(JSON.stringify({ error: "Method not allowed" }), {
       status: 405,
       headers: { "Content-Type": "application/json", ...corsHeaders },
@@ -43,15 +37,12 @@ if (req.method === "OPTIONS") {
   }
 
   try {
-    console.log("قراءة بيانات الطلب...");
     const formData: ContactFormData = await req.json();
-    console.log("البيانات المستلمة:", JSON.stringify(formData, null, 2));
+    console.log("📥 formData:", formData);
 
     const { name, email, phone, subject, message } = formData;
 
-    // التحقق من البيانات المطلوبة
     if (!name || !email || !message) {
-      console.log("بيانات مفقودة - الاسم أو الإيميل أو الرسالة");
       return new Response(
         JSON.stringify({ error: "الرجاء ملء جميع الحقول المطلوبة" }),
         {
@@ -61,18 +52,10 @@ if (req.method === "OPTIONS") {
       );
     }
 
-    // تنظيف البيانات
     const cleanName = name.trim();
     const cleanEmail = email.trim().toLowerCase();
     const cleanMessage = message.trim();
-    console.log("البيانات بعد التنظيف:", { 
-      name: cleanName, 
-      email: cleanEmail, 
-      phone: phone || "غير محدد", 
-      subject: subject || "غير محدد" 
-    });
 
-    // إنشاء محتوى البريد المبسط
     const emailContent = `رسالة جديدة من موقع Autorply
 
 تفاصيل المرسل:
@@ -86,52 +69,40 @@ ${cleanMessage}
 
 ---
 تم إرسال هذه الرسالة من موقع Autorply
-وقت الإرسال: ${new Date().toLocaleString('ar-SA')}`;
+وقت الإرسال: ${new Date().toLocaleString("ar-SA")}
+`;
 
-    // بيانات البريد المبسطة - استخدام البريد الافتراضي من Resend
-    const emailData = {
-      from: "onboarding@resend.dev", // البريد الافتراضي المُفعّل من Resend
+    const emailResponse = await resend.emails.send({
+      from: "onboarding@resend.dev",
       to: "info@autorply.sa",
       subject: `رسالة جديدة من ${cleanName}`,
       text: emailContent,
-    };
+    });
 
-    console.log("بيانات البريد التي سيتم إرسالها:", JSON.stringify(emailData, null, 2));
-    console.log("محاولة إرسال البريد عبر Resend...");
+    console.log("✅ Resend API Response:", emailResponse);
 
-    const emailResponse = await resend.emails.send(emailData);
-
-    console.log("استجابة Resend API:", JSON.stringify(emailResponse, null, 2));
-    
     if (emailResponse.error) {
-      console.error("خطأ في Resend API:", JSON.stringify(emailResponse.error, null, 2));
-      throw new Error(`Resend API Error: ${emailResponse.error.message || 'خطأ غير معروف'}`);
+      throw new Error(emailResponse.error.message || "Unknown error from Resend");
     }
 
-    console.log("تم إرسال البريد بنجاح! معرف البريد:", emailResponse.data?.id);
-
     return new Response(
-      JSON.stringify({ 
-        success: true, 
+      JSON.stringify({
+        success: true,
         message: "تم إرسال رسالتك بنجاح. سنتواصل معك قريباً.",
-        emailId: emailResponse.data?.id 
+        emailId: emailResponse.data?.id,
       }),
       {
         status: 200,
         headers: { "Content-Type": "application/json", ...corsHeaders },
       }
     );
-
   } catch (error: any) {
-    console.error("=== خطأ في دالة إرسال البريد ===");
-    console.error("تفاصيل الخطأ:", error);
-    console.error("رسالة الخطأ:", error.message);
-    console.error("نوع الخطأ:", error.name);
-    
+    console.error("❌ Error:", error.message);
+
     return new Response(
-      JSON.stringify({ 
+      JSON.stringify({
         error: "حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى.",
-        details: error.message 
+        details: error.message,
       }),
       {
         status: 500,
