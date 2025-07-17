@@ -53,27 +53,29 @@ const handler = async (req: Request): Promise<Response> => {
     
     console.log("Cleaned form data:", { name: cleanName, email: cleanEmail, phone, subject });
 
-    // Send email using Resend - simplified version for diagnosis
+    // Send email using Resend with proper formatting
+    const emailContent = [
+      "رسالة جديدة من نموذج التواصل",
+      "",
+      "تفاصيل المرسل:",
+      `الاسم: ${cleanName}`,
+      `البريد الإلكتروني: ${cleanEmail}`,
+      phone ? `رقم الهاتف: ${phone}` : "",
+      subject ? `الموضوع: ${subject}` : "",
+      "",
+      "الرسالة:",
+      cleanMessage,
+      "",
+      "---",
+      "تم إرسال هذه الرسالة من موقع AutoReply",
+      `وقت الإرسال: ${new Date().toLocaleString('ar-SA')}`
+    ].filter(line => line !== "").join("\n");
+
     const emailResponse = await resend.emails.send({
       from: "info@autorply.com",
       to: "info@autorply.sa",
       subject: "رسالة جديدة من نموذج التواصل",
-      text: `
-رسالة جديدة من نموذج التواصل
-
-تفاصيل المرسل:
-الاسم: ${cleanName}
-البريد الإلكتروني: ${cleanEmail}
-${phone ? `رقم الهاتف: ${phone}` : ''}
-${subject ? `الموضوع: ${subject}` : ''}
-
-الرسالة:
-${cleanMessage}
-
----
-تم إرسال هذه الرسالة من موقع AutoReply
-وقت الإرسال: ${new Date().toLocaleString('ar-SA')}
-      `,
+      text: emailContent,
     });
 
     console.log("Resend API Response:", JSON.stringify(emailResponse, null, 2));
