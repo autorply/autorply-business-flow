@@ -1,4 +1,4 @@
-
+import { useEffect } from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -26,9 +26,10 @@ import Resources from "./pages/Resources";
 import ResourceCategory from "./pages/ResourceCategory";
 import ResourceContentPage from "./pages/ResourceContent";
 import NotFound from "./pages/NotFound";
-import { useEffect } from 'react';
 
-function App() {
+const queryClient = new QueryClient();
+
+const App = () => {
   useEffect(() => {
     console.log('%c\n' +
 `   ###    ##     ## ########  #######  ########  ########  ##       ##    ## 
@@ -44,51 +45,41 @@ function App() {
   }, []);
 
   return (
-    <>
-      {/* بقية مكوناتك */}
-    </>
+    <QueryClientProvider client={queryClient}>
+      <HelmetProvider>
+        <TooltipProvider>
+          <WebVitals />
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/campaign" element={<Campaign />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/vision" element={<Vision />} />
+              <Route path="/success-story" element={<SuccessStory />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/technology" element={<Technology />} />
+              <Route path="/billing" element={<Billing />} />
+              <Route path="/tech-partners" element={<TechPartners />} />
+              <Route path="/business-partners" element={<BusinessPartners />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
+              <Route path="/sitemap" element={<Sitemap />} />
+              <Route path="/resources" element={<Resources />} />
+              <Route path="/resources/:category" element={<ResourceCategory />} />
+              <Route path="/resources/:category/:slug" element={<ResourceContentPage />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </HelmetProvider>
+    </QueryClientProvider>
   );
-}
-
-export default App;
-
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <HelmetProvider>
-      <TooltipProvider>
-        <WebVitals />
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/campaign" element={<Campaign />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/vision" element={<Vision />} />
-            <Route path="/success-story" element={<SuccessStory />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/technology" element={<Technology />} />
-            <Route path="/billing" element={<Billing />} />
-            <Route path="/tech-partners" element={<TechPartners />} />
-            <Route path="/business-partners" element={<BusinessPartners />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms-of-service" element={<TermsOfService />} />
-            <Route path="/sitemap" element={<Sitemap />} />
-            <Route path="/resources" element={<Resources />} />
-            <Route path="/resources/:category" element={<ResourceCategory />} />
-            <Route path="/resources/:category/:slug" element={<ResourceContentPage />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </HelmetProvider>
-  </QueryClientProvider>
-);
+};
 
 export default App;
