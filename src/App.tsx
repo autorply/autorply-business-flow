@@ -26,6 +26,31 @@ import Resources from "./pages/Resources";
 import ResourceCategory from "./pages/ResourceCategory";
 import ResourceContentPage from "./pages/ResourceContent";
 import NotFound from "./pages/NotFound";
+import { useEffect } from 'react';
+
+function App() {
+  useEffect(() => {
+    console.log('%c\n' +
+`   ###    ##     ## ########  #######  ########  ########  ##       ##    ## 
+  ## ##   ##     ##    ##    ##     ## ##     ## ##     ## ##        ##  ##  
+ ##   ##  ##     ##    ##    ##     ## ##     ## ##     ## ##         ####   
+##     ## ##     ##    ##    ##     ## ########  ########  ##          ##    
+######### ##     ##    ##    ##     ## ##   ##   ##        ##          ##    
+##     ## ##     ##    ##    ##     ## ##    ##  ##        ##          ##    
+##     ##  #######     ##     #######  ##     ## ##        ########    ##    
+`, 'color: #007bff; font-weight: bold; font-size: 11px;');
+
+    console.log('%cجميع الحقوق محفوظة.  autorply.sa', 'color: gray; font-size: 12px;');
+  }, []);
+
+  return (
+    <>
+      {/* بقية مكوناتك */}
+    </>
+  );
+}
+
+export default App;
 
 const queryClient = new QueryClient();
 
