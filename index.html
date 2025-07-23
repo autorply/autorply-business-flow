@@ -154,22 +154,7 @@
       }
     </script>
     
-    <!-- Load main CSS after critical rendering -->
-    <script>
-      // Load main CSS after page is ready
-      const loadCSS = () => {
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = '/src/index.css';
-        document.head.appendChild(link);
-      };
-      
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadCSS);
-      } else {
-        loadCSS();
-      }
-    </script>
+    <!-- CSS will be automatically injected by Vite during build -->
     
     <script type="module" src="/src/main.tsx"></script>
     
