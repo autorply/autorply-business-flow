@@ -158,13 +158,15 @@ const ResourceContent = () => {
         <title>{resource.title} | اوتوربلاي</title>
         <meta name="description" content={resource.description} />
         <meta name="keywords" content={resource.tags.join(', ')} />
+        <link rel="canonical" href={`https://autorply.sa/resources/${category}/${slug}`} />
         <meta property="og:title" content={resource.title} />
         <meta property="og:description" content={resource.description} />
         <meta property="og:type" content="article" />
+        <meta property="og:url" content={`https://autorply.sa/resources/${category}/${slug}`} />
         <meta property="article:author" content={resource.author} />
         <meta property="article:published_time" content={resource.date} />
         <meta property="article:tag" content={resource.tags.join(', ')} />
-        {resource.image && <meta property="og:image" content={resource.image} />}
+        {resource.image && <meta property="og:image" content={`https://autorply.sa${resource.image}`} />}
       </Helmet>
 
       <div className="max-w-4xl mx-auto">
