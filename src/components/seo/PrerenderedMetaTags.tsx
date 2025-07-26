@@ -13,8 +13,8 @@ interface PrerenderedMetaTagsProps {
 }
 
 const PrerenderedMetaTags = ({
-  title = 'أوتوربلاي - WhatsApp API',
-  description = 'منصة متكاملة تتيح لك التواصل مع عملائك بسهولة عبر واتساب، مع دعم كامل للردود الآلية والحملات',
+  title = 'اوتوربلاي - WhatsApp API | منصة واتساب الأعمال الرائدة في السعودية',
+  description = 'منصة متكاملة تتيح لك التواصل مع عملائك بسهولة عبر واتساب، مع دعم كامل للردود الآلية والحملات التسويقية. شريك Meta المعتمد.',
   keywords = 'واتساب, WhatsApp API, الردود الآلية, التسويق الرقمي, خدمة العملاء, السعودية',
   image = 'https://autorply.sa/assets/img/logo_64.svg',
   url = 'https://autorply.sa',
