@@ -28,8 +28,17 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            ربط رسمي وآمن مع WhatsApp Business API
+            اوتوربلاي - منصة واتساب الأعمال الرائدة في السعودية
           </motion.h1>
+          
+          <motion.h2 
+            className="mt-4 text-xl md:text-2xl font-semibold text-blue-500"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            ربط رسمي وآمن مع WhatsApp Business API
+          </motion.h2>
           
           <motion.p 
             className="mt-4 text-lg text-gray-600 max-w-xl mx-auto lg:mx-0"
@@ -37,7 +46,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            منصة متكاملة تتيح لك التواصل مع عملائك بسهولة عبر واتساب، مع دعم كامل للردود الآلية، الحملات، والتقارير المتقدمة.
+            منصة متكاملة تتيح لك التواصل مع عملائك بسهولة عبر واتساب، مع دعم كامل للردود الآلية، الحملات التسويقية، والتقارير المتقدمة. شريك Meta المعتمد للواتساب الأعمال.
           </motion.p>
           
           <motion.a 
