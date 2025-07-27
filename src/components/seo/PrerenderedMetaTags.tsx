@@ -31,8 +31,9 @@ const PrerenderedMetaTags = ({
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
       <meta name="author" content={author} />
-      <meta name="robots" content="index, follow, max-image-preview:large" />
-      <meta name="googlebot" content="index, follow" />
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+      <meta name="googlebot" content="index, follow, max-image-preview:large" />
+      <meta httpEquiv="X-Robots-Tag" content="index, follow, max-image-preview:large" />
       
       {/* Language and Direction */}
       <html lang="ar" dir="rtl" />
@@ -51,10 +52,13 @@ const PrerenderedMetaTags = ({
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@Autorplycom" />
+      <meta name="twitter:creator" content="@Autorplycom" />
       <meta name="twitter:url" content={currentUrl} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
+      <meta name="twitter:image:alt" content="اوتوربلاي - منصة واتساب الأعمال" />
       
       {/* Additional SEO Tags */}
       <meta name="theme-color" content="#2563eb" />

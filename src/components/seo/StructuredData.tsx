@@ -53,11 +53,20 @@ const StructuredData = ({ type = 'Organization', data }: StructuredDataProps) =>
           ...baseData,
           name: "اوتوربلاي",
           url: "https://autorply.sa",
-          potentialAction: {
-            "@type": "SearchAction",
-            target: "https://autorply.sa/search?q={search_term_string}",
-            "query-input": "required name=search_term_string"
+          description: "منصة واتساب الأعمال الرائدة في السعودية مع دعم كامل للردود الآلية والحملات التسويقية",
+          inLanguage: "ar-SA",
+          publisher: {
+            "@type": "Organization",
+            name: "اوتوربلاي",
+            logo: "https://autorply.sa/assets/img/logo_64.svg"
           },
+          potentialAction: [
+            {
+              "@type": "SearchAction",
+              target: "https://autorply.sa/search?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          ],
           ...data
         };
       

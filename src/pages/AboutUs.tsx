@@ -97,7 +97,8 @@ const AboutUs = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="text-5xl font-bold text-blue-700 mb-6">من نحن</h1>
+               <h1 className="text-5xl font-bold text-blue-700 mb-6">من نحن</h1>
+               <h2 className="text-2xl font-semibold text-gray-700 mb-4">منصة واتساب الأعمال الرائدة في المملكة</h2>
               <p className="text-xl text-gray-700 leading-relaxed">
                 أوتوربلاي هي منصة سعودية معتمدة من Meta، متخصصة في تقديم حلول رسمية وذكية 
                 للتواصل بين الأنشطة التجارية والعملاء.
@@ -205,7 +206,7 @@ const AboutUs = () => {
                   </ul>
                 </div>
                 <div className="text-center">
-                  <img src="/lovable-uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" alt="Meta Partner" className="h-20 mx-auto opacity-80" />
+                  <img src="/lovable-uploads/ae59c829-ce41-429a-99c8-6ef496212d06.png" alt="شعار شريك Meta المعتمد - اوتوربلاي" className="h-20 mx-auto opacity-80" />
                   <p className="text-sm text-gray-500 mt-2">شريك معتمد من Meta</p>
                 </div>
               </div>

@@ -75,6 +75,8 @@ const sitemapPlugin = () => {
       // Generate robots.txt
       const robotsTxt = `User-agent: *
 Allow: /
+X-Robots-Tag: index, follow, max-image-preview:large
+X-Robots-Tag: noarchive, nosnippet
 
 Sitemap: https://autorply.sa/sitemap.xml`;
 

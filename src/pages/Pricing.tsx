@@ -116,7 +116,8 @@ const Pricing = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="text-5xl font-bold text-blue-700 mb-6">باقات أوتوربلاي</h1>
+               <h1 className="text-5xl font-bold text-blue-700 mb-6">باقات أوتوربلاي</h1>
+               <h2 className="text-2xl font-semibold text-gray-700 mb-4">أسعار تنافسية لجميع أحجام الأعمال</h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 اختر الباقة التي تناسب نشاطك التجاري وابدأ رحلتك في تطوير تجربة العملاء
               </p>

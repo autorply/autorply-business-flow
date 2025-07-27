@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import MetaTags from '../seo/MetaTags';
 import StructuredData from '../seo/StructuredData';
+import BreadcrumbStructuredData from '../seo/BreadcrumbStructuredData';
 import PrerenderedPage from '../PrerenderedPage';
 import { useSEO } from '../../hooks/useSEO';
 
@@ -42,6 +43,7 @@ const PageLayout = ({
           <StructuredData type="Organization" />
         )}
         <StructuredData type={structuredDataType} />
+        <BreadcrumbStructuredData />
         
         {children}
       </PrerenderedPage>

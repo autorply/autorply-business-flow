@@ -117,7 +117,7 @@ const Services = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
               >
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">خدماتنا المتميزة</h2>
+                 <h2 className="text-3xl font-bold text-gray-900 mb-4">خدماتنا المتميزة</h2>
                 <p className="text-gray-600 max-w-2xl mx-auto">
                   حلول شاملة ومتكاملة تلبي جميع احتياجاتك في التواصل مع العملاء وإدارة الأعمال
                 </p>
