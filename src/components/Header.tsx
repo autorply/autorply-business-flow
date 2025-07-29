@@ -29,7 +29,7 @@ const Header = () => {
               alt="أوتوربلاي" 
               className="w-10 h-10"
             />
-            <span className="text-2xl font-bold text-blue-600">أوتوربلاي</span>
+            <span className="text-2xl font-bold text-blue-600">اوتوربلاي</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -59,8 +59,8 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <motion.a
-              href="#"
+          <motion.a
+              href="https://wa.me/autorply"
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-medium transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -111,7 +111,7 @@ const Header = () => {
                 )
               ))}
               <motion.a
-                href="#"
+                href="https://wa.me/autorply"
                 className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-medium transition-colors text-center mt-2"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
