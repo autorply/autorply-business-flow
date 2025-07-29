@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import PageLayout from '../components/layout/PageLayout';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import FAQStructuredData from '../components/seo/FAQStructuredData';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../components/ui/accordion';
 
 const FAQ = () => {
@@ -59,6 +60,7 @@ const FAQ = () => {
       }}
     >
       <div className="min-h-screen bg-white text-gray-800" dir="rtl" lang="ar">
+        <FAQStructuredData faqs={faqs} />
         <Header />
         
         <main className="pt-20">

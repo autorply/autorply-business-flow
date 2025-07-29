@@ -51,6 +51,7 @@ const Integrations = () => {
       >
         <h2 className="text-4xl font-bold text-gray-900 mb-4">التكامل</h2>
         <p className="text-xl text-gray-600 mb-8">تكامل سلس مع أهم المنصات والأدوات التقنية العالمية</p>
+        <h3 className="text-2xl font-semibold text-gray-800 mb-6">المنصات المدعومة</h3>
         <div className="w-24 h-1 mx-auto bg-gradient-to-r from-blue-500 to-green-500 rounded-full"></div>
       </motion.div>
 
@@ -75,7 +76,7 @@ const Integrations = () => {
               <div className="w-12 h-12 flex items-center justify-center">
                 <img 
                   src={integration.logo} 
-                  alt={integration.name}
+                  alt={`شعار ${integration.name} - تكامل اوتوربلاي مع ${integration.name} لحلول WhatsApp Business API`}
                   className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
                   loading="lazy"
                 />

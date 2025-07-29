@@ -34,6 +34,7 @@ const Features = () => {
       >
         <h2 className="text-3xl font-bold text-blue-700 mb-2">مميزات اوتوربلاي</h2>
         <p className="text-gray-600">أفضل أدوات الأتمتة والربط الرسمي مع واتساب API</p>
+        <h3 className="text-xl font-semibold text-blue-600 mt-6 mb-4">الحلول التقنية المتقدمة</h3>
       </motion.div>
       
       <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
@@ -50,7 +51,7 @@ const Features = () => {
             <motion.img 
               src={feature.icon} 
               className="mx-auto mb-4 w-20 h-20" 
-              alt="Icon"
+              alt={`أيقونة ${feature.title} - ${feature.description}`}
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.6 }}
             />

@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Breadcrumbs from '../components/Breadcrumbs';
 import RelatedLinks from '../components/RelatedLinks';
 import Footer from '../components/Footer';
+import ServiceStructuredData from '../components/seo/ServiceStructuredData';
 import { motion } from 'framer-motion';
 import { MessageSquare, Zap, BarChart3, Settings, Users, Clock, Shield, Headphones } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -70,6 +71,11 @@ const Services = () => {
       }}
     >
       <div className="min-h-screen bg-white text-gray-800" dir="rtl" lang="ar">
+        <ServiceStructuredData services={services.map(s => ({
+          name: s.title,
+          description: s.description,
+          features: s.features
+        }))} />
         <Header />
         <Breadcrumbs />
         

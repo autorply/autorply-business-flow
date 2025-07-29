@@ -15,7 +15,7 @@ const Hero = () => {
         >
           <motion.img 
             src="https://autorply.sa/assets/img/logo_64.svg" 
-            alt="شعار اوتوربلاي" 
+            alt="شعار اوتوربلاي - منصة واتساب الأعمال الرائدة في السعودية مع دعم WhatsApp API وشراكة Meta المعتمدة" 
             className="w-20 mb-6 mx-auto lg:mx-0"
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
