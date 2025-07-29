@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Shield, Cloud, Zap, Code, Database, Lock } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import PageLayout from '../components/layout/PageLayout';
 
 const Technology = () => {
   const techFeatures = [
@@ -52,8 +53,17 @@ const Technology = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-gray-800" dir="rtl" lang="ar">
-      <Header />
+    <PageLayout 
+      structuredDataType="Service"
+      includeOrganization={true}
+      customMetaTags={{
+        title: 'التقنية والبنية التحتية - اوتوربلاي | تقنيات متطورة وأمان عالي',
+        description: 'تقنيات متطورة وبنية تحتية قوية تضمن أعلى مستويات الأداء والأمان. اكتشف بنيتنا السحابية وواجهات API المتقدمة والتكاملات المتاحة.',
+        keywords: 'بنية تحتية, تقنيات متطورة, أمان البيانات, API واتساب, تكاملات تقنية, سحابة'
+      }}
+    >
+      <div className="min-h-screen bg-white text-gray-800" dir="rtl" lang="ar">
+        <Header />
       
       <main className="pt-20">
         {/* Hero Section */}
@@ -81,6 +91,15 @@ const Technology = () => {
         {/* Tech Features */}
         <section className="py-20 px-6">
           <div className="max-w-6xl mx-auto">
+            <motion.h2 
+              className="text-3xl font-bold text-center text-gray-800 mb-12"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              مميزاتنا التقنية
+            </motion.h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {techFeatures.map((feature, index) => (
                 <motion.div
@@ -185,8 +204,9 @@ const Technology = () => {
         </section>
       </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </PageLayout>
   );
 };
 

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link2, Code, Zap, ShoppingCart, Globe, Workflow, Settings, Users, Database, CreditCard } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import PageLayout from '../components/layout/PageLayout';
 
 const TechPartners = () => {
   const partners = [
@@ -17,8 +18,17 @@ const TechPartners = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-gray-800" dir="rtl" lang="ar">
-      <Header />
+    <PageLayout 
+      structuredDataType="Service"
+      includeOrganization={true}
+      customMetaTags={{
+        title: 'شركاء التقنية - اوتوربلاي | تكاملات مع أهم المنصات التقنية',
+        description: 'تكاملات قوية مع أهم المنصات والأنظمة التقنية لتسهيل عملكم. تعرف على شركائنا التقنيين من منصات التجارة الإلكترونية والأتمتة وأنظمة إدارة العملاء.',
+        keywords: 'شركاء تقنيون, تكاملات تقنية, منصات التجارة الإلكترونية, أنظمة CRM, أتمتة الأعمال, تكامل الأنظمة'
+      }}
+    >
+      <div className="min-h-screen bg-white text-gray-800" dir="rtl" lang="ar">
+        <Header />
       
       <main className="pt-20">
         {/* Hero Section */}
@@ -69,8 +79,9 @@ const TechPartners = () => {
         </section>
       </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </PageLayout>
   );
 };
 

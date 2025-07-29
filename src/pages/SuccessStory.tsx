@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Calendar, Award, Users, TrendingUp } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import PageLayout from '../components/layout/PageLayout';
 
 const SuccessStory = () => {
   const milestones = [
@@ -61,8 +62,17 @@ const SuccessStory = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-gray-800" dir="rtl" lang="ar">
-      <Header />
+    <PageLayout 
+      structuredDataType="Article"
+      includeOrganization={true}
+      customMetaTags={{
+        title: 'قصة نجاحنا - اوتوربلاي | من البداية المتواضعة إلى شريك Meta الرسمي',
+        description: 'رحلة استثنائية من البداية المتواضعة إلى أن أصبحنا شريك Meta الرسمي والرائدين في حلول واتساب الأعمال. اكتشف إنجازاتنا ومحطاتنا المهمة.',
+        keywords: 'قصة نجاح أوتوربلاي, شريك Meta, تاريخ الشركة, إنجازات أوتوربلاي, النمو والتطور, واتساب الأعمال'
+      }}
+    >
+      <div className="min-h-screen bg-white text-gray-800" dir="rtl" lang="ar">
+        <Header />
       
       <main className="pt-20">
         {/* Hero Section */}
@@ -196,8 +206,9 @@ const SuccessStory = () => {
         </section>
       </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </PageLayout>
   );
 };
 

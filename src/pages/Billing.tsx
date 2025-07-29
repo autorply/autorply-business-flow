@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { CreditCard, FileText, Download, Shield } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import PageLayout from '../components/layout/PageLayout';
 
 const Billing = () => {
   const paymentMethods = [
@@ -24,8 +25,17 @@ const Billing = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-gray-800" dir="rtl" lang="ar">
-      <Header />
+    <PageLayout 
+      structuredDataType="Service"
+      includeOrganization={true}
+      customMetaTags={{
+        title: 'الفوترة وطرق الدفع - اوتوربلاي | نظام فوترة شفاف ومرن',
+        description: 'نظام فوترة شفاف ومرن مع طرق دفع متنوعة تناسب احتياجاتكم. فواتير متوافقة مع نظام الفوترة الإلكترونية السعودي.',
+        keywords: 'فوترة, طرق دفع, فواتير إلكترونية, ضريبة القيمة المضافة, تحويل بنكي, بطاقات ائتمانية'
+      }}
+    >
+      <div className="min-h-screen bg-white text-gray-800" dir="rtl" lang="ar">
+        <Header />
       
       <main className="pt-20">
         {/* Hero Section */}
@@ -180,8 +190,9 @@ const Billing = () => {
         </section>
       </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </PageLayout>
   );
 };
 

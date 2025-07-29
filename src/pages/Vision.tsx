@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Target, Lightbulb, Globe, Users } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import PageLayout from '../components/layout/PageLayout';
 
 const Vision = () => {
   const visionPoints = [
@@ -29,8 +30,17 @@ const Vision = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-gray-800" dir="rtl" lang="ar">
-      <Header />
+    <PageLayout 
+      structuredDataType="Article"
+      includeOrganization={true}
+      customMetaTags={{
+        title: 'رؤيتنا للمستقبل - اوتوربلاي | مستقبل التواصل الذكي',
+        description: 'تعرف على رؤية ورسالة وقيم اوتوربلاي. نؤمن بقوة التكنولوجيا في تحويل طريقة تواصل الأعمال مع العملاء لبناء مستقبل رقمي أكثر ذكاءً وفعالية.',
+        keywords: 'رؤية أوتوربلاي, رسالة الشركة, قيم الشركة, رؤية السعودية 2030, التحول الرقمي, مستقبل التواصل'
+      }}
+    >
+      <div className="min-h-screen bg-white text-gray-800" dir="rtl" lang="ar">
+        <Header />
       
       <main className="pt-20">
         {/* Hero Section */}
@@ -134,8 +144,9 @@ const Vision = () => {
         </section>
       </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </PageLayout>
   );
 };
 
