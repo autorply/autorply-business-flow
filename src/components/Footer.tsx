@@ -55,7 +55,7 @@ const footerSections = [
       { label: 'نظام الفوترة', href: '/billing' },
       { label: 'طرق الدفع', href: '/billing' },
       { label: 'الفواتير والتقارير', href: '/billing' },
-      { label: 'استشارة مجانية', href: '/contact' }
+      { label: 'تسعيرات واتساب', href: 'https://business.whatsapp.com/products/platform-pricing?country=Saudi%20Arabia&currency=Dollars%20(USD)&category=Marketing', external: true }
     ]
   },
   {
@@ -106,9 +106,14 @@ const Footer = () => {
             </a>
           </p>
           <p className="text-gray-400">
-            <Link to="/contact" className="hover:text-blue-400 transition-colors">
-              تواصل معنا للحصول على استشارة مجانية
-            </Link>
+            <a 
+              href="https://business.whatsapp.com/products/platform-pricing?country=Saudi%20Arabia&currency=Dollars%20(USD)&category=Marketing"
+              target="_blank"
+              rel="noopener noreferrer" 
+              className="hover:text-blue-400 transition-colors"
+            >
+              تسعيرات واتساب الرسمية
+            </a>
           </p>
         </div>
 
