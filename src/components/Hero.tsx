@@ -50,7 +50,7 @@ const Hero = () => {
           </motion.p>
           
           <motion.a 
-            href="https://wa.me/966564455333" 
+            href="https://wa.me/autorply" 
             target="_blank" 
             className="mt-6 inline-block bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 text-white py-2.5 px-6 rounded-full shadow-md hover:shadow-lg transition-all duration-300"
             initial={{ opacity: 0, scale: 0.8 }}
