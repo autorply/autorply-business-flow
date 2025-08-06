@@ -201,7 +201,7 @@ const ResourceContent = () => {
               <img 
                 src={resource.image} 
                 alt={resource.title}
-                className="w-full h-64 md:h-80 object-cover"
+                className="w-full h-auto object-contain"
               />
             </div>
           )}
