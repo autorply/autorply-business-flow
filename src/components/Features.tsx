@@ -32,9 +32,14 @@ const Features = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
       >
-        <h2 className="text-3xl font-bold text-blue-700 mb-2">مميزات اوتوربلاي</h2>
-        <p className="text-gray-600">أفضل أدوات الأتمتة والربط الرسمي مع واتساب API</p>
-        <h3 className="text-xl font-semibold text-blue-600 mt-6 mb-4">الحلول التقنية المتقدمة</h3>
+        <h2 className="text-3xl md:text-4xl font-bold text-blue-700 mb-4">مميزات منصة اوتوربلاي الشاملة</h2>
+        <p className="text-lg text-gray-600 mb-6 max-w-3xl mx-auto">
+          نقدم أقوى أدوات الأتمتة والربط الرسمي مع WhatsApp Business API المعتمد من Meta، 
+          مع حلول ذكية متطورة مصممة خصيصاً لتلبية احتياجات الأعمال السعودية والخليجية
+        </p>
+        <h3 className="text-xl md:text-2xl font-semibold text-blue-600 mt-8 mb-6">
+          الحلول التقنية المتقدمة للواتساب الأعمال
+        </h3>
       </motion.div>
       
       <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">

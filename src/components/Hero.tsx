@@ -28,7 +28,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            اوتوربلاي - منصة واتساب الأعمال الرائدة في السعودية
+            اوتوربلاي - منصة واتساب الأعمال الرسمية المعتمدة من Meta في السعودية
           </motion.h1>
           
           <motion.h2 
@@ -37,17 +37,40 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            ربط رسمي وآمن مع WhatsApp Business API
+            WhatsApp Business API الرسمي مع حلول الذكاء الاصطناعي المتقدمة
           </motion.h2>
           
           <motion.p 
-            className="mt-4 text-lg text-gray-600 max-w-xl mx-auto lg:mx-0"
+            className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto lg:mx-0"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            منصة متكاملة تتيح لك التواصل مع عملائك بسهولة عبر واتساب، مع دعم كامل للردود الآلية، الحملات التسويقية، والتقارير المتقدمة. شريك Meta المعتمد للواتساب الأعمال.
+            منصة شاملة ومتطورة تمكّنك من ربط أعمالك مع واتساب بشكل رسمي وآمن عبر WhatsApp Business API المعتمد من Meta. 
+            استمتع بالردود الآلية الذكية المدعومة بالذكاء الاصطناعي، وإدارة المحادثات المتعددة، والحملات التسويقية الموجهة، 
+            والتكامل الشامل مع أنظمة CRM وإدارة علاقات العملاء. حلول مصممة خصيصاً للشركات السعودية والخليجية مع 
+            دعم فني متخصص ومتاح على مدار الساعة لضمان نجاح استراتيجيتك التسويقية وتحسين تجربة عملائك.
           </motion.p>
+          
+          <motion.div 
+            className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-center max-w-2xl mx-auto lg:mx-0"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          >
+            <div className="bg-blue-50 p-4 rounded-lg">
+              <h3 className="text-lg font-semibold text-blue-700 mb-2">ردود آلية ذكية</h3>
+              <p className="text-sm text-gray-600">استخدام الذكاء الاصطناعي للرد التلقائي على استفسارات العملاء</p>
+            </div>
+            <div className="bg-green-50 p-4 rounded-lg">
+              <h3 className="text-lg font-semibold text-green-700 mb-2">حملات تسويقية</h3>
+              <p className="text-sm text-gray-600">إرسال رسائل إعلانية موجهة وحملات تسويقية فعالة</p>
+            </div>
+            <div className="bg-purple-50 p-4 rounded-lg">
+              <h3 className="text-lg font-semibold text-purple-700 mb-2">تكامل شامل</h3>
+              <p className="text-sm text-gray-600">ربط مع المتاجر الإلكترونية وأنظمة إدارة الأعمال</p>
+            </div>
+          </motion.div>
           
           <motion.a 
             href="https://wa.me/autorply" 
