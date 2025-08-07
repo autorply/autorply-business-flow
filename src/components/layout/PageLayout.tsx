@@ -1,6 +1,5 @@
-
 import { ReactNode } from 'react';
-import { HelmetProvider } from 'react-helmet-async';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import MetaTags from '../seo/MetaTags';
 import StructuredData from '../seo/StructuredData';
 import BreadcrumbStructuredData from '../seo/BreadcrumbStructuredData';
@@ -18,13 +17,15 @@ interface PageLayoutProps {
     image?: string;
     url?: string;
   };
+  canonical?: string;
 }
 
 const PageLayout = ({ 
   children, 
   structuredDataType = 'Organization',
   includeOrganization = false,
-  customMetaTags 
+  customMetaTags,
+  canonical
 }: PageLayoutProps) => {
   const seoData = useSEO();
   
@@ -35,10 +36,13 @@ const PageLayout = ({
 
   return (
     <HelmetProvider>
+      <Helmet>
+        {canonical && <link rel="canonical" href={canonical} />}
+      </Helmet>
+
       <PrerenderedPage>
         <MetaTags {...metaProps} />
         
-        {/* Include both Organization and the specified type for homepage */}
         {includeOrganization && structuredDataType !== 'Organization' && (
           <StructuredData type="Organization" />
         )}
