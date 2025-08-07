@@ -65,6 +65,7 @@ const SuccessStory = () => {
     <PageLayout 
       structuredDataType="Article"
       includeOrganization={true}
+      canonical="https://autorply.sa/success-story"
       customMetaTags={{
         title: 'قصة نجاحنا - اوتوربلاي | من البداية المتواضعة إلى شريك Meta الرسمي',
         description: 'رحلة استثنائية من البداية المتواضعة إلى أن أصبحنا شريك Meta الرسمي والرائدين في حلول واتساب الأعمال. اكتشف إنجازاتنا ومحطاتنا المهمة.',
