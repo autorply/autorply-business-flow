@@ -97,7 +97,7 @@ const Campaign = () => {
                       <div className="bg-[#E8F5E8] rounded-xl p-4 text-right">
                         <h4 className="font-bold text-[#25D366] text-lg mb-1">عرض خاص لك! 🎉</h4>
                         <img 
-                          src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=400&h=200" 
+                          src="https://autorply.sa/imgs/Autorply_offer.webp?auto=format&fit=crop&w=400&h=200" 
                           alt="عرض خاص" 
                           className="w-full h-32 object-cover rounded-lg mt-2"
                         />
