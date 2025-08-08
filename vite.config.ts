@@ -4,8 +4,8 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { generateSitemap, getSitemapUrls } from "./src/utils/sitemap";
-import prerender from "@prerenderer/rollup-plugin";
-import PuppeteerRenderer from "@prerenderer/renderer-puppeteer";
+import { createRequire } from 'module';
+// Prerenderer plugins will be loaded dynamically when enabled via PRERENDER env.
 
 // Crypto polyfill for Node.js build environment
 const createCryptoPolyfill = () => {
@@ -104,65 +104,88 @@ const prerenderPlugin = () => {
 };
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
-  server: {
-    host: "::",
-    port: 8080,
-  },
-  plugins: [
+export default defineConfig(({ mode }) => {
+  const isProd = mode === 'production';
+  const shouldPrerender = isProd && (process.env.PRERENDER === 'true' || process.env.PRERENDER === '1');
+
+  const plugins: any[] = [
     react(),
     mode === 'development' && componentTagger(),
-    mode === 'production' && sitemapPlugin(),
-    mode === 'production' && prerender({
-      routes: routesToPrerender,
-      renderer: new PuppeteerRenderer({
-        renderAfterDocumentEvent: 'prerender-ready',
-        headless: true,
-        maxConcurrentRoutes: 4,
-      })
-    })
-  ].filter(Boolean),
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
+    isProd && sitemapPlugin(),
+  ].filter(Boolean);
+
+  if (shouldPrerender) {
+    try {
+      const req = createRequire(import.meta.url);
+      const prerender = req('@prerenderer/rollup-plugin').default;
+      const PuppeteerRenderer = req('@prerenderer/renderer-puppeteer').default;
+
+      plugins.push(
+        prerender({
+          routes: routesToPrerender,
+          renderer: new PuppeteerRenderer({
+            renderAfterDocumentEvent: 'prerender-ready',
+            headless: true,
+            maxConcurrentRoutes: 4,
+          }),
+        })
+      );
+      console.log('✅ Prerendering enabled for', routesToPrerender.length, 'routes');
+    } catch (e) {
+      console.warn('⚠️ Prerenderer packages not available. Skipping prerendering. Error:', (e as Error).message);
+    }
+  } else {
+    console.log('ℹ️ Prerendering disabled. Set PRERENDER=true to enable during production build.');
+  }
+
+  return {
+    server: {
+      host: "::",
+      port: 8080,
     },
-  },
-  define: {
-    global: 'globalThis',
-    'process.env': {},
-  },
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          motion: ['framer-motion'],
-          icons: ['lucide-react'],
-          ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu'],
-          router: ['react-router-dom'],
-          seo: ['react-helmet-async']
+    plugins,
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+      },
+    },
+    define: {
+      global: 'globalThis',
+      'process.env': {},
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['react', 'react-dom'],
+            motion: ['framer-motion'],
+            icons: ['lucide-react'],
+            ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu'],
+            router: ['react-router-dom'],
+            seo: ['react-helmet-async']
+          }
         }
+      },
+      minify: isProd ? 'esbuild' : false,
+      chunkSizeWarningLimit: 1000,
+      target: 'es2020',
+      sourcemap: mode === 'development',
+      commonjsOptions: {
+        transformMixedEsModules: true
       }
     },
-    minify: mode === 'production' ? 'esbuild' : false,
-    chunkSizeWarningLimit: 1000,
-    target: 'es2020',
-    sourcemap: mode === 'development',
-    commonjsOptions: {
-      transformMixedEsModules: true
+    esbuild: {
+      target: 'es2020',
+      minifyIdentifiers: isProd,
+      minifySyntax: isProd,
+      minifyWhitespace: isProd
+    },
+    optimizeDeps: {
+      include: ['react', 'react-dom', 'framer-motion', 'lucide-react', 'react-router-dom', 'react-helmet-async'],
+      force: false,
+      esbuildOptions: {
+        target: 'es2020'
+      }
     }
-  },
-  esbuild: {
-    target: 'es2020',
-    minifyIdentifiers: mode === 'production',
-    minifySyntax: mode === 'production',
-    minifyWhitespace: mode === 'production'
-  },
-  optimizeDeps: {
-    include: ['react', 'react-dom', 'framer-motion', 'lucide-react', 'react-router-dom', 'react-helmet-async'],
-    force: false,
-    esbuildOptions: {
-      target: 'es2020'
-    }
-  }
-}));
+  };
+});
