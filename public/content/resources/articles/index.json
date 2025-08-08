@@ -49,5 +49,18 @@
     "slug": "whatsapp-api-guide",
     "readTime": "5 دقائق",
     "content": "article-1.md"
+  },
+  {
+    "title": "وكلاء Agentic AI: مستقبل تجربة العملاء مع اوتوربلاي",
+    "description": "كيف تعيد اوتوربلاي تعريف تجربة العملاء عبر وكلاء Agentic AI بالتكامل مع WhatsApp API وأدوات الأتمتة الحديثة.",
+    "author": "فريق اوتوربلاي",
+    "date": "2025-08-08",
+    "category": "articles",
+    "tags": ["Agentic AI", "تجربة العملاء", "واتساب API", "أتمتة", "n8n", "make.com", "autorply"],
+    "image": "/uploads/agentic-ai-cx-autorply.webp",
+    "slug": "agentic-ai-cx-autorply",
+    "readTime": "9 دقائق",
+    "featured": true,
+    "content": "agentic-ai-cx-autorply.md"
   }
 ]

@@ -167,6 +167,28 @@ const ResourceContent = () => {
         <meta property="article:published_time" content={resource.date} />
         <meta property="article:tag" content={resource.tags.join(', ')} />
         {resource.image && <meta property="og:image" content={`https://autorply.sa${resource.image}`} />}
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={resource.title} />
+        <meta name="twitter:description" content={resource.description} />
+        {resource.image && <meta name="twitter:image" content={`https://autorply.sa${resource.image}`} />}
+        {/* Article Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context":"https://schema.org",
+            "@type":"Article",
+            "headline": resource.title,
+            "description": resource.description,
+            "image": resource.image ? [`https://autorply.sa${resource.image}`] : undefined,
+            "author": { "@type": "Organization", "name": resource.author },
+            "publisher": { "@type": "Organization", "name": "اوتوربلاي", "logo": { "@type": "ImageObject", "url": "https://autorply.sa/assets/img/logo_64.svg" } },
+            "datePublished": resource.date,
+            "dateModified": resource.date,
+            "mainEntityOfPage": { "@type": "WebPage", "@id": `https://autorply.sa/resources/${category}/${slug}` },
+            "inLanguage": "ar-SA",
+            "keywords": resource.tags.join(', ')
+          })}
+        </script>
       </Helmet>
 
       <div className="max-w-4xl mx-auto">
