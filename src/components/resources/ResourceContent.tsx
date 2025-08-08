@@ -165,7 +165,10 @@ const ResourceContent = () => {
         <meta property="og:url" content={`https://autorply.sa/resources/${category}/${slug}`} />
         <meta property="article:author" content={resource.author} />
         <meta property="article:published_time" content={resource.date} />
-        <meta property="article:tag" content={resource.tags.join(', ')} />
+        {/* Provide rich tags individually to avoid overly long single tag */}
+        {resource.tags.map((t, i) => (
+          <meta key={`article:tag:${i}`} property="article:tag" content={t} />
+        ))}
         {resource.image && <meta property="og:image" content={`https://autorply.sa${resource.image}`} />}
         {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />

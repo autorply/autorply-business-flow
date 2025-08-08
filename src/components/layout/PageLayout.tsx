@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
 import MetaTags from '../seo/MetaTags';
 import StructuredData from '../seo/StructuredData';
 import BreadcrumbStructuredData from '../seo/BreadcrumbStructuredData';
@@ -28,6 +29,8 @@ const PageLayout = ({
   canonical
 }: PageLayoutProps) => {
   const seoData = useSEO();
+  const location = useLocation();
+  const isResourceRoute = location.pathname.startsWith('/resources');
   
   const metaProps = {
     ...seoData,
@@ -41,7 +44,7 @@ const PageLayout = ({
       </Helmet>
 
       <PrerenderedPage>
-        <MetaTags {...metaProps} />
+        {!isResourceRoute && <MetaTags {...metaProps} />}
         
         {includeOrganization && structuredDataType !== 'Organization' && (
           <StructuredData type="Organization" />
