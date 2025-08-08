@@ -2,9 +2,19 @@
 import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import PageLayout from '../components/layout/PageLayout';
 
 const Campaign = () => {
   return (
+    <PageLayout 
+      structuredDataType="Service"
+      customMetaTags={{
+        title: 'حملات واتساب الرسمية - اوتوربلاي | قوالب معتمدة من ميتا',
+        description: 'أنشئ حملات واتساب رسمية معتمدة من Meta باستخدام قوالب رسائل تفاعلية وتقارير أداء.',
+        keywords: 'حملات واتساب, قوالب واتساب, Meta, رسائل تفاعلية, تسويق واتساب, WhatsApp API',
+        url: 'https://autorply.sa/campaign'
+      }}
+    >
     <div className="min-h-screen bg-white">
       <Header />
       
@@ -188,6 +198,7 @@ const Campaign = () => {
 
       <Footer />
     </div>
+    </PageLayout>
   );
 };
 

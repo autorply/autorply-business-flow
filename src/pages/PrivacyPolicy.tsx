@@ -2,9 +2,19 @@
 import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import PageLayout from '../components/layout/PageLayout';
 
 const PrivacyPolicy = () => {
   return (
+    <PageLayout 
+      structuredDataType="WebSite"
+      customMetaTags={{
+        title: 'سياسة الخصوصية - اوتوربلاي | حماية البيانات',
+        description: 'تعرف على كيفية جمع واستخدام وحماية بياناتك في منصة اوتوربلاي وفق أنظمة المملكة.',
+        keywords: 'سياسة الخصوصية, حماية البيانات, اوتوربلاي, السعودية, WhatsApp API',
+        url: 'https://autorply.sa/privacy-policy'
+      }}
+    >
     <div className="min-h-screen bg-white text-gray-800" dir="rtl" lang="ar">
       <Header />
       
@@ -317,6 +327,7 @@ const PrivacyPolicy = () => {
 
       <Footer />
     </div>
+    </PageLayout>
   );
 };
 

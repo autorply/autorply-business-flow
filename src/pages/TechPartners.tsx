@@ -24,7 +24,8 @@ const TechPartners = () => {
       customMetaTags={{
         title: 'شركاء التقنية - اوتوربلاي | تكاملات مع أهم المنصات التقنية',
         description: 'تكاملات قوية مع أهم المنصات والأنظمة التقنية لتسهيل عملكم. تعرف على شركائنا التقنيين من منصات التجارة الإلكترونية والأتمتة وأنظمة إدارة العملاء.',
-        keywords: 'شركاء تقنيون, تكاملات تقنية, منصات التجارة الإلكترونية, أنظمة CRM, أتمتة الأعمال, تكامل الأنظمة'
+        keywords: 'شركاء تقنيون, تكاملات تقنية, منصات التجارة الإلكترونية, أنظمة CRM, أتمتة الأعمال, تكامل الأنظمة',
+        url: 'https://autorply.sa/tech-partners'
       }}
     >
       <div className="min-h-screen bg-white text-gray-800" dir="rtl" lang="ar">
@@ -56,6 +57,15 @@ const TechPartners = () => {
         {/* Partners Grid */}
         <section className="py-20 px-6">
           <div className="max-w-6xl mx-auto">
+            <motion.h2 
+              className="text-3xl font-bold text-gray-800 mb-12 text-center"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              التكاملات والمنصات المدعومة
+            </motion.h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {partners.map((partner, index) => (
                 <motion.div

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Send, Mail, Phone, MapPin } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import PageLayout from '../components/layout/PageLayout';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
@@ -85,6 +86,15 @@ const Contact = () => {
   };
 
   return (
+    <PageLayout 
+      structuredDataType="WebSite"
+      customMetaTags={{
+        title: 'تواصل معنا - اوتوربلاي | دعم ومبيعات واتساب الأعمال',
+        description: 'تواصل مع فريق اوتوربلاي للدعم والمبيعات والاستشارات حول WhatsApp API وحلول واتساب الأعمال في السعودية.',
+        keywords: 'تواصل, دعم, مبيعات, واتساب الأعمال, WhatsApp API, اوتوربلاي, السعودية',
+        url: 'https://autorply.sa/contact'
+      }}
+    >
     <div className="min-h-screen bg-white text-gray-800" dir="rtl" lang="ar">
       <Header />
       
@@ -281,6 +291,7 @@ const Contact = () => {
 
       <Footer />
     </div>
+    </PageLayout>
   );
 };
 

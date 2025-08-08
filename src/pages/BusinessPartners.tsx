@@ -12,7 +12,8 @@ const BusinessPartners = () => {
       customMetaTags={{
         title: 'شركاء الأعمال - اوتوربلاي | شراكات استراتيجية',
         description: 'شراكات استراتيجية مع عملاء متميزين وقصص نجاح ملهمة. انضم إلى شبكة شركائنا واستفد من حلولنا المتطورة.',
-        keywords: 'شركاء أعمال, شراكة استراتيجية, عملاء متميزون, قصص نجاح, واتساب الأعمال'
+        keywords: 'شركاء أعمال, شراكة استراتيجية, عملاء متميزون, قصص نجاح, واتساب الأعمال',
+        url: 'https://autorply.sa/business-partners'
       }}
     >
       <div className="min-h-screen bg-white text-gray-800" dir="rtl" lang="ar">

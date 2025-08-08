@@ -2,9 +2,19 @@
 import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import PageLayout from '../components/layout/PageLayout';
 
 const TermsOfService = () => {
   return (
+    <PageLayout 
+      structuredDataType="WebSite"
+      customMetaTags={{
+        title: 'شروط الخدمة - اوتوربلاي | اتفاقية الاستخدام',
+        description: 'اطلع على شروط وأحكام استخدام منصة اوتوربلاي وخدمات WhatsApp Business API.',
+        keywords: 'شروط الخدمة, اتفاقية الاستخدام, اوتوربلاي, WhatsApp API, السعودية',
+        url: 'https://autorply.sa/terms-of-service'
+      }}
+    >
     <div className="min-h-screen bg-white text-gray-800" dir="rtl" lang="ar">
       <Header />
       
@@ -315,6 +325,7 @@ const TermsOfService = () => {
 
       <Footer />
     </div>
+    </PageLayout>
   );
 };
 
