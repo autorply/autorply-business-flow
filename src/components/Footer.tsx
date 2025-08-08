@@ -1,6 +1,6 @@
 
 import { motion } from 'framer-motion';
-import { Facebook, Instagram, MessageCircle, Send } from 'lucide-react';
+// removed unused lucide-react icons
 import { Link } from 'react-router-dom';
 
 const footerSections = [
@@ -120,21 +120,24 @@ const Footer = () => {
         {/* Social Media */}
         <div className="flex justify-center gap-8 mb-12">
           {[
-            { icon: MessageCircle, href: 'https://wa.me/966594959443?text=مرحبا%20بكم', label: 'واتساب' },
-            { icon: Facebook, href: '#', label: 'فيسبوك' },
-            { icon: Instagram, href: '#', label: 'انستغرام' },
-            { icon: Send, href: '#', label: 'تليجرام' }
+            { src: '/uploads/whatsapp.svg', href: 'https://wa.me/autorply', label: 'واتساب' },
+            { src: '/uploads/instagram.svg', href: 'http://instagram.com/autorply/', label: 'انستغرام' },
+            { src: '/uploads/facebook.svg', href: 'https://www.facebook.com/business/partner-directory/search?solution_type=messaging&ref=pd_home_hero_cta&id=8019759771417166&section=overview', label: 'فيسبوك' },
+            { src: '/uploads/x.svg', href: 'https://x.com/autorplycom', label: 'X' },
+            { src: '/uploads/tiktok.svg', href: 'https://www.tiktok.com/@autorply', label: 'تيك توك' },
+            { src: '/uploads/snapchat.svg', href: 'https://www.snapchat.com/@autorply', label: 'سناب شات' },
+            { src: '/uploads/linkedin.svg', href: 'https://www.linkedin.com/company/autorply', label: 'لينكدإن' }
           ].map((social, index) => (
             <motion.a
               key={index}
               href={social.href}
-              target={social.href.startsWith('http') ? '_blank' : '_self'}
-              rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-gray-800 p-4 rounded-2xl hover:bg-blue-600 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
               whileHover={{ scale: 1.05 }}
               aria-label={social.label}
             >
-              <social.icon className="w-7 h-7" />
+              <img src={social.src} alt={`تابعنا على ${social.label}`} className="w-7 h-7" loading="lazy" />
             </motion.a>
           ))}
         </div>
