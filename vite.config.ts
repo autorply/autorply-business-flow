@@ -4,6 +4,8 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { generateSitemap, getSitemapUrls } from "./src/utils/sitemap";
+import prerender from "@prerenderer/rollup-plugin";
+import PuppeteerRenderer from "@prerenderer/renderer-puppeteer";
 
 // Crypto polyfill for Node.js build environment
 const createCryptoPolyfill = () => {
@@ -111,7 +113,14 @@ export default defineConfig(({ mode }) => ({
     react(),
     mode === 'development' && componentTagger(),
     mode === 'production' && sitemapPlugin(),
-    mode === 'production' && prerenderPlugin()
+    mode === 'production' && prerender({
+      routes: routesToPrerender,
+      renderer: new PuppeteerRenderer({
+        renderAfterDocumentEvent: 'prerender-ready',
+        headless: true,
+        maxConcurrentRoutes: 4,
+      })
+    })
   ].filter(Boolean),
   resolve: {
     alias: {

@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import MetaTags from '../seo/MetaTags';
@@ -37,6 +37,15 @@ const PageLayout = ({
     ...customMetaTags
   };
 
+  // Signal to the prerenderer that the page is ready once critical content is rendered
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      // Fire after next tick to ensure Helmet and above-the-fold content rendered
+      setTimeout(() => {
+        document.dispatchEvent(new Event('prerender-ready'));
+      }, 0);
+    }
+  }, [location.pathname]);
   return (
     <HelmetProvider>
       <Helmet>
@@ -51,7 +60,7 @@ const PageLayout = ({
         )}
         <StructuredData type={structuredDataType} />
         <BreadcrumbStructuredData />
-        
+
         {children}
       </PrerenderedPage>
     </HelmetProvider>
