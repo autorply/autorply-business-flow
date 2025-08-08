@@ -103,6 +103,7 @@ const Pricing = () => {
         keywords: 'أسعار واتساب, باقات واتساب, تكلفة واتساب الأعمال, اشتراك واتساب API, أسعار تنافسية',
         url: 'https://autorply.sa/pricing'
       }}
+      canonical="https://autorply.sa/pricing"
     >
       <div className="min-h-screen bg-white text-gray-800" dir="rtl" lang="ar">
         <Header />
