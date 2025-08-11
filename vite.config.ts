@@ -3,7 +3,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
-import { generateSitemap, getSitemapUrls } from "./src/utils/sitemap";
+import { generateSitemap, getSitemapUrls, getPrerenderRoutes } from "./src/utils/sitemap";
 import { createRequire } from 'module';
 // Prerenderer plugins will be loaded dynamically when enabled via PRERENDER env.
 
@@ -40,7 +40,7 @@ const createCryptoPolyfill = () => {
 createCryptoPolyfill();
 
 // Define routes to prerender
-const routesToPrerender = [
+const baseRoutes = [
   '/',
   '/services',
   '/pricing',
@@ -56,8 +56,10 @@ const routesToPrerender = [
   '/billing',
   '/privacy-policy',
   '/terms-of-service',
-  '/sitemap'
+  '/sitemap',
+  '/resources'
 ];
+const routesToPrerender = Array.from(new Set([...baseRoutes, ...getPrerenderRoutes()]));
 
 // Generate sitemap during build
 const sitemapPlugin = () => {
@@ -104,7 +106,8 @@ const prerenderPlugin = () => {
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const isProd = mode === 'production';
-  const shouldPrerender = isProd && (process.env.PRERENDER === 'true' || process.env.PRERENDER === '1');
+  // Always prerender in production to ensure crawlers receive full HTML
+  const shouldPrerender = isProd;
 
   const plugins: any[] = [
     react(),

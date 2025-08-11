@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 
 interface SitemapUrl {
   loc: string;
@@ -25,11 +27,43 @@ export const generateSitemap = (urls: SitemapUrl[]): string => {
   return `${xmlHeader}${urlsetOpen}${urlElements}${urlsetClose}`;
 };
 
+// Resource-based routes helpers
+const resourceCategories = ['articles', 'tutorials', 'comparisons'];
+const publicResourcesDir = path.resolve(process.cwd(), 'public', 'content', 'resources');
+
+type ResourceIndexItem = { slug: string; date?: string };
+
+function safeReadResourceIndex(category: string): ResourceIndexItem[] {
+  try {
+    const file = path.join(publicResourcesDir, category, 'index.json');
+    if (fs.existsSync(file)) {
+      const raw = fs.readFileSync(file, 'utf-8');
+      const data = JSON.parse(raw);
+      if (Array.isArray(data)) return data;
+    }
+  } catch (e) {
+    console.warn('[sitemap] Failed reading index for', category, e);
+  }
+  return [];
+}
+
+export const getPrerenderRoutes = (): string[] => {
+  const routes: string[] = ['/resources'];
+  for (const cat of resourceCategories) {
+    routes.push(`/resources/${cat}`);
+    const items = safeReadResourceIndex(cat);
+    for (const item of items) {
+      if (item?.slug) routes.push(`/resources/${cat}/${item.slug}`);
+    }
+  }
+  return Array.from(new Set(routes));
+};
+
 export const getSitemapUrls = (): SitemapUrl[] => {
   const baseUrl = 'https://autorply.sa';
   const currentDate = new Date().toISOString().split('T')[0];
 
-  return [
+  const urls: SitemapUrl[] = [
     {
       loc: baseUrl,
       lastmod: currentDate,
@@ -119,6 +153,37 @@ export const getSitemapUrls = (): SitemapUrl[] => {
       lastmod: currentDate,
       changefreq: 'monthly',
       priority: 0.4
+    },
+    {
+      loc: `${baseUrl}/resources`,
+      lastmod: currentDate,
+      changefreq: 'weekly',
+      priority: 0.7
     }
   ];
+
+  for (const cat of resourceCategories) {
+    urls.push({
+      loc: `${baseUrl}/resources/${cat}`,
+      lastmod: currentDate,
+      changefreq: 'weekly',
+      priority: 0.6
+    });
+
+    const items = safeReadResourceIndex(cat);
+    for (const item of items) {
+      if (!item?.slug) continue;
+      urls.push({
+        loc: `${baseUrl}/resources/${cat}/${item.slug}`,
+        lastmod: item.date || currentDate,
+        changefreq: 'monthly',
+        priority: 0.6
+      });
+    }
+  }
+
+  const dedup = new Map<string, SitemapUrl>();
+  for (const u of urls) dedup.set(u.loc, u);
+  return Array.from(dedup.values());
 };
+
