@@ -70,12 +70,19 @@ const ResourceContent = () => {
     }
   };
 
+  // Signal prerender-ready after content (or error) is fully loaded
+  useEffect(() => {
+    if (typeof document !== 'undefined' && !loading) {
+      setTimeout(() => document.dispatchEvent(new Event('prerender-ready')), 0);
+    }
+  }, [loading]);
+
   const convertMarkdownToHtml = (markdown: string): string => {
     return markdown
       // Headers
       .replace(/^### (.*$)/gim, '<h3 class="text-xl font-semibold mt-8 mb-4">$1</h3>')
       .replace(/^## (.*$)/gim, '<h2 class="text-2xl font-bold mt-10 mb-6">$1</h2>')
-      .replace(/^# (.*$)/gim, '<h1 class="text-3xl font-bold mt-12 mb-8">$1</h1>')
+      .replace(/^# (.*$)/gim, '<h2 class="text-2xl font-bold mt-10 mb-6">$1</h2>')
       
       // Code blocks
       .replace(/```(\w+)?\n([\s\S]*?)\n```/g, '<pre class="bg-muted p-4 rounded-lg overflow-x-auto my-6"><code class="text-sm">$2</code></pre>')
@@ -155,10 +162,16 @@ const ResourceContent = () => {
   return (
     <>
       <Helmet>
+        <html lang="ar-SA" dir="rtl" />
         <title>{resource.title} | اوتوربلاي</title>
         <meta name="description" content={resource.description} />
         <meta name="keywords" content={resource.tags.join(', ')} />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
         <link rel="canonical" href={`https://autorply.sa/resources/${category}/${slug}`} />
+        <link rel="alternate" hrefLang="ar-SA" href={`https://autorply.sa/resources/${category}/${slug}`} />
+        <link rel="alternate" hrefLang="ar" href={`https://autorply.sa/resources/${category}/${slug}`} />
+        <link rel="alternate" hrefLang="x-default" href={`https://autorply.sa/resources/${category}/${slug}`} />
+        <meta property="og:site_name" content="اوتوربلاي" />
         <meta property="og:title" content={resource.title} />
         <meta property="og:description" content={resource.description} />
         <meta property="og:type" content="article" />

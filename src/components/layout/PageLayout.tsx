@@ -39,13 +39,13 @@ const PageLayout = ({
 
   // Signal to the prerenderer that the page is ready once critical content is rendered
   useEffect(() => {
-    if (typeof document !== 'undefined') {
+    if (typeof document !== 'undefined' && !isResourceRoute) {
       // Fire after next tick to ensure Helmet and above-the-fold content rendered
       setTimeout(() => {
         document.dispatchEvent(new Event('prerender-ready'));
       }, 0);
     }
-  }, [location.pathname]);
+  }, [location.pathname, isResourceRoute]);
   return (
     <HelmetProvider>
       <Helmet>
