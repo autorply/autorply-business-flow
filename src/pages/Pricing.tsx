@@ -1,4 +1,4 @@
-
+import { useEffect } from 'react';
 import PageLayout from '../components/layout/PageLayout';
 import Header from '../components/Header';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -7,6 +7,63 @@ import Footer from '../components/Footer';
 import { motion } from 'framer-motion';
 
 const Pricing = () => {
+  // ===== SEO: Title / Description / Canonical / Open Graph / Twitter =====
+  useEffect(() => {
+    const title = 'الأسعار والباقات - اوتوربلاي | باقات WhatsApp API للشركات';
+    const description =
+      'اختر الباقة المناسبة لعملك من اوتوربلاي. حلول WhatsApp API رسمية معتمدة من Meta، دعم عربي، حملات ورسائل تفاعلية، وتكاملات جاهزة.';
+    const url = 'https://autorply.sa/pricing';
+
+    const upsertByName = (name: string, content: string) => {
+      let el = document.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
+      if (!el) {
+        el = document.createElement('meta');
+        el.setAttribute('name', name);
+        document.head.appendChild(el);
+      }
+      el.setAttribute('content', content);
+    };
+
+    const upsertByProp = (property: string, content: string) => {
+      let el = document.querySelector<HTMLMetaElement>(`meta[property="${property}"]`);
+      if (!el) {
+        el = document.createElement('meta');
+        el.setAttribute('property', property);
+        document.head.appendChild(el);
+      }
+      el.setAttribute('content', content);
+    };
+
+    const upsertCanonical = (href: string) => {
+      let link = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+      if (!link) {
+        link = document.createElement('link');
+        link.setAttribute('rel', 'canonical');
+        document.head.appendChild(link);
+      }
+      link.setAttribute('href', href);
+    };
+
+    document.title = title;
+    upsertByName('description', description);
+    upsertCanonical(url);
+
+    // Open Graph
+    upsertByProp('og:title', title);
+    upsertByProp('og:description', description);
+    upsertByProp('og:url', url);
+    upsertByProp('og:type', 'website');
+    upsertByProp('og:site_name', 'اوتوربلاي');
+    upsertByProp('og:locale', 'ar_SA');
+
+    // Twitter
+    upsertByName('twitter:card', 'summary');
+    upsertByName('twitter:title', title);
+    upsertByName('twitter:description', description);
+    upsertByName('twitter:url', url);
+  }, []);
+  // =======================================================================
+
   const plans = [
     {
       title: "باقة Start",
@@ -103,7 +160,6 @@ const Pricing = () => {
         keywords: 'أسعار واتساب, باقات واتساب, تكلفة واتساب الأعمال, اشتراك واتساب API, أسعار تنافسية',
         url: 'https://autorply.sa/pricing'
       }}
-      
     >
       <div className="min-h-screen bg-white text-gray-800" dir="rtl" lang="ar">
         <Header />
@@ -128,9 +184,7 @@ const Pricing = () => {
               {plans.map((plan, index) => (
                 <motion.div
                   key={index}
-                  className={`border p-6 rounded-3xl shadow-sm bg-white h-fit ${
-                    plan.featured ? 'ring-2 ring-blue-500 shadow-lg transform scale-105' : ''
-                  }`}
+                  className={`border p-6 rounded-3xl shadow-sm bg-white h-fit ${plan.featured ? 'ring-2 ring-blue-500 shadow-lg transform scale-105' : ''}`}
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: plan.delay }}
