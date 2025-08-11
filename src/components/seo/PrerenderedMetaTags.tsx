@@ -33,10 +33,9 @@ const PrerenderedMetaTags = ({
       <meta name="author" content={author} />
       <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
       <meta name="googlebot" content="index, follow, max-image-preview:large" />
-      <meta httpEquiv="X-Robots-Tag" content="index, follow, max-image-preview:large" />
       
       {/* Language and Direction */}
-      <html lang="ar" dir="rtl" />
+      <html lang="ar-SA" dir="rtl" />
       <meta name="language" content="Arabic" />
       
       {/* Open Graph / Facebook */}
@@ -72,6 +71,10 @@ const PrerenderedMetaTags = ({
       {/* Canonical URL */}
       <link rel="canonical" href={currentUrl} />
       
+      {/* Hreflang alternates */}
+      <link rel="alternate" hrefLang="ar-SA" href={currentUrl} />
+      <link rel="alternate" hrefLang="ar" href={currentUrl} />
+      <link rel="alternate" hrefLang="x-default" href={currentUrl} />
       {/* Preconnect to external domains */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />

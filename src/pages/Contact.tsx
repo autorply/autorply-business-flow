@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Mail, Phone, MapPin } from 'lucide-react';
 import Header from '../components/Header';
@@ -20,62 +20,6 @@ const Contact = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
 
-  // ====== SEO: Title, Description, Canonical, OpenGraph, Twitter ======
-  useEffect(() => {
-    const title = 'تواصل معنا - اوتوربلاي | دعم ومبيعات واتساب الأعمال';
-    const description =
-      'تواصل مع فريق اوتوربلاي للدعم والمبيعات والاستشارات حول WhatsApp API وحلول واتساب الأعمال في السعودية.';
-    const url = 'https://autorply.sa/contact';
-
-    const upsertByName = (name: string, content: string) => {
-      let el = document.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
-      if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute('name', name);
-        document.head.appendChild(el);
-      }
-      el.setAttribute('content', content);
-    };
-
-    const upsertByProp = (property: string, content: string) => {
-      let el = document.querySelector<HTMLMetaElement>(`meta[property="${property}"]`);
-      if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute('property', property);
-        document.head.appendChild(el);
-      }
-      el.setAttribute('content', content);
-    };
-
-    const upsertCanonical = (href: string) => {
-      let link = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-      if (!link) {
-        link = document.createElement('link');
-        link.setAttribute('rel', 'canonical');
-        document.head.appendChild(link);
-      }
-      link.setAttribute('href', href);
-    };
-
-    document.title = title;
-    upsertByName('description', description);
-    upsertCanonical(url);
-
-    // Open Graph
-    upsertByProp('og:title', title);
-    upsertByProp('og:description', description);
-    upsertByProp('og:url', url);
-    upsertByProp('og:type', 'website');
-    upsertByProp('og:site_name', 'اوتوربلاي');
-    upsertByProp('og:locale', 'ar_SA');
-
-    // Twitter Card
-    upsertByName('twitter:card', 'summary');
-    upsertByName('twitter:title', title);
-    upsertByName('twitter:description', description);
-    upsertByName('twitter:url', url);
-  }, []);
-  // ================================================================
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -151,7 +95,7 @@ const Contact = () => {
         url: 'https://autorply.sa/contact'
       }}
     >
-      <div className="min-h-screen bg-white text-gray-800" dir="rtl" lang="ar">
+      <div className="min-h-screen bg-white text-gray-800" dir="rtl" lang="ar-SA">
         <Header />
         
         <main className="pt-20">
@@ -342,8 +286,7 @@ const Contact = () => {
                 </motion.div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
         </main>
 
         <Footer />
