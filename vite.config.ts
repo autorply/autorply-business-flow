@@ -117,8 +117,8 @@ export default defineConfig(({ mode }) => {
   if (shouldPrerender) {
     try {
       const req = createRequire(import.meta.url);
-      const prerender = req('@prerenderer/rollup-plugin').default;
-      const PuppeteerRenderer = req('@prerenderer/renderer-puppeteer').default;
+      const prerender = req('@prerenderer/rollup-plugin');
+      const PuppeteerRenderer = req('@prerenderer/renderer-puppeteer');
 
       plugins.push(
         prerender({
