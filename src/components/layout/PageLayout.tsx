@@ -30,7 +30,9 @@ const PageLayout = ({
 }: PageLayoutProps) => {
   const seoData = useSEO();
   const location = useLocation();
-  const isResourceRoute = location.pathname.startsWith('/resources');
+  const path = location.pathname;
+  const isResourcePath = path.startsWith('/resources');
+  const isResourceDetail = /^\/resources\/[^/]+\/[^/]+$/.test(path);
   
   const metaProps = {
     ...seoData,
@@ -39,13 +41,13 @@ const PageLayout = ({
 
   // Signal to the prerenderer that the page is ready once critical content is rendered
   useEffect(() => {
-    if (typeof document !== 'undefined' && !isResourceRoute) {
+    if (typeof document !== 'undefined' && !isResourcePath) {
       // Fire after next tick to ensure Helmet and above-the-fold content rendered
       setTimeout(() => {
         document.dispatchEvent(new Event('prerender-ready'));
       }, 0);
     }
-  }, [location.pathname, isResourceRoute]);
+  }, [location.pathname, isResourcePath]);
   return (
     <HelmetProvider>
       <Helmet>
@@ -53,7 +55,7 @@ const PageLayout = ({
       </Helmet>
 
       <PrerenderedPage>
-        {!isResourceRoute && <MetaTags {...metaProps} />}
+        {!isResourceDetail && <MetaTags {...metaProps} />}
         
         {includeOrganization && structuredDataType !== 'Organization' && (
           <StructuredData type="Organization" />

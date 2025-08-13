@@ -42,6 +42,15 @@ const ResourcesList = ({ category }: ResourcesListProps) => {
     filterResources();
   }, [resources, searchTerm, selectedTags]);
 
+  // Signal prerender-ready only after resources are fully loaded and filtered
+  useEffect(() => {
+    if (typeof document !== 'undefined' && !loading) {
+      setTimeout(() => {
+        document.dispatchEvent(new Event('prerender-ready'));
+      }, 0);
+    }
+  }, [loading, filteredResources.length]);
+
   const loadResources = async () => {
     setLoading(true);
     try {
