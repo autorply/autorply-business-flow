@@ -11,7 +11,7 @@
     "preview": "vite preview",
   "prerender": "node scripts/prerender.mjs",
   "build:prerender": "pnpm run build && (pnpm run preview & sleep 2) && pnpm run prerender"
-  },
+  }, 
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@prerenderer/renderer-puppeteer": "^1.2.4",
