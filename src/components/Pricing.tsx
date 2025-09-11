@@ -5,23 +5,6 @@ import { memo } from 'react';
 const Pricing = memo(() => {
   const plans = [
     {
-      title: "باقة Start",
-      price: "99 ريال / شهريًا",
-      link: "https://store.autorply.sa/ar/ezvRAR",
-      features: [
-        "شات بوت تلقائي",
-        "ذكاء اصطناعي محدود (أساسي)",
-        "حملات واتساب جماعية",
-        "رسائل تفاعلية (أزرار + قوائم)",
-        "جهات الاتصال 1000",
-        "مستخدم واحد",
-        "(WooCommerce / سلة / زد / شوبيفاي)",
-        "تصدير المشتركين",
-        "دعم فني عبر البريد الإلكتروني"
-      ],
-      delay: 0
-    },
-    {
       title: "باقة أعمال",
       price: "199 ريال / شهريًا",
       link: "https://store.autorply.sa/ar/WaYGVV",
@@ -103,7 +86,7 @@ const Pricing = memo(() => {
         <p className="text-gray-600">اختر الباقة التي تناسب نشاطك التجاري</p>
       </motion.div>
       
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+      <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
         {plans.map((plan, index) => (
           <motion.div
             key={plan.title}
