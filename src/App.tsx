@@ -11,6 +11,7 @@ import Pricing from "./pages/Pricing";
 import AboutUs from "./pages/AboutUs";
 import Campaign from "./pages/Campaign";
 import Services from "./pages/Services";
+import WhatsAppAPI from "./pages/WhatsAppAPI";
 import Contact from "./pages/Contact";
 import Vision from "./pages/Vision";
 import SuccessStory from "./pages/SuccessStory";
@@ -55,6 +56,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/services" element={<Services />} />
+              <Route path="/whatsapp-api" element={<WhatsAppAPI />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/about-us" element={<AboutUs />} />
               <Route path="/campaign" element={<Campaign />} />
