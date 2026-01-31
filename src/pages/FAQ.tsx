@@ -76,13 +76,25 @@ const FAQ = () => {
                 الأسئلة الشائعة
               </motion.h1>
               <motion.p 
-                className="text-xl text-gray-600"
+                className="text-xl text-gray-600 mb-6"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 إجابات شاملة على أهم الأسئلة حول خدماتنا
               </motion.p>
+              
+              {/* SEO Intro Paragraph */}
+              <motion.div
+                className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 max-w-3xl mx-auto text-right shadow-lg border border-white/50"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                <p className="text-gray-700 leading-relaxed">
+                  نجيب في هذه الصفحة على الأسئلة الأكثر شيوعاً حول <strong>WhatsApp Business API</strong> وخدمات واتساب للأعمال. سواء كنت تتساءل عن متطلبات التفعيل، التكلفة، الربط مع حساب Meta، أو إمكانية استخدام رقمك الحالي - ستجد هنا إجابات واضحة ومباشرة. إذا لم تجد إجابة سؤالك، لا تتردد في <a href="/contact" className="text-blue-600 hover:text-blue-800 font-medium">التواصل مع فريق الدعم</a> أو زيارة <a href="/resources" className="text-blue-600 hover:text-blue-800 font-medium">مركز الموارد</a> للمزيد من الشروحات التفصيلية.
+                </p>
+              </motion.div>
             </div>
           </section>
 

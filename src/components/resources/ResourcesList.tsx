@@ -158,56 +158,93 @@ const ResourcesList = ({ category }: ResourcesListProps) => {
 
   return (
     <div className="space-y-8">
-      {/* Header */}
+      {/* Header with H1 and SEO intro */}
       <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">{getCategoryTitle()}</h1>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          اكتشف مجموعة متنوعة من الموارد المفيدة لتطوير أعمالك باستخدام واتساب API
-        </p>
+        <h1 className="text-4xl font-bold mb-6">موارد شاملة لـ WhatsApp Business API</h1>
+        
+        {/* SEO Introduction Paragraph */}
+        <div className="max-w-4xl mx-auto text-right bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 mb-8 border border-blue-100">
+          <p className="text-muted-foreground text-lg leading-relaxed mb-4">
+            مرحباً بك في مركز موارد اوتوربلاي - وجهتك الشاملة لكل ما يتعلق بـ <strong>WhatsApp Business API</strong>. نقدم لك مكتبة متكاملة من الأدلة والشروحات والمقالات التعليمية المصممة خصيصاً لمساعدتك على فهم وتطبيق حلول واتساب للأعمال بفعالية.
+          </p>
+          <p className="text-muted-foreground leading-relaxed mb-4">
+            سواء كنت تبحث عن <strong>دليل WhatsApp API للمبتدئين</strong>، أو ترغب في استكشاف حالات استخدام متقدمة مثل الأتمتة والتكامل مع أنظمة CRM، أو تحتاج إلى مقارنات تفصيلية بين مزودي الخدمة المختلفين - ستجد هنا كل ما تحتاجه. نحرص على تحديث موارد واتساب بشكل مستمر لتعكس أحدث التغييرات في سياسات Meta ومتطلبات السوق السعودي.
+          </p>
+          <p className="text-muted-foreground leading-relaxed mb-4">
+            تتضمن مواردنا: شروحات خطوة بخطوة لتفعيل WhatsApp API، أفضل الممارسات لإرسال الرسائل التسويقية، كيفية إنشاء قوالب الرسائل المعتمدة، استراتيجيات خدمة العملاء عبر واتساب، ودراسات حالة من شركات سعودية ناجحة. كما نقدم مقارنات موضوعية بين WhatsApp Business App و WhatsApp API لمساعدتك في اتخاذ القرار الأنسب لحجم أعمالك.
+          </p>
+          <p className="text-muted-foreground leading-relaxed">
+            تم إعداد جميع المحتويات بواسطة خبراء معتمدين في WhatsApp Business Solutions، مع مراعاة المعايير المحلية ومتطلبات السوق السعودي. ندعوك لاستكشاف الأقسام المختلفة أدناه والبدء في رحلة تطوير تواصلك مع العملاء.
+          </p>
+        </div>
       </div>
 
-      {/* Category Navigation */}
-      <div className="flex flex-wrap gap-4 justify-center">
-        <Link 
-          to="/resources" 
-          className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
-            !category 
-              ? 'bg-primary text-primary-foreground' 
-              : 'bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground'
-          }`}
-        >
-          📚 جميع الموارد
-        </Link>
-        <Link 
-          to="/resources?category=articles" 
-          className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
-            category === 'articles' 
-              ? 'bg-primary text-primary-foreground' 
-              : 'bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground'
-          }`}
-        >
-          📄 المقالات
-        </Link>
-        <Link 
-          to="/resources?category=tutorials" 
-          className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
-            category === 'tutorials' 
-              ? 'bg-primary text-primary-foreground' 
-              : 'bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground'
-          }`}
-        >
-          🎓 الشروحات
-        </Link>
-        <Link 
-          to="/resources?category=comparisons" 
-          className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
-            category === 'comparisons' 
-              ? 'bg-primary text-primary-foreground' 
-              : 'bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground'
-          }`}
-        >
-          ⚖️ المقارنات
-        </Link>
+      {/* Category Navigation with Descriptions */}
+      <div className="space-y-6">
+        <div className="flex flex-wrap gap-4 justify-center">
+          <Link 
+            to="/resources" 
+            className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+              !category 
+                ? 'bg-primary text-primary-foreground' 
+                : 'bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            📚 جميع الموارد
+          </Link>
+          <Link 
+            to="/resources?category=articles" 
+            className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+              category === 'articles' 
+                ? 'bg-primary text-primary-foreground' 
+                : 'bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            📄 المقالات
+          </Link>
+          <Link 
+            to="/resources?category=tutorials" 
+            className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+              category === 'tutorials' 
+                ? 'bg-primary text-primary-foreground' 
+                : 'bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            🎓 الشروحات
+          </Link>
+          <Link 
+            to="/resources?category=comparisons" 
+            className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+              category === 'comparisons' 
+                ? 'bg-primary text-primary-foreground' 
+                : 'bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            ⚖️ المقارنات
+          </Link>
+        </div>
+        
+        {/* Section Descriptions */}
+        <div className="grid md:grid-cols-3 gap-4 max-w-5xl mx-auto">
+          <div className="bg-card rounded-lg p-4 border text-center">
+            <h3 className="font-bold text-foreground mb-2">📄 المقالات</h3>
+            <p className="text-sm text-muted-foreground">
+              مقالات تعليمية معمقة تغطي أحدث استراتيجيات التسويق عبر واتساب وأفضل ممارسات التواصل مع العملاء.
+            </p>
+          </div>
+          <div className="bg-card rounded-lg p-4 border text-center">
+            <h3 className="font-bold text-foreground mb-2">🎓 الشروحات</h3>
+            <p className="text-sm text-muted-foreground">
+              أدلة عملية خطوة بخطوة لإعداد وتشغيل WhatsApp API، من التفعيل الأولي حتى التكاملات المتقدمة.
+            </p>
+          </div>
+          <div className="bg-card rounded-lg p-4 border text-center">
+            <h3 className="font-bold text-foreground mb-2">⚖️ المقارنات</h3>
+            <p className="text-sm text-muted-foreground">
+              مقارنات موضوعية بين الحلول والأدوات المختلفة لمساعدتك في اتخاذ القرار الأنسب لاحتياجات عملك.
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Search and Filters */}
