@@ -25,10 +25,10 @@ const Pricing = memo(() => {
         "دعم API متكامل"
       ],
       delay: 0.1,
-      featured: true
+      featured: false
     },
     {
-      title: "باقة احترافية",
+      title: "الباقة الاحترافية",
       price: "299 ريال / شهريًا",
       link: "https://store.autorply.sa/ar/ABByBdY",
       features: [
@@ -47,7 +47,8 @@ const Pricing = memo(() => {
         "دعم فني وسريع",
         "دعم API متكامل"
       ],
-      delay: 0.2
+      delay: 0.2,
+      featured: true
     },
     {
       title: "باقة Enterprise",
@@ -118,6 +119,10 @@ const Pricing = memo(() => {
                 ))}
               </ul>
             </div>
+            
+            {plan.title !== "باقة Enterprise" && (
+              <p className="text-xs text-gray-500 mb-3 text-center">فوترة سنوية</p>
+            )}
             
             <motion.a 
               href={plan.link}

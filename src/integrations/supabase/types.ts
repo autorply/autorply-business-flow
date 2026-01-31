@@ -7,20 +7,536 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "12.2.3 (519615d)"
   }
   public: {
     Tables: {
-      [_ in never]: never
+      accounts: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      activity_logs: {
+        Row: {
+          account_id: string
+          action: string
+          created_at: string
+          details: Json | null
+          id: string
+          ip_address: string | null
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          account_id: string
+          action: string
+          created_at?: string
+          details?: Json | null
+          id?: string
+          ip_address?: string | null
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          account_id?: string
+          action?: string
+          created_at?: string
+          details?: Json | null
+          id?: string
+          ip_address?: string | null
+          user_agent?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      admin_settings: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          id: string
+          setting_key: string
+          setting_value: Json
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          setting_key: string
+          setting_value?: Json
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          setting_key?: string
+          setting_value?: Json
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      canned_responses: {
+        Row: {
+          account_id: string
+          content: string
+          created_at: string
+          created_by: string
+          id: string
+          short_code: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          account_id: string
+          content: string
+          created_at?: string
+          created_by: string
+          id?: string
+          short_code?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          account_id?: string
+          content?: string
+          created_at?: string
+          created_by?: string
+          id?: string
+          short_code?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "canned_responses_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "canned_responses_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "user_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      contact_inboxes: {
+        Row: {
+          contact_id: string
+          created_at: string
+          id: string
+          inbox_id: string
+          source_id: string
+        }
+        Insert: {
+          contact_id: string
+          created_at?: string
+          id?: string
+          inbox_id: string
+          source_id: string
+        }
+        Update: {
+          contact_id?: string
+          created_at?: string
+          id?: string
+          inbox_id?: string
+          source_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_inboxes_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_inboxes_inbox_id_fkey"
+            columns: ["inbox_id"]
+            isOneToOne: false
+            referencedRelation: "inboxes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      contacts: {
+        Row: {
+          account_id: string
+          additional_attributes: Json | null
+          avatar_url: string | null
+          created_at: string
+          email: string | null
+          id: string
+          name: string | null
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          account_id: string
+          additional_attributes?: Json | null
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          name?: string | null
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          account_id?: string
+          additional_attributes?: Json | null
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          name?: string | null
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contacts_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      conversations: {
+        Row: {
+          account_id: string
+          assignee_id: string | null
+          contact_id: string
+          created_at: string
+          id: string
+          inbox_id: string
+          last_activity_at: string | null
+          priority: number | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          account_id: string
+          assignee_id?: string | null
+          contact_id: string
+          created_at?: string
+          id?: string
+          inbox_id: string
+          last_activity_at?: string | null
+          priority?: number | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          account_id?: string
+          assignee_id?: string | null
+          contact_id?: string
+          created_at?: string
+          id?: string
+          inbox_id?: string
+          last_activity_at?: string | null
+          priority?: number | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conversations_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "conversations_assignee_id_fkey"
+            columns: ["assignee_id"]
+            isOneToOne: false
+            referencedRelation: "user_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "conversations_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "conversations_inbox_id_fkey"
+            columns: ["inbox_id"]
+            isOneToOne: false
+            referencedRelation: "inboxes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      inboxes: {
+        Row: {
+          account_id: string
+          channel_type: string
+          created_at: string
+          id: string
+          is_active: boolean | null
+          name: string
+          settings: Json | null
+          updated_at: string
+        }
+        Insert: {
+          account_id: string
+          channel_type: string
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          name: string
+          settings?: Json | null
+          updated_at?: string
+        }
+        Update: {
+          account_id?: string
+          channel_type?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          settings?: Json | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inboxes_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messages: {
+        Row: {
+          account_id: string
+          content: string
+          conversation_id: string
+          created_at: string
+          id: string
+          message_type: string
+          sender_id: string | null
+          sender_type: string
+          source_id: string | null
+        }
+        Insert: {
+          account_id: string
+          content: string
+          conversation_id: string
+          created_at?: string
+          id?: string
+          message_type?: string
+          sender_id?: string | null
+          sender_type: string
+          source_id?: string | null
+        }
+        Update: {
+          account_id?: string
+          content?: string
+          conversation_id?: string
+          created_at?: string
+          id?: string
+          message_type?: string
+          sender_id?: string | null
+          sender_type?: string
+          source_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      permissions: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      role_permissions: {
+        Row: {
+          created_at: string
+          id: string
+          permission_id: string
+          role: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          permission_id: string
+          role: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          permission_id?: string
+          role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "role_permissions_permission_id_fkey"
+            columns: ["permission_id"]
+            isOneToOne: false
+            referencedRelation: "permissions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_profiles: {
+        Row: {
+          account_id: string
+          created_at: string
+          id: string
+          name: string
+          role: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          account_id: string
+          created_at?: string
+          id?: string
+          name: string
+          role: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          account_id?: string
+          created_at?: string
+          id?: string
+          name?: string
+          role?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_profiles_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      whatsapp_templates: {
+        Row: {
+          account_id: string
+          category: string
+          components: Json
+          created_at: string
+          display_name: string
+          id: string
+          language: string
+          meta_template_id: string | null
+          rejection_reason: string | null
+          status: string
+          template_name: string
+          updated_at: string
+        }
+        Insert: {
+          account_id: string
+          category: string
+          components?: Json
+          created_at?: string
+          display_name: string
+          id?: string
+          language?: string
+          meta_template_id?: string | null
+          rejection_reason?: string | null
+          status?: string
+          template_name: string
+          updated_at?: string
+        }
+        Update: {
+          account_id?: string
+          category?: string
+          components?: Json
+          created_at?: string
+          display_name?: string
+          id?: string
+          language?: string
+          meta_template_id?: string | null
+          rejection_reason?: string | null
+          status?: string
+          template_name?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "whatsapp_templates_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_user_account_id: { Args: never; Returns: string }
+      is_user_admin: { Args: never; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
