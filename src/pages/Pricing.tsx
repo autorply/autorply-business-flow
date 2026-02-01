@@ -12,7 +12,7 @@ const Pricing = () => {
     {
       title: "باقة أعمال",
       price: "199 ريال / شهريًا",
-      link: "https://store.autorply.sa/ar/WaYGVV",
+      link: "https://store.autorply.sa/ar/nledxv",
       features: [
         "شات بوت تلقائي",
         "ذكاء اصطناعي للردود",

@@ -163,6 +163,24 @@ export const useSEO = (): SEOData => {
           type: 'website'
         };
 
+      case '/whatsapp-api':
+        return {
+          title: 'WhatsApp Business API في السعودية - دليل شامل | اوتوربلاي',
+          description: 'دليلك الشامل لـ WhatsApp Business API في السعودية. تعرف على الفرق بين واتساب العادي و API، متطلبات التفعيل، وكيفية الاستفادة منه لتطوير أعمالك.',
+          keywords: 'WhatsApp API, واتساب API, WhatsApp Business API السعودية, تفعيل واتساب API, واتساب للأعمال, WhatsApp Cloud API',
+          url: fullUrl,
+          type: 'website'
+        };
+
+      case '/resources':
+        return {
+          title: 'الموارد التعليمية | اوتوربلاي - مقالات وشروحات واتساب API',
+          description: 'اكتشف مجموعة شاملة من المقالات والشروحات والمقارنات حول واتساب API والأتمتة التجارية لتطوير أعمالك.',
+          keywords: 'موارد واتساب, شروحات واتساب API, مقالات تقنية, دليل الأعمال, أتمتة المحادثات',
+          url: fullUrl,
+          type: 'website'
+        };
+
       default:
         return {
           title: 'اوتوربلاي - WhatsApp API',
