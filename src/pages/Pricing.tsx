@@ -35,7 +35,7 @@ const Pricing = () => {
     {
       title: "الباقة الاحترافية",
       price: "299 ريال / شهريًا",
-      link: "https://store.autorply.sa/ar/ABByBdY",
+      link: "https://store.autorply.sa/products/%D8%A7%D9%84%D8%A8%D8%A7%D9%82%D8%A9-%D8%A7%D9%84%D8%A5%D8%AD%D8%AA%D8%B1%D8%A7%D9%81%D9%8A%D8%A9-%D8%B3%D9%86%D9%88%D9%8A",
       features: [
         "شات بوت تلقائي",
         "ذكاء اصطناعي متقدم ",
